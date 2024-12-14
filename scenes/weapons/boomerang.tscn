@@ -1,0 +1,104 @@
+[gd_scene load_steps=10 format=3 uid="uid://cglnd1yy7dfgk"]
+
+[ext_resource type="Texture2D" uid="uid://biedftd3xku6x" path="res://resourses/sprites/weapons/Boomerang.png" id="1_7s0xy"]
+[ext_resource type="PackedScene" uid="uid://dcf8nguqift3x" path="res://scenes/technical/shadow_small.tscn" id="1_aj1sp"]
+[ext_resource type="Script" path="res://scripts/weapons/boomerang.gd" id="1_cyesg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qssc4"]
+size = Vector2(16, 28)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n8ffl"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_wr5qc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationalPart:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6fbrb"]
+resource_name = "spin_left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationalPart:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -1.5708, -3.14159, -4.71239, -6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_lu7qy"]
+resource_name = "spin_right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationalPart:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 3.14159, 4.71239, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jlym2"]
+_data = {
+"RESET": SubResource("Animation_wr5qc"),
+"spin_left": SubResource("Animation_6fbrb"),
+"spin_right": SubResource("Animation_lu7qy")
+}
+
+[node name="Boomerang" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_cyesg")
+
+[node name="ShadowSmall" parent="." instance=ExtResource("1_aj1sp")]
+position = Vector2(0, 2)
+
+[node name="RotationalPart" type="Node2D" parent="."]
+position = Vector2(0, -14)
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationalPart"]
+texture = ExtResource("1_7s0xy")
+
+[node name="DamageArea" type="Area2D" parent="RotationalPart"]
+collision_layer = 2
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationalPart/DamageArea"]
+shape = SubResource("RectangleShape2D_qssc4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CircleShape2D_n8ffl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jlym2")
+}
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="CollisionResponseTimer" type="Timer" parent="Timers"]
+
+[connection signal="weapon_collided_with_wall" from="." to="." method="_on_weapon_collided_with_wall"]
+[connection signal="weapon_have_to_destroy" from="." to="." method="_on_weapon_have_to_destroy"]
+[connection signal="body_entered" from="RotationalPart/DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="timeout" from="Timers/CollisionResponseTimer" to="." method="_on_collision_response_timer_timeout"]

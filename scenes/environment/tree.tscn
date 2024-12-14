@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://cr6ppaon7nkj8"]
+
+[ext_resource type="Script" path="res://scripts/environment/tree.gd" id="1_eah4c"]
+[ext_resource type="Texture2D" uid="uid://cmr4xvio5ah83" path="res://resourses/sprites/environment/Tree.png" id="1_uj5t0"]
+[ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="2_rh2e8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxhgg"]
+radius = 4.0
+height = 36.0
+
+[sub_resource type="Animation" id="Animation_igqy3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationalPart:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4kuti"]
+resource_name = "shaking"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationalPart:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0523599, 0.0523599, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wsbg1"]
+_data = {
+"RESET": SubResource("Animation_igqy3"),
+"shaking": SubResource("Animation_4kuti")
+}
+
+[node name="Tree" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 61
+script = ExtResource("1_eah4c")
+
+[node name="Shadow" parent="." instance=ExtResource("2_rh2e8")]
+position = Vector2(1, 9)
+
+[node name="RotationalPart" type="Node2D" parent="."]
+position = Vector2(0, -48)
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationalPart"]
+texture = ExtResource("1_uj5t0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_rxhgg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wsbg1")
+}

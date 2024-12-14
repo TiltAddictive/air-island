@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcf8nguqift3x"]
+
+[ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="1_vjs4m"]
+[ext_resource type="Texture2D" uid="uid://dkb3sios5pwct" path="res://resourses/sprites/technical/white_oval_small.png" id="2_dkb0a"]
+
+[node name="ShadowSmall" instance=ExtResource("1_vjs4m")]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="RotationalPart" index="0"]
+texture = ExtResource("2_dkb0a")
