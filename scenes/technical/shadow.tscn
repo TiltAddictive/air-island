@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce1njilpfwhdq"]
+
+[ext_resource type="Texture2D" uid="uid://d2el32gkybloj" path="res://resourses/sprites/technical/white_oval.png" id="1_lig5p"]
+
+[node name="Shadow" type="Node2D"]
+position = Vector2(0, 9)
+
+[node name="RotationalPart" type="Node2D" parent="."]
+position = Vector2(0, -32)
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationalPart"]
+modulate = Color(0.266667, 0.266667, 0.266667, 0.447059)
+texture = ExtResource("1_lig5p")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu1oollavc5jl"]
+
+[ext_resource type="Script" path="res://scripts/weapons/default_weapon.gd" id="1_o885s"]
+
+[node name="DefaultWeapon" type="CharacterBody2D"]
+script = ExtResource("1_o885s")
+
+[node name="ShadowPoint" type="Node2D" parent="."]
+
+[node name="RotationalPart" type="Node2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="CollisionResponseTimer" type="Timer" parent="Timers"]
+
+[connection signal="weapon_have_to_destroy" from="." to="." method="_on_weapon_have_to_destroy"]
+[connection signal="timeout" from="Timers/CollisionResponseTimer" to="." method="_on_collision_response_timer_timeout"]

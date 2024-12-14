@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4ou1ewvat1uw"]
+
+[ext_resource type="PackedScene" uid="uid://db0kps2wuxwwl" path="res://scenes/player/player.tscn" id="1_83f7u"]
+[ext_resource type="PackedScene" uid="uid://cglnd1yy7dfgk" path="res://scenes/weapons/boomerang.tscn" id="2_ar5e8"]
+[ext_resource type="PackedScene" uid="uid://cr6ppaon7nkj8" path="res://scenes/environment/tree.tscn" id="3_8wpse"]
+[ext_resource type="Texture2D" uid="uid://d2el32gkybloj" path="res://resourses/sprites/technical/white_oval.png" id="4_lbujc"]
+
+[node name="MainLevel" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Weapons" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Allies" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Allies" node_paths=PackedStringArray("WEAPON_NODE") instance=ExtResource("1_83f7u")]
+position = Vector2(242, 116)
+SPEED = 200.0
+WEAPON_NODE = NodePath("../../Weapons")
+
+[node name="Boomerang" parent="Allies" instance=ExtResource("2_ar5e8")]
+position = Vector2(0, 55)
+
+[node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="EnemyBullets" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Environment" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Tree" parent="Environment" instance=ExtResource("3_8wpse")]
+position = Vector2(-210, 12)
+
+[node name="Tree2" parent="Environment" instance=ExtResource("3_8wpse")]
+position = Vector2(-19, 9)
+
+[node name="WhiteOval" type="Sprite2D" parent="."]
+modulate = Color(0.462745, 0.686275, 0.227451, 1)
+position = Vector2(826, -1784)
+scale = Vector2(100, 100)
+texture = ExtResource("4_lbujc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

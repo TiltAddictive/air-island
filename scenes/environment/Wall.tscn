@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwsqabvg2h5si"]
+
+[ext_resource type="Texture2D" uid="uid://cup8kivk0njg8" path="res://icon.svg" id="1_0tafw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1kpt"]
+size = Vector2(129, 94)
+
+[node name="Wall" type="StaticBody2D"]
+position = Vector2(0, -64)
+collision_layer = 16
+
+[node name="RotationalPart" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationalPart"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_0tafw")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 9)
+shape = SubResource("RectangleShape2D_h1kpt")
