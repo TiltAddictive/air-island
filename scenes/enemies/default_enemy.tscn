@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1f4280rnaacr"]
+
+[ext_resource type="Script" path="res://scripts/enemies/default_enemy.gd" id="1_j4tom"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l8bx4"]
+
+[node name="DefaultEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 48
+script = ExtResource("1_j4tom")
+
+[node name="ShadowPoint" type="Node2D" parent="."]
+
+[node name="RotationalPart" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="RotationalPart"]
+
+[node name="AttackAreaNode" type="Node2D" parent="."]
+
+[node name="AttackArea2D" type="Area2D" parent="AttackAreaNode"]
+collision_layer = 0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_l8bx4")
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="AttackReloadTimer" type="Timer" parent="Timers"]
+
+[connection signal="timeout" from="Timers/AttackReloadTimer" to="." method="_on_attack_reload_timer_timeout"]

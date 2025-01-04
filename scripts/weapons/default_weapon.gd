@@ -8,6 +8,10 @@ signal weapon_have_to_destroy
 @onready var collision_response_timer: Timer = $Timers/CollisionResponseTimer
 @export var collision_response_time: float = 0.05
 
+@onready var attack_reload_timer: Timer = $Timers/AttackReloadTimer
+@export var attack_reload_time: float = 1
+
+
 # Movement
 @export var SPEED: float = 400
 var direction: Vector2 = Vector2(1, 1)
@@ -26,6 +30,7 @@ func set_weapon_behaviour_states():
 	pass
 
 func _ready():
+	RunGlobal.WEAPON_PLAYER = self
 	set_weapon_behaviour_states()
 	set_timers_times()
 	run_timers()
@@ -34,8 +39,10 @@ func _ready():
 func set_timers_times():
 	collision_response_timer.wait_time = collision_response_time
 
+
 func run_timers():
 	collision_response_timer.start()
+
 
 func restart_collision_response_waiting():
 	have_to_response_on_collision = false
@@ -48,6 +55,7 @@ func _on_collision_response_timer_timeout() -> void:
 
 func destroy():
 	RunGlobal.PLAYER.restore(global_position)
+	RunGlobal.WEAPON_PLAYER = null
 	queue_free()
 
 

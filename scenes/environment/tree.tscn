@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/environment/tree.gd" id="1_eah4c"]
 [ext_resource type="Texture2D" uid="uid://cmr4xvio5ah83" path="res://resourses/sprites/environment/Tree.png" id="1_uj5t0"]
-[ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="2_rh2e8"]
+[ext_resource type="PackedScene" uid="uid://bf3bdqpypeb71" path="res://scenes/technical/shadow_middle.tscn" id="2_ybxrr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxhgg"]
-radius = 4.0
-height = 36.0
+radius = 2.0
+height = 26.0
 
 [sub_resource type="Animation" id="Animation_igqy3"]
 length = 0.001
@@ -50,17 +50,20 @@ collision_layer = 16
 collision_mask = 61
 script = ExtResource("1_eah4c")
 
-[node name="Shadow" parent="." instance=ExtResource("2_rh2e8")]
-position = Vector2(1, 9)
+[node name="SahdowPoint" type="Node2D" parent="."]
+
+[node name="ShadowMiddle" parent="SahdowPoint" instance=ExtResource("2_ybxrr")]
+position = Vector2(0, 6)
 
 [node name="RotationalPart" type="Node2D" parent="."]
 position = Vector2(0, -48)
 
 [node name="Sprite2D" type="Sprite2D" parent="RotationalPart"]
+position = Vector2(0, 16)
 texture = ExtResource("1_uj5t0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -2)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_rxhgg")
 
@@ -68,3 +71,7 @@ shape = SubResource("CapsuleShape2D_rxhgg")
 libraries = {
 "": SubResource("AnimationLibrary_wsbg1")
 }
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, -4)
+radius = 10.0

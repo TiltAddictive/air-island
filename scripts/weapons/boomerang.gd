@@ -79,5 +79,6 @@ func _on_collision_response_timer_timeout() -> void:
 
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
+	print(body, " ", body.has_method("get_hit"))
 	if body.has_method("get_hit"):
 		body.get_hit(DAMAGE)
