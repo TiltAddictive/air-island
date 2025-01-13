@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbumo37nalh4f"]
+
+[ext_resource type="PackedScene" uid="uid://bu1oollavc5jl" path="res://scenes/weapons/default_weapon.tscn" id="1_7p0tw"]
+[ext_resource type="PackedScene" uid="uid://dcf8nguqift3x" path="res://scenes/technical/shadow_small.tscn" id="2_1tvog"]
+[ext_resource type="Script" path="res://scripts/weapons/hammer.gd" id="2_8h8bq"]
+[ext_resource type="Texture2D" uid="uid://5idun5f76yul" path="res://resourses/sprites/weapons/hammer.png" id="3_bdv4g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uilnh"]
+radius = 49.0102
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xfyjx"]
+radius = 2.0
+height = 18.0
+
+[node name="Hammer" instance=ExtResource("1_7p0tw")]
+script = ExtResource("2_8h8bq")
+ROTATION_SPEED = 300.0
+live_time = 0.75
+SPEED = 200.0
+DAMAGE = 1.0
+REJECTION_FORCE_VALUE = 300.0
+IMPULSE_IMPACT_TIME = 0.5
+
+[node name="ShadowSmall" parent="ShadowPoint" index="0" instance=ExtResource("2_1tvog")]
+position = Vector2(0, 2)
+
+[node name="RotationalPart" parent="." index="1"]
+position = Vector2(0, -20)
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationalPart" index="0"]
+texture = ExtResource("3_bdv4g")
+
+[node name="DamageArea" type="Area2D" parent="RotationalPart" index="1"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationalPart/DamageArea" index="0"]
+shape = SubResource("CircleShape2D_uilnh")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -3)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_xfyjx")
+
+[node name="LiveTimer" type="Timer" parent="Timers" index="1"]
+one_shot = true
+
+[connection signal="timeout" from="Timers/LiveTimer" to="." method="_on_live_timer_timeout"]

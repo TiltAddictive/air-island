@@ -7,8 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qssc4"]
 size = Vector2(16, 28)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n8ffl"]
-radius = 8.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_py0fe"]
+radius = 2.0
+height = 16.0
 
 [sub_resource type="Animation" id="Animation_wr5qc"]
 length = 0.001
@@ -68,6 +69,8 @@ _data = {
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_cyesg")
+MAX_DISTANCE = 100.0
+BACKWARDS_MAX_DISTANCE = 200.0
 
 [node name="ShadowSmall" parent="." instance=ExtResource("1_aj1sp")]
 position = Vector2(0, 2)
@@ -79,15 +82,16 @@ position = Vector2(0, -14)
 texture = ExtResource("1_7s0xy")
 
 [node name="DamageArea" type="Area2D" parent="RotationalPart"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RotationalPart/DamageArea"]
 shape = SubResource("RectangleShape2D_qssc4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -14)
-shape = SubResource("CircleShape2D_n8ffl")
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_py0fe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

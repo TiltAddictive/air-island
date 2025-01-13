@@ -1,7 +1,6 @@
 extends DefaultWeapon
 
 @export var ROTATION_SPEED: float = 900
-@onready var rotational_part: Node2D = $RotationalPart
 
 @export var MAX_DISTANCE_REACH_TIME_SEC: float = 1
 @export var MAX_DISTANCE: float = 150
@@ -24,17 +23,14 @@ func _ready() -> void:
 	start_position = global_position
 	velocity = SPEED * direction
 
-
 func _physics_process(delta: float) -> void:
 	BEHAVIOUR[curent_state].call(delta)
 	var is_collided: bool = move_and_slide()
 	if is_collided:
 		weapon_collided_with_wall.emit()
 
-
 func _process(delta: float) -> void:
 	calc_animations(delta)
-
 
 func calc_speed(delta: float):
 	var velocity_sign: int = 1
@@ -62,7 +58,6 @@ func calc_animations(delta) -> void:
 		horiz_direction = 1
 	rotational_part.rotation_degrees += horiz_direction * delta * ROTATION_SPEED
 
-
 func _on_weapon_collided_with_wall() -> void:
 	if not have_to_response_on_collision:
 		return
@@ -76,7 +71,6 @@ func _on_weapon_collided_with_wall() -> void:
 
 func _on_collision_response_timer_timeout() -> void:
 	have_to_response_on_collision = true
-
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if body.has_method("get_hit"):

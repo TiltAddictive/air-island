@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf3bdqpypeb71"]
+
+[ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="1_qltow"]
+[ext_resource type="Texture2D" uid="uid://dwoadnkt6pouy" path="res://resourses/sprites/technical/white_oval_middle.png" id="2_v1yqc"]
+
+[node name="ShadowMiddle" instance=ExtResource("1_qltow")]
+position = Vector2(0, 0)
+
+[node name="RotationalPart" parent="." index="0"]
+position = Vector2(0, 0)
+
+[node name="Sprite2D" parent="RotationalPart" index="0"]
+position = Vector2(0, -32)
+texture = ExtResource("2_v1yqc")

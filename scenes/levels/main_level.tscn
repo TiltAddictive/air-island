@@ -1,12 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4ou1ewvat1uw"]
+[gd_scene load_steps=10 format=3 uid="uid://c4ou1ewvat1uw"]
 
 [ext_resource type="PackedScene" uid="uid://db0kps2wuxwwl" path="res://scenes/player/player.tscn" id="1_83f7u"]
-[ext_resource type="PackedScene" uid="uid://cglnd1yy7dfgk" path="res://scenes/weapons/boomerang.tscn" id="2_ar5e8"]
+[ext_resource type="Script" path="res://scripts/levels/main_level.gd" id="1_snwsc"]
 [ext_resource type="PackedScene" uid="uid://cr6ppaon7nkj8" path="res://scenes/environment/tree.tscn" id="3_8wpse"]
+[ext_resource type="PackedScene" uid="uid://c5rmck7e5wyfs" path="res://scenes/enemies/walker.tscn" id="3_wwb6q"]
+[ext_resource type="PackedScene" uid="uid://ciisd7blrkrdp" path="res://scenes/enemies/navigation_enemy.tscn" id="4_7h27a"]
 [ext_resource type="Texture2D" uid="uid://d2el32gkybloj" path="res://resourses/sprites/technical/white_oval.png" id="4_lbujc"]
+[ext_resource type="PackedScene" uid="uid://kexsyhactk42" path="res://scenes/UI/run_ui.tscn" id="4_uyyy4"]
+[ext_resource type="PackedScene" uid="uid://vxm07ely8ocl" path="res://scenes/technical/level_generator.tscn" id="8_rbtoj"]
 
-[node name="MainLevel" type="Node2D"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kgjf6"]
+vertices = PackedVector2Array(407, 233, -415, 233, -415, -233, 407, -233)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-424, -241, 416, -243, 417, 243, -427, 241)])
+
+[node name="MainLevel" type="Node2D" node_paths=PackedStringArray("level_generator")]
 y_sort_enabled = true
+script = ExtResource("1_snwsc")
+level_generator = NodePath("Technical/LevelGenerator")
 
 [node name="Weapons" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -15,27 +26,28 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Player" parent="Allies" node_paths=PackedStringArray("WEAPON_NODE") instance=ExtResource("1_83f7u")]
-position = Vector2(242, 116)
-SPEED = 200.0
+position = Vector2(263, 115)
+SPEED = 150.0
 WEAPON_NODE = NodePath("../../Weapons")
-
-[node name="Boomerang" parent="Allies" instance=ExtResource("2_ar5e8")]
-position = Vector2(0, 55)
 
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Walker" parent="Enemies" node_paths=PackedStringArray("ENEMY_ATACK_NODE") instance=ExtResource("3_wwb6q")]
+position = Vector2(-175, -90)
+ENEMY_ATACK_NODE = NodePath("../../EnemyBullets")
+
+[node name="NavigationEnemy" parent="Enemies" instance=ExtResource("4_7h27a")]
+position = Vector2(-116, -44)
+
+[node name="NavigationEnemy2" parent="Enemies" instance=ExtResource("4_7h27a")]
+position = Vector2(-41, -88)
 
 [node name="EnemyBullets" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Environment" type="Node2D" parent="."]
 y_sort_enabled = true
-
-[node name="Tree" parent="Environment" instance=ExtResource("3_8wpse")]
-position = Vector2(-210, 12)
-
-[node name="Tree2" parent="Environment" instance=ExtResource("3_8wpse")]
-position = Vector2(-19, 9)
 
 [node name="WhiteOval" type="Sprite2D" parent="."]
 modulate = Color(0.462745, 0.686275, 0.227451, 1)
@@ -45,3 +57,34 @@ texture = ExtResource("4_lbujc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="RunUI" parent="Camera2D" instance=ExtResource("4_uyyy4")]
+offset_left = -376.0
+offset_top = -224.0
+offset_right = -376.0
+offset_bottom = -224.0
+
+[node name="Technical" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Technical"]
+navigation_polygon = SubResource("NavigationPolygon_kgjf6")
+
+[node name="LevelGenerator" parent="Technical" node_paths=PackedStringArray("TOPLEFT_ZONE_POINT", "TOPRIGHT_ZONE_POINT", "DOWNLEFT_ZONE_POINT", "DOWNRIGHT_ZONE_POINT", "ENVIRONMENT_ITEM_NODE") instance=ExtResource("8_rbtoj")]
+TOPLEFT_ZONE_POINT = NodePath("TOPLEFT_ZONE_POINT")
+TOPRIGHT_ZONE_POINT = NodePath("TOPRIGHT_ZONE_POINT")
+DOWNLEFT_ZONE_POINT = NodePath("DOWNLEFT_ZONE_POINT")
+DOWNRIGHT_ZONE_POINT = NodePath("DOWNRIGHT_ZONE_POINT")
+ENVIRONMENT_ITEM_NODE = NodePath("../../Environment")
+environmental_items = Array[PackedScene]([ExtResource("3_8wpse")])
+
+[node name="TOPLEFT_ZONE_POINT" type="Node2D" parent="Technical/LevelGenerator"]
+position = Vector2(-340, -150)
+
+[node name="TOPRIGHT_ZONE_POINT" type="Node2D" parent="Technical/LevelGenerator"]
+position = Vector2(340, -150)
+
+[node name="DOWNLEFT_ZONE_POINT" type="Node2D" parent="Technical/LevelGenerator"]
+position = Vector2(-340, 150)
+
+[node name="DOWNRIGHT_ZONE_POINT" type="Node2D" parent="Technical/LevelGenerator"]
+position = Vector2(340, 150)

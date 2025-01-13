@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://ciisd7blrkrdp"]
+
+[ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_xmba4"]
+[ext_resource type="Script" path="res://scripts/enemies/navigation_enemy.gd" id="2_m6xit"]
+[ext_resource type="PackedScene" uid="uid://bf3bdqpypeb71" path="res://scenes/technical/shadow_middle.tscn" id="3_8pa2u"]
+[ext_resource type="Texture2D" uid="uid://cup8kivk0njg8" path="res://icon.svg" id="4_ivrqg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkyq6"]
+size = Vector2(28, 28)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j0m7u"]
+radius = 2.0
+
+[node name="NavigationEnemy" instance=ExtResource("1_xmba4")]
+script = ExtResource("2_m6xit")
+search_target_time = 0.5
+
+[node name="ShadowMiddle" parent="ShadowPoint" index="0" instance=ExtResource("3_8pa2u")]
+position = Vector2(0, 6)
+
+[node name="Sprite" parent="RotationalPart" index="0"]
+self_modulate = Color(0.945098, 0.313726, 0, 1)
+position = Vector2(0, -15)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_ivrqg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaNode/AttackArea2D" index="0"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_wkyq6")
+
+[node name="Collision" parent="." index="3"]
+position = Vector2(0, -2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_j0m7u")
+
+[node name="SearchTargetTimer" type="Timer" parent="Timers" index="1"]
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="5"]
+avoidance_enabled = true
+radius = 20.0
+max_speed = 50.0
+debug_enabled = true
+
+[connection signal="timeout" from="Timers/SearchTargetTimer" to="." method="_on_search_target_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
