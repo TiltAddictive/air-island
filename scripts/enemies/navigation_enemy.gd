@@ -15,10 +15,14 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	var direction = to_local(navigation_agent.get_next_path_position())
-	if direction.length() >= 2:
-		velocity = direction.normalized() * SPEED
 	move_and_slide()
+
+
+func calc_move(_delta: float) -> void:
+	if not calc_velocity:
+		return
+	var intended_velocity = to_local(navigation_agent.get_next_path_position()).normalized() * SPEED
+	navigation_agent.velocity = intended_velocity
 
 
 func set_target():
@@ -28,3 +32,9 @@ func set_target():
 
 func _on_search_target_timer_timeout() -> void:
 	set_target()
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	if not calc_velocity:
+		return
+	velocity = safe_velocity.normalized() * SPEED

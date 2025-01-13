@@ -10,8 +10,7 @@ var INVULNERABILITY_TIME_MULTIPLIER: float = 1
 
 var weapons: Array[PackedScene] = [
 	preload("res://scenes/weapons/boomerang.tscn"),
-	preload("res://scenes/weapons/boomerang.tscn"),
-	preload("res://scenes/weapons/boomerang.tscn"),
+	preload("res://scenes/weapons/hammer.tscn"),
 ]
 
 var rng = RandomNumberGenerator.new()
@@ -32,7 +31,7 @@ func get_negative_index(arr: Array, idx: int) -> int:
 	return real_idx
 
 
-func get_closest_player(glob_pos: Vector2) -> CharacterBody2D:
+func get_closest_player(_glob_pos: Vector2) -> CharacterBody2D:
 	if WEAPON_PLAYER != null:
 		return WEAPON_PLAYER
 	return PLAYER

@@ -27,4 +27,7 @@ shape = SubResource("CircleShape2D_l8bx4")
 
 [node name="AttackReloadTimer" type="Timer" parent="Timers"]
 
+[node name="CalcVelocityTimer" type="Timer" parent="Timers"]
+
 [connection signal="timeout" from="Timers/AttackReloadTimer" to="." method="_on_attack_reload_timer_timeout"]
+[connection signal="timeout" from="Timers/CalcVelocityTimer" to="." method="_on_calc_velocity_timer_timeout"]

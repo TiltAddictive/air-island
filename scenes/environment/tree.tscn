@@ -45,9 +45,9 @@ _data = {
 "shaking": SubResource("Animation_4kuti")
 }
 
-[node name="Tree" type="CharacterBody2D"]
+[node name="Tree" type="StaticBody2D"]
 collision_layer = 16
-collision_mask = 61
+collision_mask = 48
 script = ExtResource("1_eah4c")
 
 [node name="SahdowPoint" type="Node2D" parent="."]
@@ -64,7 +64,7 @@ texture = ExtResource("1_uj5t0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
-rotation = 4.71239
+rotation = -1.5708
 shape = SubResource("CapsuleShape2D_rxhgg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

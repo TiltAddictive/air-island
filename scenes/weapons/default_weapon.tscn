@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scripts/weapons/default_weapon.gd" id="1_o885s"]
 
 [node name="DefaultWeapon" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 48
 script = ExtResource("1_o885s")
 
 [node name="ShadowPoint" type="Node2D" parent="."]

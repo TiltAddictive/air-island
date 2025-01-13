@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://vxm07ely8ocl" path="res://scenes/technical/level_generator.tscn" id="8_rbtoj"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kgjf6"]
-vertices = PackedVector2Array(406.969, 232.969, -416.93, 231.023, -414.062, -231.023, 406.023, -232.969)
+vertices = PackedVector2Array(407, 233, -415, 233, -415, -233, 407, -233)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-424, -241, 416, -243, 417, 243, -427, 241)])
 
@@ -27,7 +27,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Allies" node_paths=PackedStringArray("WEAPON_NODE") instance=ExtResource("1_83f7u")]
 position = Vector2(263, 115)
-SPEED = 200.0
+SPEED = 150.0
 WEAPON_NODE = NodePath("../../Weapons")
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -39,6 +39,9 @@ ENEMY_ATACK_NODE = NodePath("../../EnemyBullets")
 
 [node name="NavigationEnemy" parent="Enemies" instance=ExtResource("4_7h27a")]
 position = Vector2(-116, -44)
+
+[node name="NavigationEnemy2" parent="Enemies" instance=ExtResource("4_7h27a")]
+position = Vector2(-41, -88)
 
 [node name="EnemyBullets" type="Node2D" parent="."]
 y_sort_enabled = true

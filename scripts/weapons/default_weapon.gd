@@ -8,9 +8,8 @@ signal weapon_have_to_destroy
 @onready var collision_response_timer: Timer = $Timers/CollisionResponseTimer
 @export var collision_response_time: float = 0.05
 
-@onready var attack_reload_timer: Timer = $Timers/AttackReloadTimer
-@export var attack_reload_time: float = 1
-
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var rotational_part: Node2D = $RotationalPart
 
 # Movement
 @export var SPEED: float = 400
@@ -18,6 +17,8 @@ var direction: Vector2 = Vector2(1, 1)
 
 # Damage
 @export var DAMAGE: float = 2
+@export var REJECTION_FORCE_VALUE: float = 0
+@export var IMPULSE_IMPACT_TIME: float = 1
 
 # Behaviour
 var BEHAVIOUR: Dictionary
@@ -57,6 +58,14 @@ func destroy():
 	RunGlobal.PLAYER.restore(global_position)
 	RunGlobal.WEAPON_PLAYER = null
 	queue_free()
+
+
+func disabled_collision():
+	collision_shape_2d.disabled = true
+
+
+func enable_collision():
+	collision_shape_2d.disabled = false
 
 
 func _on_weapon_have_to_destroy() -> void:

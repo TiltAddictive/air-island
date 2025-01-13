@@ -102,8 +102,6 @@ libraries = {
 
 [node name="CollisionResponseTimer" type="Timer" parent="Timers"]
 
-[node name="AttackReloadTimer" type="Timer" parent="Timers"]
-
 [connection signal="weapon_collided_with_wall" from="." to="." method="_on_weapon_collided_with_wall"]
 [connection signal="weapon_have_to_destroy" from="." to="." method="_on_weapon_have_to_destroy"]
 [connection signal="body_entered" from="RotationalPart/DamageArea" to="." method="_on_damage_area_body_entered"]
