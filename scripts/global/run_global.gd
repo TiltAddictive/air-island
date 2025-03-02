@@ -1,7 +1,8 @@
 extends Node
 
+signal weapon_switched
 
-var current_weapon_index: int = 0
+var current_weapon_index: int = 1
 var PLAYER: CharacterBody2D
 var WEAPON_PLAYER: CharacterBody2D
 
@@ -21,12 +22,13 @@ func _ready() -> void:
 
 
 func swith_weapon(delta_index: int) -> void:
-	current_weapon_index = get_negative_index(
+	current_weapon_index = get_changed_index(
 		weapons,
 		current_weapon_index + delta_index
 	)
+	weapon_switched.emit()
 
-func get_negative_index(arr: Array, idx: int) -> int:
+func get_changed_index(arr: Array, idx: int) -> int:
 	var real_idx = idx % arr.size() if idx >= 0 else arr.size() + idx
 	return real_idx
 
