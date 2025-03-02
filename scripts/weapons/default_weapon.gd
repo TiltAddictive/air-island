@@ -27,6 +27,8 @@ var have_to_response_on_collision: bool = false
 # Player
 var PLAYER: CharacterBody2D
 
+@export var SPRITE: Sprite2D
+
 func set_weapon_behaviour_states():
 	pass
 
