@@ -4,3 +4,5 @@
 
 [node name="LevelGenerator" type="Node2D"]
 script = ExtResource("1_t0311")
+MARGIN_RADIUS = null
+environmental_items = null

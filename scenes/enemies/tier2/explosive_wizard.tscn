@@ -1,0 +1,203 @@
+[gd_scene load_steps=12 format=3 uid="uid://dj30cqjhxijko"]
+
+[ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_kqh4q"]
+[ext_resource type="Script" path="res://scripts/enemies/tier2/explosive_wizard.gd" id="2_j7by5"]
+[ext_resource type="Texture2D" uid="uid://cir1vyw17qx44" path="res://resourses/sprites/enemies/red_wizard-hood.png" id="2_uysng"]
+[ext_resource type="PackedScene" uid="uid://r8n7bxyhuna5" path="res://scenes/enemies/technical/bomb.tscn" id="3_3253c"]
+[ext_resource type="Texture2D" uid="uid://bnur0fx1tj35l" path="res://resourses/sprites/enemies/red_wizard-hat.png" id="3_vecde"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xcxh5"]
+radius = 126.194
+
+[sub_resource type="Animation" id="Animation_xi3hi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_j0igp"]
+resource_name = "attack_spawning"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_spawning_bombs"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dcne1"]
+resource_name = "move"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -32), Vector2(0, -33), Vector2(0, -32), Vector2(0, -33), Vector2(0, -32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0698132, 0.0, -0.0698132, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_717qx"]
+_data = {
+"RESET": SubResource("Animation_xi3hi"),
+"attack_spawning": SubResource("Animation_j0igp"),
+"move": SubResource("Animation_dcne1")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wq2g0"]
+radius = 3.0
+height = 34.0
+
+[node name="ExplosiveWizard" instance=ExtResource("1_kqh4q")]
+script = ExtResource("2_j7by5")
+bomb_spawn_area_range = 70.0
+panic_area_radius = 150.0
+bomb_spawn_delay = 0.1
+bombs_to_spawn = 3
+change_random_direction_time = 0.5
+bomb_scene = ExtResource("3_3253c")
+SPEED = 100.0
+
+[node name="PanicArea2D" type="Area2D" parent="." index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanicArea2D" index="0"]
+shape = SubResource("CircleShape2D_xcxh5")
+
+[node name="Sprite" parent="RotationalPart" index="0"]
+position = Vector2(0, 6)
+scale = Vector2(1, 1)
+texture = ExtResource("2_uysng")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationalPart/Sprite" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_717qx")
+}
+
+[node name="Hat" type="Sprite2D" parent="RotationalPart" index="1"]
+position = Vector2(0, 6)
+scale = Vector2(-1, 1)
+texture = ExtResource("3_vecde")
+hframes = 4
+
+[node name="Collision" parent="." index="5"]
+position = Vector2(-1, -3)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_wq2g0")
+
+[node name="AttackReloadTimer" parent="Timers" index="0"]
+one_shot = true
+
+[node name="ChangeRandomDirectionTimer" type="Timer" parent="Timers" index="2"]
+one_shot = true
+
+[node name="BombSpawnTimer" type="Timer" parent="Timers" index="3"]
+
+[connection signal="timeout" from="Timers/ChangeRandomDirectionTimer" to="." method="_on_change_random_direction_timer_timeout"]
+[connection signal="timeout" from="Timers/BombSpawnTimer" to="." method="_on_bomb_spawn_timer_timeout"]

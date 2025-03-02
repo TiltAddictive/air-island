@@ -1,5 +1,7 @@
 extends DefaultEnemy
 
+
+
 func _ready() -> void:
 	super._ready()
 
@@ -17,4 +19,8 @@ func calc_move(_delta: float) -> void:
 		player_position = prev_player_position
 	else:
 		prev_player_position = player_position
+
+	if (player_position - global_position).length() <= DISTANCE_TO_PLAYER_EPSILON:
+		velocity = Vector2.ZERO
+		return
 	velocity = ((player_position - global_position).normalized()) * SPEED

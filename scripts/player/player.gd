@@ -20,9 +20,16 @@ var can_get_damage: bool = true
 @onready var invulnerability_timer: Timer = $Timers/InvulnerabilityTimer
 @export var invulnerability_time: float = 1
 
+@onready var rotational_part: Node2D = $RotationalPart
+
+@onready var animation_player: AnimationPlayer = $RotationalPart/Sprite2D/AnimationPlayer
 
 func _ready() -> void:
 	RunGlobal.PLAYER = self
+
+
+func _process(delta: float) -> void:
+	switch_rotational_scale()
 
 
 func _physics_process(delta: float) -> void:
@@ -33,6 +40,7 @@ func _physics_process(delta: float) -> void:
 	get_input()
 	calc_attack()
 	velocity = direction * SPEED * RunGlobal.SPEED_MULTIPLIER
+	calc_animation()
 	move_and_slide()
 
 
@@ -71,8 +79,7 @@ func start_evaporating():
 	is_evaporated = true
 	can_get_damage = false
 	can_attack = false
-	
-	
+
 	set_physics_process(false)  # Отключаем физическую обработку (перемещения и коллизии)
 	visible = false
 
@@ -87,6 +94,20 @@ func restore(spawn_position: Vector2, damage: float = 0):
 	visible = true
 	can_attack = true
 	set_physics_process(true)
+
+
+func calc_animation():
+	if velocity.length() != 0:
+		animation_player.play("move")
+		return
+	animation_player.stop()
+
+
+func switch_rotational_scale():
+	if sign(velocity.x) > 0:
+		rotational_part.scale.x = 1
+	elif sign(velocity.x) < 0:
+		rotational_part.scale.x = -1
 
 
 func _on_invulnerability_timer_timeout() -> void:
