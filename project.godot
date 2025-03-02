@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 RunGlobal="*res://scripts/global/run_global.gd"
+ConstantsGlobal="*res://scripts/global/constants_global.gd"
+RunAuxiliaryScript="*res://scripts/technical/run_auxiliary_script.gd"
 
 [display]
 
@@ -86,6 +88,10 @@ choose_right={
 2d_physics/layer_4="EnemyBullets"
 2d_physics/layer_5="Walls"
 2d_physics/layer_6="HalfWalls"
+2d_physics/layer_7="LevelEdge"
+avoidance/layer_1="Player"
+avoidance/layer_2="Enemies"
+avoidance/layer_3="Environment"
 
 [rendering]
 

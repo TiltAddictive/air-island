@@ -1,13 +1,81 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4ou1ewvat1uw"]
+[gd_scene load_steps=14 format=3 uid="uid://c4ou1ewvat1uw"]
 
 [ext_resource type="PackedScene" uid="uid://db0kps2wuxwwl" path="res://scenes/player/player.tscn" id="1_83f7u"]
 [ext_resource type="Script" path="res://scripts/levels/main_level.gd" id="1_snwsc"]
 [ext_resource type="PackedScene" uid="uid://cr6ppaon7nkj8" path="res://scenes/environment/tree.tscn" id="3_8wpse"]
-[ext_resource type="PackedScene" uid="uid://c5rmck7e5wyfs" path="res://scenes/enemies/walker.tscn" id="3_wwb6q"]
-[ext_resource type="PackedScene" uid="uid://ciisd7blrkrdp" path="res://scenes/enemies/navigation_enemy.tscn" id="4_7h27a"]
 [ext_resource type="Texture2D" uid="uid://d2el32gkybloj" path="res://resourses/sprites/technical/white_oval.png" id="4_lbujc"]
+[ext_resource type="Texture2D" uid="uid://cvuilqdl7sqq2" path="res://resourses/sprites/environment/grass_tileset_16x16.png" id="4_sdcbw"]
 [ext_resource type="PackedScene" uid="uid://kexsyhactk42" path="res://scenes/UI/run_ui.tscn" id="4_uyyy4"]
 [ext_resource type="PackedScene" uid="uid://vxm07ely8ocl" path="res://scenes/technical/level_generator.tscn" id="8_rbtoj"]
+[ext_resource type="PackedScene" uid="uid://t1mo7c1n113w" path="res://scenes/technical/enemy_wave_manager.tscn" id="10_wssw8"]
+[ext_resource type="PackedScene" uid="uid://c5dxkmwrgebu6" path="res://scenes/technical/zone_spawner.tscn" id="11_paba4"]
+[ext_resource type="PackedScene" uid="uid://bwsqabvg2h5si" path="res://scenes/environment/Wall.tscn" id="12_ns323"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0y7sw"]
+texture = ExtResource("4_sdcbw")
+texture_region_size = Vector2i(32, 32)
+use_texture_padding = false
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+3:3/0 = 0
+3:4/0 = 0
+3:5/0 = 0
+3:6/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+1:8/0 = 0
+0:7/0 = 0
+0:6/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+1:6/0 = 0
+0:8/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+2:6/0 = 0
+2:5/0 = 0
+2:4/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+5:7/0 = 0
+5:6/0 = 0
+4:6/0 = 0
+3:2/0 = 0
+5:0/0 = 0
+5:1/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+8:1/0 = 0
+8:2/0 = 0
+7:2/0 = 0
+6:2/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+4:3/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+5:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5mnfs"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_0y7sw")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kgjf6"]
 vertices = PackedVector2Array(407, 233, -415, 233, -415, -233, 407, -233)
@@ -33,16 +101,6 @@ WEAPON_NODE = NodePath("../../Weapons")
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Walker" parent="Enemies" node_paths=PackedStringArray("ENEMY_ATACK_NODE") instance=ExtResource("3_wwb6q")]
-position = Vector2(-175, -90)
-ENEMY_ATACK_NODE = NodePath("../../EnemyBullets")
-
-[node name="NavigationEnemy" parent="Enemies" instance=ExtResource("4_7h27a")]
-position = Vector2(-116, -44)
-
-[node name="NavigationEnemy2" parent="Enemies" instance=ExtResource("4_7h27a")]
-position = Vector2(-41, -88)
-
 [node name="EnemyBullets" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -50,10 +108,19 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="WhiteOval" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.462745, 0.686275, 0.227451, 1)
 position = Vector2(826, -1784)
 scale = Vector2(100, 100)
 texture = ExtResource("4_lbujc")
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = -1
+tile_set = SubResource("TileSet_5mnfs")
+format = 2
+layer_0/tile_data = PackedInt32Array(-458766, 1, 0, -393230, 1, 0, -327694, 1, 0, -262158, 1, 0, -196622, 1, 0, -131086, 1, 0, -65550, 1, 0, -14, 1, 0, 65522, 1, 0, 131058, 1, 0, 196594, 1, 0, 262130, 1, 0, 327666, 1, 0, 393202, 1, 0, 458738, 1, 0, 524274, 1, 0, -458765, 1, 0, -393229, 1, 0, -327693, 1, 0, -262157, 1, 0, -196621, 1, 0, -131085, 1, 0, -65549, 1, 0, -13, 1, 0, 65523, 1, 0, 131059, 1, 0, 196595, 1, 0, 262131, 1, 0, 327667, 1, 0, 393203, 1, 0, 458739, 1, 0, 524275, 1, 0, -458764, 1, 0, -393228, 1, 0, -327692, 1, 0, -262156, 1, 0, -196620, 1, 0, -131084, 1, 0, -65548, 1, 0, -12, 1, 0, 65524, 1, 0, 131060, 1, 0, 196596, 1, 0, 262132, 1, 0, 327668, 1, 0, 393204, 1, 0, 458740, 1, 0, 524276, 1, 0, -458763, 1, 0, -393227, 1, 0, -327691, 1, 0, -262155, 1, 0, -196619, 1, 0, -131083, 1, 0, -65547, 1, 0, -11, 1, 0, 65525, 1, 0, 131061, 1, 0, 196597, 1, 0, 262133, 1, 0, 327669, 1, 0, 393205, 1, 0, 458741, 1, 0, 524277, 1, 0, -458762, 1, 0, -393226, 1, 0, -327690, 1, 0, -262154, 1, 0, -196618, 1, 0, -131082, 1, 0, -65546, 1, 0, -10, 1, 0, 65526, 1, 0, 131062, 1, 0, 196598, 1, 0, 262134, 1, 0, 327670, 1, 0, 393206, 1, 0, 458742, 1, 0, 524278, 1, 0, -458761, 1, 0, -393225, 1, 0, -327689, 1, 0, -262153, 1, 0, -196617, 1, 0, -131081, 1, 0, -65545, 1, 2, -9, 1, 0, 65527, 1, 0, 131063, 1, 0, 196599, 1, 0, 262135, 1, 0, 327671, 1, 0, 393207, 1, 0, 458743, 1, 0, 524279, 1, 0, -458760, 1, 0, -393224, 1, 0, -327688, 1, 0, -262152, 1, 0, -196616, 1, 0, -131080, 1, 0, -65544, 1, 0, -8, 1, 0, 65528, 1, 0, 131064, 1, 0, 196600, 1, 0, 262136, 1, 0, 327672, 1, 0, 393208, 1, 0, 458744, 1, 0, 524280, 1, 0, -458759, 1, 0, -393223, 1, 0, -327687, 1, 0, -262151, 1, 0, -196615, 1, 0, -131079, 1, 0, -65543, 1, 0, -7, 1, 0, 65529, 1, 0, 131065, 1, 0, 196601, 1, 0, 262137, 1, 1, 327673, 1, 0, 393209, 1, 0, 458745, 1, 0, 524281, 1, 0, -458758, 1, 0, -393222, 1, 0, -327686, 1, 0, -262150, 1, 0, -196614, 1, 0, -131078, 1, 0, -65542, 1, 0, -6, 1, 0, 65530, 1, 0, 131066, 1, 0, 196602, 1, 0, 262138, 1, 0, 327674, 1, 0, 393210, 1, 0, 458746, 1, 0, 524282, 1, 0, -458757, 1, 0, -393221, 1, 0, -327685, 1, 0, -262149, 1, 0, -196613, 1, 0, -131077, 1, 0, -65541, 1, 0, -5, 1, 0, 65531, 1, 0, 131067, 1, 0, 196603, 1, 0, 262139, 1, 0, 327675, 1, 0, 393211, 1, 0, 458747, 1, 0, 524283, 1, 0, -458756, 1, 0, -393220, 1, 0, -327684, 1, 0, -262148, 1, 0, -196612, 1, 0, -131076, 1, 0, -65540, 1, 0, -4, 1, 0, 65532, 1, 0, 131068, 1, 0, 196604, 1, 0, 262140, 1, 0, 327676, 1, 0, 393212, 1, 0, 458748, 1, 0, 524284, 1, 0, -458755, 1, 0, -393219, 1, 0, -327683, 1, 0, -262147, 1, 0, -196611, 1, 0, -131075, 1, 0, -65539, 1, 0, -3, 1, 0, 65533, 1, 0, 131069, 1, 0, 196605, 1, 0, 262141, 1, 0, 327677, 1, 0, 393213, 1, 0, 458749, 1, 0, 524285, 1, 0, -458754, 1, 0, -393218, 1, 0, -327682, 1, 0, -262146, 1, 0, -196610, 1, 0, -131074, 1, 0, -65538, 1, 0, -2, 1, 0, 65534, 1, 0, 131070, 1, 0, 196606, 1, 0, 262142, 1, 0, 327678, 1, 0, 393214, 1, 0, 458750, 1, 0, 524286, 1, 0, -458753, 1, 0, -393217, 1, 0, -327681, 1, 0, -262145, 1, 0, -196609, 1, 0, -131073, 1, 0, -65537, 1, 0, -1, 1, 0, 65535, 1, 0, 131071, 1, 0, 196607, 1, 0, 262143, 1, 0, 327679, 1, 0, 393215, 1, 0, 458751, 1, 0, 524287, 1, 0, -524288, 1, 0, -458752, 1, 0, -393216, 1, 0, -327680, 1, 0, -262144, 1, 0, -196608, 1, 0, -131072, 1, 1, -65536, 1, 0, 0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, -524287, 1, 0, -458751, 1, 0, -393215, 1, 0, -327679, 1, 0, -262143, 1, 0, -196607, 1, 0, -131071, 1, 0, -65535, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 196609, 1, 0, 262145, 1, 0, 327681, 1, 0, 393217, 1, 0, 458753, 1, 0, -524286, 1, 0, -458750, 1, 0, -393214, 1, 0, -327678, 1, 0, -262142, 1, 0, -196606, 1, 0, -131070, 1, 0, -65534, 1, 0, 2, 1, 0, 65538, 1, 0, 131074, 1, 0, 196610, 1, 0, 262146, 1, 0, 327682, 1, 0, 393218, 1, 0, 458754, 1, 0, -524285, 1, 0, -458749, 1, 0, -393213, 1, 0, -327677, 1, 0, -262141, 1, 0, -196605, 1, 0, -131069, 1, 0, -65533, 1, 0, 3, 1, 0, 65539, 1, 0, 131075, 1, 0, 196611, 1, 0, 262147, 1, 0, 327683, 1, 0, 393219, 1, 0, 458755, 1, 0, -524284, 1, 0, -458748, 1, 0, -393212, 1, 0, -327676, 1, 0, -262140, 1, 0, -196604, 1, 0, -131068, 1, 0, -65532, 1, 0, 4, 1, 0, 65540, 1, 0, 131076, 1, 0, 196612, 1, 0, 262148, 1, 0, 327684, 1, 0, 393220, 1, 0, 458756, 1, 0, -524283, 1, 0, -458747, 1, 0, -393211, 1, 0, -327675, 1, 0, -262139, 1, 0, -196603, 1, 0, -131067, 1, 0, -65531, 1, 0, 5, 1, 0, 65541, 1, 0, 131077, 1, 0, 196613, 1, 2, 262149, 1, 0, 327685, 1, 0, 393221, 1, 0, 458757, 1, 0, -524282, 1, 0, -458746, 1, 0, -393210, 1, 0, -327674, 1, 0, -262138, 1, 0, -196602, 1, 0, -131066, 1, 0, -65530, 1, 0, 6, 1, 0, 65542, 1, 0, 131078, 1, 0, 196614, 1, 0, 262150, 1, 0, 327686, 1, 0, 393222, 1, 0, 458758, 1, 0, -524281, 1, 0, -458745, 1, 0, -393209, 1, 0, -327673, 1, 0, -262137, 1, 2, -196601, 1, 0, -131065, 1, 0, -65529, 1, 0, 7, 1, 0, 65543, 1, 0, 131079, 1, 0, 196615, 1, 0, 262151, 1, 0, 327687, 1, 0, 393223, 1, 0, 458759, 1, 0, -524280, 1, 0, -458744, 1, 0, -393208, 1, 0, -327672, 1, 0, -262136, 1, 0, -196600, 1, 0, -131064, 1, 0, -65528, 1, 0, 8, 1, 0, 65544, 1, 0, 131080, 1, 0, 196616, 1, 0, 262152, 1, 0, 327688, 1, 0, 393224, 1, 0, 458760, 1, 0, -524279, 1, 0, -458743, 1, 0, -393207, 1, 0, -327671, 1, 0, -262135, 1, 0, -196599, 1, 0, -131063, 1, 0, -65527, 1, 0, 9, 1, 0, 65545, 1, 0, 131081, 1, 0, 196617, 1, 0, 262153, 1, 0, 327689, 1, 0, 393225, 1, 0, 458761, 1, 0, -524278, 1, 0, -458742, 1, 0, -393206, 1, 0, -327670, 1, 0, -262134, 1, 0, -196598, 1, 0, -131062, 1, 0, -65526, 1, 0, 10, 1, 0, 65546, 1, 0, 131082, 1, 0, 196618, 1, 0, 262154, 1, 0, 327690, 1, 0, 393226, 1, 0, 458762, 1, 0, -524277, 1, 0, -458741, 1, 0, -393205, 1, 0, -327669, 1, 0, -262133, 1, 0, -196597, 1, 0, -131061, 1, 0, -65525, 1, 0, 11, 1, 0, 65547, 1, 0, 131083, 1, 0, 196619, 1, 0, 262155, 1, 0, 327691, 1, 0, 393227, 1, 0, 458763, 1, 0, -524276, 1, 0, -458740, 1, 0, -393204, 1, 0, -327668, 1, 0, -262132, 1, 0, -196596, 1, 0, -131060, 1, 0, -65524, 1, 0, 12, 1, 0, 65548, 1, 0, 131084, 1, 0, 196620, 1, 0, 262156, 1, 0, 327692, 1, 0, 393228, 1, 0, 458764, 1, 0, -524275, 1, 0, -458739, 1, 0, -393203, 1, 0, -327667, 1, 0, -262131, 1, 0, -196595, 1, 0, -131059, 1, 0, -65523, 1, 0, 13, 1, 0, 65549, 1, 0, 131085, 1, 0, 196621, 1, 0, 262157, 1, 0, 327693, 1, 0, 393229, 1, 0, 458765, 1, 0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -69,22 +136,46 @@ offset_bottom = -224.0
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Technical"]
 navigation_polygon = SubResource("NavigationPolygon_kgjf6")
 
-[node name="LevelGenerator" parent="Technical" node_paths=PackedStringArray("TOPLEFT_ZONE_POINT", "TOPRIGHT_ZONE_POINT", "DOWNLEFT_ZONE_POINT", "DOWNRIGHT_ZONE_POINT", "ENVIRONMENT_ITEM_NODE") instance=ExtResource("8_rbtoj")]
+[node name="LevelGenerator" parent="Technical" node_paths=PackedStringArray("ENVIRONMENT_ITEM_NODE", "ZONE_SPAWNER") instance=ExtResource("8_rbtoj")]
+ENVIRONMENT_ITEM_NODE = NodePath("../../Environment")
+environmental_items = Array[PackedScene]([ExtResource("3_8wpse")])
+ZONE_SPAWNER = NodePath("../ZoneSpawner")
+
+[node name="EnemyWaveManager" parent="Technical" node_paths=PackedStringArray("ENEMY_NODE", "ENEMY_BULLETS_NODE", "ZONE_SPAWNER") instance=ExtResource("10_wssw8")]
+ENEMY_NODE = NodePath("../../Enemies")
+ENEMY_BULLETS_NODE = NodePath("../../EnemyBullets")
+ZONE_SPAWNER = NodePath("../ZoneSpawner")
+
+[node name="ZoneSpawner" parent="Technical" node_paths=PackedStringArray("TOPLEFT_ZONE_POINT", "TOPRIGHT_ZONE_POINT", "DOWNLEFT_ZONE_POINT", "DOWNRIGHT_ZONE_POINT") instance=ExtResource("11_paba4")]
 TOPLEFT_ZONE_POINT = NodePath("TOPLEFT_ZONE_POINT")
 TOPRIGHT_ZONE_POINT = NodePath("TOPRIGHT_ZONE_POINT")
 DOWNLEFT_ZONE_POINT = NodePath("DOWNLEFT_ZONE_POINT")
 DOWNRIGHT_ZONE_POINT = NodePath("DOWNRIGHT_ZONE_POINT")
-ENVIRONMENT_ITEM_NODE = NodePath("../../Environment")
-environmental_items = Array[PackedScene]([ExtResource("3_8wpse")])
 
-[node name="TOPLEFT_ZONE_POINT" type="Node2D" parent="Technical/LevelGenerator"]
+[node name="TOPLEFT_ZONE_POINT" type="Node2D" parent="Technical/ZoneSpawner"]
 position = Vector2(-340, -150)
 
-[node name="TOPRIGHT_ZONE_POINT" type="Node2D" parent="Technical/LevelGenerator"]
+[node name="TOPRIGHT_ZONE_POINT" type="Node2D" parent="Technical/ZoneSpawner"]
 position = Vector2(340, -150)
 
-[node name="DOWNLEFT_ZONE_POINT" type="Node2D" parent="Technical/LevelGenerator"]
+[node name="DOWNLEFT_ZONE_POINT" type="Node2D" parent="Technical/ZoneSpawner"]
 position = Vector2(-340, 150)
 
-[node name="DOWNRIGHT_ZONE_POINT" type="Node2D" parent="Technical/LevelGenerator"]
+[node name="DOWNRIGHT_ZONE_POINT" type="Node2D" parent="Technical/ZoneSpawner"]
 position = Vector2(340, 150)
+
+[node name="Wall" parent="." instance=ExtResource("12_ns323")]
+position = Vector2(-476, -43)
+scale = Vector2(1, 5.4)
+
+[node name="Wall2" parent="." instance=ExtResource("12_ns323")]
+position = Vector2(467, -43)
+scale = Vector2(1, 5.4)
+
+[node name="Wall3" parent="." instance=ExtResource("12_ns323")]
+position = Vector2(-24, 273)
+scale = Vector2(7.025, 1)
+
+[node name="Wall4" parent="." instance=ExtResource("12_ns323")]
+position = Vector2(-29, -289)
+scale = Vector2(7.025, 1)

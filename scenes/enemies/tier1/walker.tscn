@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5rmck7e5wyfs"]
+
+[ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_ek8xn"]
+[ext_resource type="Script" path="res://scripts/enemies/tier1/walker.gd" id="2_eeb36"]
+[ext_resource type="PackedScene" uid="uid://dcf8nguqift3x" path="res://scenes/technical/shadow_small.tscn" id="3_7fs7l"]
+
+[sub_resource type="Animation" id="Animation_6ob5p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ts70i"]
+resource_name = "move"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -32), Vector2(0, -33), Vector2(0, -32), Vector2(0, -33), Vector2(0, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0698132, 0.0, -0.0698132, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bodyi"]
+_data = {
+"RESET": SubResource("Animation_6ob5p"),
+"move": SubResource("Animation_ts70i")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tida"]
+size = Vector2(28, 28)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ks7x8"]
+radius = 5.0
+
+[node name="Walker" instance=ExtResource("1_ek8xn")]
+script = ExtResource("2_eeb36")
+
+[node name="ShadowSmall" parent="ShadowPoint" index="0" instance=ExtResource("3_7fs7l")]
+position = Vector2(0, 5)
+
+[node name="Sprite" parent="RotationalPart" index="0"]
+self_modulate = Color(0.844352, 0.162371, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationalPart/Sprite" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_bodyi")
+}
+autoplay = "move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaNode/AttackArea2D" index="0"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_1tida")
+
+[node name="Collision" parent="." index="4"]
+position = Vector2(0, -5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ks7x8")

@@ -23,14 +23,12 @@ func _process(delta: float) -> void:
 
 func damage_body(body: Node2D) -> void:
 	var impulse_vector_direction: Vector2 = (body.global_position - self.global_position).normalized() * REJECTION_FORCE_VALUE
-	print(body, " | ", body.has_method("get_hit"), " | ", impulse_vector_direction)
 	if body.has_method("get_hit"):
 		body.get_hit(DAMAGE, impulse_vector_direction, IMPULSE_IMPACT_TIME)
 
 
 func damage_everybody_in_damage_area():
 	var bodies_list: Array[Node2D] = damage_area.get_overlapping_bodies()
-	print(bodies_list)
 	for body in bodies_list:
 		damage_body(body)
 
