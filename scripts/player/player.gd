@@ -66,7 +66,10 @@ func calc_attack():
 
 
 func launch_weapon():
-	var weapon_scene = RunGlobal.weapons[RunGlobal.current_weapon_index].instantiate()
+	var weapon_scene = RunGlobal.launch_current_weapon()
+	print("launch_weapon_scene: ", weapon_scene)
+	if weapon_scene == null:
+		return
 	weapon_scene.global_position = global_position
 	weapon_scene.direction = look_at_direction
 	WEAPON_NODE.add_child(weapon_scene)

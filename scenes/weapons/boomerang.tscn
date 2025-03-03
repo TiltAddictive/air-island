@@ -71,6 +71,7 @@ collision_mask = 16
 script = ExtResource("1_cyesg")
 MAX_DISTANCE = 100.0
 BACKWARDS_MAX_DISTANCE = 200.0
+RELOAD_TIME = 2.0
 SPRITE = NodePath("RotationalPart/Sprite2D")
 
 [node name="ShadowSmall" parent="." instance=ExtResource("1_aj1sp")]

@@ -21,7 +21,7 @@ offset_bottom = 40.0
 layout_mode = 2
 texture = ExtResource("2_6ta04")
 
-[node name="CooldownLeft" type="Label" parent="HBoxContainer/WeaponIconLeft"]
+[node name="WeaponCooldownLeft" type="Label" parent="HBoxContainer/WeaponIconLeft"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -42,7 +42,7 @@ vertical_alignment = 1
 layout_mode = 2
 texture = ExtResource("2_6ta04")
 
-[node name="CooldownCenter" type="Label" parent="HBoxContainer/WeaponIconCenter"]
+[node name="WeaponCooldownCenter" type="Label" parent="HBoxContainer/WeaponIconCenter"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -63,7 +63,7 @@ vertical_alignment = 1
 layout_mode = 2
 texture = ExtResource("2_6ta04")
 
-[node name="CooldownRight" type="Label" parent="HBoxContainer/WeaponIconRight"]
+[node name="WeaponCooldownRight" type="Label" parent="HBoxContainer/WeaponIconRight"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

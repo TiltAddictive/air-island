@@ -16,6 +16,7 @@ height = 18.0
 script = ExtResource("2_8h8bq")
 ROTATION_SPEED = 300.0
 live_time = 0.75
+RELOAD_TIME = 2.5
 SPEED = 200.0
 DAMAGE = 1.0
 REJECTION_FORCE_VALUE = 300.0
