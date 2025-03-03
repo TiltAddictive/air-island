@@ -13,12 +13,29 @@ var weapons: Array[PackedScene] = [
 	preload("res://scenes/weapons/boomerang.tscn"),
 	preload("res://scenes/weapons/hammer.tscn"),
 ]
+var weapon_timers: Array[Timer] = []
 
 var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
 	rng.randomize()
+	initialize_weapon_timers()
+
+
+
+func initialize_weapon_timers():
+	for timer in weapon_timers:
+		timer.queue_free()
+	for weapon_scene in weapons:
+		var weapon_node = weapon_scene.instantiate()
+		var timer = Timer.new()
+		timer.autostart = false
+		timer.wait_time = weapon_node.RELOAD_TIME
+		timer.one_shot = true
+		weapon_node.queue_free()
+		weapon_timers.append(timer)
+		add_child(timer)
 
 
 func swith_weapon(delta_index: int) -> void:
@@ -37,3 +54,13 @@ func get_closest_player(_glob_pos: Vector2) -> CharacterBody2D:
 	if WEAPON_PLAYER != null:
 		return WEAPON_PLAYER
 	return PLAYER
+
+func launch_current_weapon() -> Node2D:
+	print(weapon_timers[current_weapon_index].time_left)
+	if weapon_timers[current_weapon_index].time_left != 0:
+		return null
+	weapon_timers[current_weapon_index].start()
+	print(weapon_timers[current_weapon_index].time_left)
+	print(weapon_timers[current_weapon_index].time_left)
+	return weapons[current_weapon_index].instantiate()
+	

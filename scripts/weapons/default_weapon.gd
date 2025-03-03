@@ -7,6 +7,7 @@ signal weapon_have_to_destroy
 # Timers
 @onready var collision_response_timer: Timer = $Timers/CollisionResponseTimer
 @export var collision_response_time: float = 0.05
+@export var RELOAD_TIME: float = 1.0
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var rotational_part: Node2D = $RotationalPart
