@@ -4,5 +4,9 @@
 
 [node name="LevelGenerator" type="Node2D"]
 script = ExtResource("1_t0311")
-MARGIN_RADIUS = null
-environmental_items = null
+
+[node name="SpawnGapTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="SpawnGapTimer" to="." method="_on_spawn_gap_timer_timeout"]

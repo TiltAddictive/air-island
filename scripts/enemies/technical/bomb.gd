@@ -4,6 +4,7 @@ class_name Bomb
 
 @export var DAMAGE: float = 1
 @export var can_attack: bool = false
+@export var REJECTION_FORCE_VALUE: float = 200
 
 
 func _ready() -> void:
@@ -20,5 +21,6 @@ func _physics_process(delta: float) -> void:
 	for body in $Area2D.get_overlapping_bodies():
 		if not body.has_method("get_hit"):
 			return
-		body.get_hit(DAMAGE)
+		var impulse_vector_direction: Vector2 = (body.global_position - self.global_position).normalized() * REJECTION_FORCE_VALUE
+		body.get_hit(DAMAGE, impulse_vector_direction)
 		can_attack = false

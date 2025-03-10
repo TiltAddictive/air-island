@@ -2,11 +2,13 @@ extends CharacterBody2D
 class_name DefaultEnemy
 
 @onready var animation_player: AnimationPlayer = $RotationalPart/Sprite/AnimationPlayer
+@onready var death_animation_player: AnimationPlayer = $RotationalPart/DeathAnimationPlayer
 
 # HP
 @export var MAX_HP: float = 3
 @onready var hp: float = MAX_HP
 @onready var hp_bar: HPBar = $HPBar
+var is_dying: bool = false
 
 
 # Move
@@ -19,6 +21,7 @@ var look_at_direction: Vector2 = Vector2.RIGHT
 @export var ENEMY_ATACK_NODE: Node2D = null
 @onready var attack_area_2d: Area2D = $AttackAreaNode/AttackArea2D
 @export var DAMAGE: float = 2
+@export var REJECTION_FORCE_VALUE: float = 200
 
 
 # Timers
@@ -26,7 +29,7 @@ var look_at_direction: Vector2 = Vector2.RIGHT
 @export var attack_reload_time: float = 2
 @onready var calc_velocity_timer: Timer = $Timers/CalcVelocityTimer
 
-var can_attack: bool = true
+@export var can_attack: bool = true
 @export var can_get_damage: bool = true
 var calc_velocity: bool = true
 
@@ -38,13 +41,17 @@ var prev_velocity_sign: int = 1
 var player_position: Vector2
 @export var DISTANCE_TO_PLAYER_EPSILON: float = 10
 
+@export var ROTATION_SPEED: float = 1200
+
+@export var DEATH_SPEED: float = 150
+
 
 func _ready() -> void:
 	attack_reload_timer.wait_time = attack_reload_time
 
 
-func _process(delta: float) -> void:
-	switch_rotational_scale()
+func _process(_delta: float) -> void:
+	calc_rotation_scale()
 
 
 func _physics_process(delta: float) -> void:
@@ -55,23 +62,27 @@ func _physics_process(delta: float) -> void:
 
 
 func calc_animation():
-	if velocity.length() != 0:
+	if velocity.length() != 0 and not is_dying:
 		animation_player.play("move")
 		return
 	animation_player.stop()
 
 
 func calc_death() -> void:
-	if hp <= 0:
+	if hp <= 0 and not is_dying:
 		death()
 
 
 func calc_attack():
-	can_attack = false
-	attack_reload_timer.start()
+	if not can_attack:
+		return
 	var bodies_to_attack_list = attack_area_2d.get_overlapping_bodies()
 	for body in bodies_to_attack_list:
 		attack(body)
+	if bodies_to_attack_list.size() == 0:
+		return
+	attack_reload_timer.start()
+	can_attack = false
 
 
 func calc_move(_delta: float) -> void:
@@ -83,7 +94,14 @@ func get_player_position() -> Vector2:
 
 
 func death() -> void:
-	queue_free()
+	can_attack = false
+	calc_velocity = false
+	can_get_damage = false
+	is_dying = true
+	velocity = Vector2(-sign(velocity.x) * DEATH_SPEED, 0)
+	animation_player.clear_queue()
+	animation_player.stop()
+	death_animation_player.play("death_animation", -1, 1.5)
 
 
 func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO, impulse_impact_time: float = 0) -> void:
@@ -99,9 +117,15 @@ func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO, impulse_impact_time
 
 func attack(body: Node2D) -> void:
 	if can_attack and body.has_method("get_hit"):
-		can_attack = false
-		body.get_hit(DAMAGE)
+		var impulse_vector_direction: Vector2 = (body.global_position - self.global_position).normalized() * REJECTION_FORCE_VALUE
+		body.get_hit(DAMAGE, impulse_vector_direction)
 		attack_reload_timer.start(attack_reload_time)
+
+
+func calc_rotation_scale():
+	if is_dying:
+		return
+	switch_rotational_scale()
 
 
 func switch_rotational_scale():
@@ -112,8 +136,12 @@ func switch_rotational_scale():
 
 
 func _on_attack_reload_timer_timeout() -> void:
+	if is_dying:
+		return
 	can_attack = true
 
 
 func _on_calc_velocity_timer_timeout() -> void:
+	if is_dying:
+		return
 	calc_velocity = true

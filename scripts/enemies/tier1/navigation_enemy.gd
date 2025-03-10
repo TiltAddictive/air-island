@@ -23,6 +23,12 @@ func calc_move(_delta: float) -> void:
 		return
 	var intended_velocity = to_local(navigation_agent.get_next_path_position()).normalized() * SPEED
 	navigation_agent.velocity = intended_velocity
+	return
+
+
+func death() -> void:
+	navigation_agent.avoidance_layers = 0
+	super.death()
 
 
 func set_target():

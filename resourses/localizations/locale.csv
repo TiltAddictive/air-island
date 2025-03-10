@@ -1,0 +1,5 @@
+key,ru,en
+replaceWeapon,Заменить,Replace
+boomerangTitle,Бумеранг,Boomerang
+hammerTitle,Молот,Hammer
+wave_count_text,"Волна: %d/%d","Wave: %d/%d"

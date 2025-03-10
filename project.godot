@@ -80,6 +80,10 @@ choose_right={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://resourses/localizations/locale.en.translation", "res://resourses/localizations/locale.ru.translation")
+
 [layer_names]
 
 2d_physics/layer_1="Player"

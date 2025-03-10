@@ -10,15 +10,19 @@ var look_at_direction: Vector2 = Vector2.RIGHT
 
 # Attack
 @export var WEAPON_NODE: Node2D = null
+@export var GET_DAMAGE_IMPULSE: float = 100
 
 var can_attack: bool = true
 var is_evaporated: bool = false
 var can_get_damage: bool = true
+var calc_input: bool = true
 
 
 # Timers
 @onready var invulnerability_timer: Timer = $Timers/InvulnerabilityTimer
-@export var invulnerability_time: float = 1
+@export var invulnerability_time: float = 0.6
+@onready var input_reload_timer: Timer = $Timers/InputReloadTimer
+@export var input_reload_time: float = 0.3
 
 @onready var rotational_part: Node2D = $RotationalPart
 
@@ -39,12 +43,19 @@ func _physics_process(delta: float) -> void:
 
 	get_input()
 	calc_attack()
-	velocity = direction * SPEED * RunGlobal.SPEED_MULTIPLIER
+	calc_velocity()
 	calc_animation()
 	move_and_slide()
 
 
+func calc_velocity():
+	if not calc_input and not can_get_damage:
+		return
+	velocity = direction * SPEED * RunGlobal.SPEED_MULTIPLIER
+
 func get_input():
+	if not calc_input:
+		return
 	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
 	look_at_direction = direction if direction != Vector2.ZERO else look_at_direction
 
@@ -52,11 +63,13 @@ func get_input():
 func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO) -> void:
 	if not can_get_damage:
 		return
+	RunGlobal.player_hp -= 1
 	can_get_damage = false
 	invulnerability_timer.start(
 		invulnerability_time * RunGlobal.INVULNERABILITY_TIME_MULTIPLIER
 	)
-	print("player_get_gamage.emit(",damage,", ", impulse, ")")
+	stun(input_reload_time)
+	velocity = impulse.normalized() * GET_DAMAGE_IMPULSE
 	player_get_gamage.emit(damage, impulse)
 
 
@@ -67,7 +80,6 @@ func calc_attack():
 
 func launch_weapon():
 	var weapon_scene = RunGlobal.launch_current_weapon()
-	print("launch_weapon_scene: ", weapon_scene)
 	if weapon_scene == null:
 		return
 	weapon_scene.global_position = global_position
@@ -90,9 +102,12 @@ func start_evaporating():
 func restore(spawn_position: Vector2, damage: float = 0):
 	if not is_evaporated:
 		return
-	#velocity = restore_direction.normalized() * impulse
-	#velocity.x = abs(velocity.x) if is_moving_right else -abs(velocity.x)
+	can_get_damage = false
+	invulnerability_timer.start(
+		invulnerability_time * RunGlobal.INVULNERABILITY_TIME_MULTIPLIER
+	)
 	global_position = spawn_position
+	velocity = Vector2.ZERO
 	is_evaporated = false
 	visible = true
 	can_attack = true
@@ -112,6 +127,17 @@ func switch_rotational_scale():
 	elif sign(velocity.x) < 0:
 		rotational_part.scale.x = -1
 
+func stun(duration: float = -1):
+	if duration < 0:
+		duration = input_reload_time
+	calc_input = false
+	can_attack = false
+	input_reload_timer.start(duration)
 
 func _on_invulnerability_timer_timeout() -> void:
 	can_get_damage = true
+
+
+func _on_input_reload_timer_timeout() -> void:
+	calc_input = true
+	can_attack = true

@@ -1,10 +1,14 @@
 extends Node
 
 signal weapon_switched
+signal player_run_out_of_hp
 
 var current_weapon_index: int = 1
 var PLAYER: CharacterBody2D
 var WEAPON_PLAYER: CharacterBody2D
+
+var player_max_hp: int = 3
+var player_hp: int
 
 var SPEED_MULTIPLIER: float = 1
 var INVULNERABILITY_TIME_MULTIPLIER: float = 1
@@ -19,9 +23,13 @@ var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
+	player_hp = player_max_hp
 	rng.randomize()
 	initialize_weapon_timers()
 
+
+func initialize_run() -> void:
+	player_hp = player_max_hp
 
 
 func initialize_weapon_timers():
@@ -56,11 +64,20 @@ func get_closest_player(_glob_pos: Vector2) -> CharacterBody2D:
 	return PLAYER
 
 func launch_current_weapon() -> Node2D:
-	print(weapon_timers[current_weapon_index].time_left)
 	if weapon_timers[current_weapon_index].time_left != 0:
 		return null
 	weapon_timers[current_weapon_index].start()
-	print(weapon_timers[current_weapon_index].time_left)
-	print(weapon_timers[current_weapon_index].time_left)
 	return weapons[current_weapon_index].instantiate()
-	
+
+
+func get_weapon_indexes() -> Array[int]:
+	var center_index: int = RunGlobal.current_weapon_index
+	var left_index: int = RunGlobal.get_changed_index(
+		RunGlobal.weapons,
+		center_index - 1
+	)
+	var right_index: int = RunGlobal.get_changed_index(
+		RunGlobal.weapons,
+		center_index + 1
+	)
+	return [left_index, center_index, right_index]

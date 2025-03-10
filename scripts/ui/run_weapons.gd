@@ -1,14 +1,14 @@
 extends Control
 
-@onready var left_weapon_icon: TextureRect = $HBoxContainer/WeaponIconLeft
-@onready var left_weapon_cooldown: Label = $HBoxContainer/WeaponIconLeft/WeaponCooldownLeft
+@onready var left_weapon_icon: TextureRect = $MarginContainer/HBoxContainer/LeftWeaponVBox/WeaponIconLeft
+@onready var left_weapon_cooldown: Label = $MarginContainer/HBoxContainer/LeftWeaponVBox/WeaponCooldownLeft
 
-@onready var center_weapon_icon: TextureRect = $HBoxContainer/WeaponIconCenter
-@onready var center_weapon_cooldown: Label = $HBoxContainer/WeaponIconCenter/WeaponCooldownCenter
+@onready var center_weapon_icon: TextureRect = $MarginContainer/HBoxContainer/CenterWeaponVBox/WeaponIconCenter
+@onready var center_weapon_cooldown: Label = $MarginContainer/HBoxContainer/CenterWeaponVBox/WeaponCooldownCenter
 
-@onready var right_weapon_icon: TextureRect = $HBoxContainer/WeaponIconRight
-@onready var right_weapon_cooldown: Label = $HBoxContainer/WeaponIconRight/WeaponCooldownRight
-var weapon_indexes: Array[int] = []
+@onready var right_weapon_icon: TextureRect = $MarginContainer/HBoxContainer/RightWeaponVBox/WeaponIconRight
+@onready var right_weapon_cooldown: Label = $MarginContainer/HBoxContainer/RightWeaponVBox/WeaponCooldownRight
+var weapon_indexes: Array[int] = [0, 0, 0]
 
 
 func _ready() -> void:
@@ -19,17 +19,7 @@ func _process(delta: float) -> void:
 	update_timers_labels(weapon_indexes[0], weapon_indexes[1], weapon_indexes[2])
 
 func update_weapon_indexes():
-	var center_index: int = RunGlobal.current_weapon_index
-	var left_index: int = RunGlobal.get_changed_index(
-		RunGlobal.weapons,
-		center_index - 1
-	)
-	var right_index: int = RunGlobal.get_changed_index(
-		RunGlobal.weapons,
-		center_index + 1
-	)
-	weapon_indexes = [left_index, center_index, right_index]
-	
+	weapon_indexes = RunGlobal.get_weapon_indexes()
 
 func update_weapon_display():
 	update_weapon_indexes()
@@ -52,13 +42,6 @@ func update_timer_label(timer_label: Label, index: int):
 
 
 func update_icons(left_index: int = 0, center_index: int = 1, right_index: int = 2):
-	left_weapon_icon.texture = load(get_weapon_image_path(left_index))
-	center_weapon_icon.texture = load(get_weapon_image_path(center_index))
-	right_weapon_icon.texture = load(get_weapon_image_path(right_index))
-
-
-func get_weapon_image_path(index: int) -> String:
-	var temp_weapon = RunGlobal.weapons[index].instantiate()
-	var sprite = temp_weapon.SPRITE.texture.resource_path
-	temp_weapon.queue_free()
-	return sprite
+	left_weapon_icon.texture = load(PathUtils.get_weapon_image_path_and_title(left_index)[0])
+	center_weapon_icon.texture = load(PathUtils.get_weapon_image_path_and_title(center_index)[0])
+	right_weapon_icon.texture = load(PathUtils.get_weapon_image_path_and_title(right_index)[0])

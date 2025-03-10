@@ -29,6 +29,7 @@ var have_to_response_on_collision: bool = false
 var PLAYER: CharacterBody2D
 
 @export var SPRITE: Sprite2D
+@export var TITLE_ID: String = "classic"
 
 func set_weapon_behaviour_states():
 	pass

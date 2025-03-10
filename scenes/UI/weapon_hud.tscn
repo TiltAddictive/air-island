@@ -1,80 +1,78 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsjtljod0y2fk"]
+[gd_scene load_steps=4 format=3 uid="uid://bsjtljod0y2fk"]
 
 [ext_resource type="Script" path="res://scripts/ui/run_weapons.gd" id="1_kyxhl"]
 [ext_resource type="Texture2D" uid="uid://biedftd3xku6x" path="res://resourses/sprites/weapons/Boomerang.png" id="2_6ta04"]
+[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_ynbv1"]
 
 [node name="WeaponHUD" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kyxhl")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_right = 130.0
+offset_bottom = 143.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
-[node name="WeaponIconLeft" type="TextureRect" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="LeftWeaponVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="WeaponIconLeft" type="TextureRect" parent="MarginContainer/HBoxContainer/LeftWeaponVBox"]
 layout_mode = 2
 texture = ExtResource("2_6ta04")
 
-[node name="WeaponCooldownLeft" type="Label" parent="HBoxContainer/WeaponIconLeft"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="WeaponCooldownLeft" type="Label" parent="MarginContainer/HBoxContainer/LeftWeaponVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ynbv1")
 theme_override_font_sizes/font_size = 16
 text = "1.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WeaponIconCenter" type="TextureRect" parent="HBoxContainer"]
+[node name="CenterWeaponVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="WeaponIconCenter" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterWeaponVBox"]
 layout_mode = 2
 texture = ExtResource("2_6ta04")
 
-[node name="WeaponCooldownCenter" type="Label" parent="HBoxContainer/WeaponIconCenter"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="WeaponCooldownCenter" type="Label" parent="MarginContainer/HBoxContainer/CenterWeaponVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ynbv1")
 theme_override_font_sizes/font_size = 16
 text = "2.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WeaponIconRight" type="TextureRect" parent="HBoxContainer"]
+[node name="RightWeaponVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="WeaponIconRight" type="TextureRect" parent="MarginContainer/HBoxContainer/RightWeaponVBox"]
 layout_mode = 2
 texture = ExtResource("2_6ta04")
 
-[node name="WeaponCooldownRight" type="Label" parent="HBoxContainer/WeaponIconRight"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -9.5
-offset_top = -18.0
-offset_right = 9.5
-grow_horizontal = 2
-grow_vertical = 0
+[node name="WeaponCooldownRight" type="Label" parent="MarginContainer/HBoxContainer/RightWeaponVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ynbv1")
 theme_override_font_sizes/font_size = 16
 text = "3.0"
+horizontal_alignment = 1
 vertical_alignment = 1

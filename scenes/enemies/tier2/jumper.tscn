@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdeec0yha2j1g"]
+[gd_scene load_steps=13 format=3 uid="uid://cdeec0yha2j1g"]
 
 [ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_syjrk"]
 [ext_resource type="Script" path="res://scripts/enemies/tier2/jumper.gd" id="2_i02yh"]
@@ -55,6 +55,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../..:can_attack")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../..:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_bwlam"]
 resource_name = "idle"
@@ -71,6 +95,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
 }
 
 [sub_resource type="Animation" id="Animation_1ipek"]
@@ -138,6 +186,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../..:can_attack")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_7gpvt"]
 resource_name = "jump_initiation"
@@ -178,7 +238,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(0, -34), Vector2(0, -38)]
+"values": [Vector2(0, -32), Vector2(0, -38)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -205,6 +265,30 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../..:can_attack")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../..:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_vx8qw"]
@@ -236,6 +320,30 @@ tracks/1/keys = {
 "method": &"play"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2bk7x"]
 _data = {
@@ -245,6 +353,9 @@ _data = {
 "jump_initiation": SubResource("Animation_7gpvt"),
 "jump_preparation": SubResource("Animation_vx8qw")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xbq4"]
+size = Vector2(24, 16.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1e4j"]
 radius = 4.0
@@ -260,9 +371,6 @@ SPEED = 300.0
 [node name="ShadowMiddle" parent="ShadowPoint" index="0" instance=ExtResource("3_7ttoi")]
 position = Vector2(0, 2)
 
-[node name="RotationalPart" parent="." index="2"]
-position = Vector2(0, -34)
-
 [node name="Sprite" parent="RotationalPart" index="0"]
 position = Vector2(0, 20)
 scale = Vector2(1, 1)
@@ -275,8 +383,11 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaNode/AttackArea2D" index="0"]
+position = Vector2(0, -7.75)
+shape = SubResource("RectangleShape2D_2xbq4")
+
 [node name="Collision" parent="." index="4"]
-visible = false
 position = Vector2(0, -4)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_q1e4j")

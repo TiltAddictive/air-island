@@ -14,16 +14,14 @@ func _ready() -> void:
 	disabled_collision()
 
 
-func _physics_process(_delta: float) -> void:
-	move_and_slide()
-
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	calc_animations(delta)
+	move_and_slide()
 
 
 func damage_body(body: Node2D) -> void:
-	var impulse_vector_direction: Vector2 = (body.global_position - self.global_position).normalized() * REJECTION_FORCE_VALUE
 	if body.has_method("get_hit"):
+		var impulse_vector_direction: Vector2 = (body.global_position - self.global_position).normalized() * REJECTION_FORCE_VALUE
 		body.get_hit(DAMAGE, impulse_vector_direction, IMPULSE_IMPACT_TIME)
 
 

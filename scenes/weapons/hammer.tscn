@@ -22,6 +22,7 @@ DAMAGE = 1.0
 REJECTION_FORCE_VALUE = 300.0
 IMPULSE_IMPACT_TIME = 0.5
 SPRITE = NodePath("RotationalPart/Sprite2D")
+TITLE_ID = "hammerTitle"
 
 [node name="ShadowSmall" parent="ShadowPoint" index="0" instance=ExtResource("2_1tvog")]
 position = Vector2(0, 2)

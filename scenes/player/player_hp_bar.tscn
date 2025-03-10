@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0gdisdm7gqtv"]
+
+[ext_resource type="Script" path="res://scripts/player/player_hp_bar.gd" id="1_hy5uo"]
+[ext_resource type="PackedScene" uid="uid://d1u5pdwrnbuqp" path="res://scenes/player/player_hp_heart.tscn" id="2_s6ons"]
+
+[node name="PlayerHpBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hy5uo")
+
+[node name="HeartsContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+theme_override_constants/separation = 40
+
+[node name="PlayerHPHeart" parent="HeartsContainer" instance=ExtResource("2_s6ons")]
+layout_mode = 2
+
+[node name="PlayerHPHeart2" parent="HeartsContainer" instance=ExtResource("2_s6ons")]
+layout_mode = 2
+
+[node name="PlayerHPHeart3" parent="HeartsContainer" instance=ExtResource("2_s6ons")]
+layout_mode = 2

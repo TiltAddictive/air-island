@@ -4,21 +4,16 @@ extends Node2D
 @export var ENVIRONMENT_ITEM_NODE: Node2D
 @export var environmental_items: Array[PackedScene] = []
 @export var ZONE_SPAWNER: ZoneSpawner
+@onready var spawn_gap_timer: Timer = $SpawnGapTimer
+var _items_amount: int
 
 func _ready() -> void:
 	pass
 
 
 func generate_level(items_amount: int = 7) -> void:
-	while items_amount > 0:
-		var chosen_item: PackedScene = choose_item()
-		if chosen_item == null:
-			return
-		items_amount -= 1
-		var item_position: Vector2 = ZONE_SPAWNER.choose_item_position(self)
-		if item_position == Vector2.INF:
-			continue
-		spawn_item(chosen_item, item_position)
+	_items_amount = items_amount
+	spawn_gap_timer.start()
 
 
 func choose_item() -> PackedScene:
@@ -43,3 +38,17 @@ func spawn_item(item: PackedScene, item_position: Vector2) -> void:
 func clear_level():
 	for item in ENVIRONMENT_ITEM_NODE.get_children():
 		item.queue_free()
+
+
+func _on_spawn_gap_timer_timeout() -> void:
+	if _items_amount <= 0:
+		return
+	var chosen_item: PackedScene = choose_item()
+	if chosen_item == null:
+		return
+	_items_amount -= 1
+	var item_position: Vector2 = ZONE_SPAWNER.choose_item_position(self)
+	if item_position == Vector2.INF:
+		return
+	spawn_item(chosen_item, item_position)
+	spawn_gap_timer.start()

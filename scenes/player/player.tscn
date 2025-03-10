@@ -108,8 +108,11 @@ shape = SubResource("CapsuleShape2D_yfv46")
 
 [node name="InvulnerabilityTimer" type="Timer" parent="Timers"]
 
+[node name="InputReloadTimer" type="Timer" parent="Timers"]
+
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 position = Vector2(0, -15)
 radius = 20.0
 
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
+[connection signal="timeout" from="Timers/InputReloadTimer" to="." method="_on_input_reload_timer_timeout"]

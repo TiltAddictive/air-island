@@ -50,7 +50,7 @@ func calc_state() -> void:
 		current_state = STATES.SATISFACTORY_DISTANCE
 
 
-func calc_move(delta: float):
+func calc_move(delta: float) -> void:
 	if not calc_velocity:
 		return
 	if current_state == STATES.ATTACK:
@@ -62,6 +62,7 @@ func calc_move(delta: float):
 		change_random_direction_timer.start()
 		direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	velocity = direction * SPEED
+	return
 
 
 func calc_attack():

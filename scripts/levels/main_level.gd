@@ -4,6 +4,7 @@ extends Node2D
 
 func _ready():
 	level_generator.generate_level(15)
+	$Allies/Player.stun()
 
 
 func _process(delta: float) -> void:

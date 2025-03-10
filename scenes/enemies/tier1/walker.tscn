@@ -73,6 +73,7 @@ radius = 5.0
 
 [node name="Walker" instance=ExtResource("1_ek8xn")]
 script = ExtResource("2_eeb36")
+attack_reload_time = 1.0
 
 [node name="ShadowSmall" parent="ShadowPoint" index="0" instance=ExtResource("3_7fs7l")]
 position = Vector2(0, 5)
