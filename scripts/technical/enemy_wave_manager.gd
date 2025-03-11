@@ -84,7 +84,7 @@ func get_available_tieres_in_wave(curent_wave: int) -> Array[String]:
 	if current_wave < 4:
 		return [AVAILABLE_TIERES[0], AVAILABLE_TIERES[1]]
 	var availailable_tier_list: Array[String] = [AVAILABLE_TIERES[1]]
-	if randf() < 0.2:
+	if randf() < 0.3:
 		availailable_tier_list.append(AVAILABLE_TIERES[0])
 	return availailable_tier_list
 

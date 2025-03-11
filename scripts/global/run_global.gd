@@ -5,10 +5,19 @@ signal player_run_out_of_hp
 
 var current_weapon_index: int = 1
 var PLAYER: CharacterBody2D
+var WEAPON_NODE: Node2D
 var WEAPON_PLAYER: CharacterBody2D
 
 var player_max_hp: int = 3
-var player_hp: int
+var _player_hp: int
+
+var player_hp: int:
+	get:
+		return _player_hp
+	set (value):
+		_player_hp = max(0, value)
+		if _player_hp <= 0:
+			player_run_out_of_hp.emit()
 
 var SPEED_MULTIPLIER: float = 1
 var INVULNERABILITY_TIME_MULTIPLIER: float = 1
@@ -16,6 +25,7 @@ var INVULNERABILITY_TIME_MULTIPLIER: float = 1
 var weapons: Array[PackedScene] = [
 	preload("res://scenes/weapons/boomerang.tscn"),
 	preload("res://scenes/weapons/hammer.tscn"),
+	preload("res://scenes/weapons/stick.tscn"),
 ]
 var weapon_timers: Array[Timer] = []
 
@@ -35,6 +45,7 @@ func initialize_run() -> void:
 func initialize_weapon_timers():
 	for timer in weapon_timers:
 		timer.queue_free()
+	weapon_timers = []
 	for weapon_scene in weapons:
 		var weapon_node = weapon_scene.instantiate()
 		var timer = Timer.new()
@@ -53,14 +64,23 @@ func swith_weapon(delta_index: int) -> void:
 	)
 	weapon_switched.emit()
 
+
+func replace_by_new_weapon(weapon_index: int, new_weapon_path: String):
+	weapons[weapon_index] = load(new_weapon_path)
+	initialize_weapon_timers()
+	swith_weapon(0)
+	weapon_switched.emit()
+
+
 func get_changed_index(arr: Array, idx: int) -> int:
 	var real_idx = idx % arr.size() if idx >= 0 else arr.size() + idx
 	return real_idx
 
 
 func get_closest_player(_glob_pos: Vector2) -> CharacterBody2D:
-	if WEAPON_PLAYER != null:
-		return WEAPON_PLAYER
+	var weapon_children: Array = WEAPON_NODE.get_children()
+	if weapon_children.size() > 0:
+		return weapon_children.pick_random()
 	return PLAYER
 
 func launch_current_weapon() -> Node2D:

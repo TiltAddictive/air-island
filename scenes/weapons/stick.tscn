@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgrcevvvsr1vh"]
+
+[ext_resource type="PackedScene" uid="uid://bu1oollavc5jl" path="res://scenes/weapons/default_weapon.tscn" id="1_h65xs"]
+[ext_resource type="Texture2D" uid="uid://nvpxslqbp2bd" path="res://resourses/sprites/weapons/stick.png" id="2_j3ef5"]
+[ext_resource type="Script" path="res://scripts/weapons/stick.gd" id="2_kgeb8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pbuln"]
+radius = 3.53553
+height = 52.3259
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ai0bw"]
+radius = 26.0192
+
+[node name="Stick" instance=ExtResource("1_h65xs")]
+script = ExtResource("2_kgeb8")
+ROTATION_SPEED = 900.0
+MAX_BOUNCES_AMOUNT = 10
+live_time = 4.0
+RELOAD_TIME = 10.0
+SPRITE_PATH = "res://resourses/sprites/weapons/stick.png"
+TITLE_ID = "stickTitle"
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationalPart" index="0"]
+texture = ExtResource("2_j3ef5")
+
+[node name="DamageArea" type="Area2D" parent="RotationalPart" index="1"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationalPart/DamageArea" index="0"]
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_pbuln")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_ai0bw")
+
+[node name="LiveTimer" type="Timer" parent="Timers" index="1"]
+one_shot = true
+
+[connection signal="body_entered" from="RotationalPart/DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="timeout" from="Timers/LiveTimer" to="." method="_on_live_timer_timeout"]

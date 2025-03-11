@@ -12,7 +12,7 @@ radius = 49.0102
 radius = 2.0
 height = 18.0
 
-[node name="Hammer" node_paths=PackedStringArray("SPRITE") instance=ExtResource("1_7p0tw")]
+[node name="Hammer" instance=ExtResource("1_7p0tw")]
 script = ExtResource("2_8h8bq")
 ROTATION_SPEED = 300.0
 live_time = 0.75
@@ -21,7 +21,7 @@ SPEED = 200.0
 DAMAGE = 1.0
 REJECTION_FORCE_VALUE = 300.0
 IMPULSE_IMPACT_TIME = 0.5
-SPRITE = NodePath("RotationalPart/Sprite2D")
+SPRITE_PATH = "res://resourses/sprites/weapons/hammer.png"
 TITLE_ID = "hammerTitle"
 
 [node name="ShadowSmall" parent="ShadowPoint" index="0" instance=ExtResource("2_1tvog")]

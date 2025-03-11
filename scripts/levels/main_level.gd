@@ -5,6 +5,8 @@ extends Node2D
 func _ready():
 	level_generator.generate_level(15)
 	$Allies/Player.stun()
+	RunGlobal.WEAPON_NODE = $Weapons
+	
 
 
 func _process(delta: float) -> void:

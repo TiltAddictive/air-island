@@ -6,6 +6,9 @@ extends Control
 @onready var new_weapon_icon: TextureRect = $VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponIcon
 @onready var new_weapon_name_label: Label = $VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponNameLabel
 
+var new_weapon_path: String
+var weapon_indexes
+var new_weapon_info
 
 func _ready() -> void:
 	update()
@@ -22,7 +25,7 @@ func localize_text():
 
 
 func update_current_weapons_images():
-	var weapon_indexes = RunGlobal.get_weapon_indexes()
+	weapon_indexes = RunGlobal.get_weapon_indexes()
 	var left_weapon_info = PathUtils.get_weapon_image_path_and_title(weapon_indexes[0])
 	var center_weapon_info = PathUtils.get_weapon_image_path_and_title(weapon_indexes[1])
 	var right_weapon_info = PathUtils.get_weapon_image_path_and_title(weapon_indexes[2])
@@ -35,10 +38,12 @@ func update_current_weapons_images():
 
 
 func update_new_weapon_image():
-	var sprite_and_title = PathUtils.get_weapon_scene_image_path_and_title(load(get_new_weapon_path()))
+	new_weapon_path = get_new_weapon_path()
+	new_weapon_info = PathUtils.get_weapon_scene_image_path_and_title(load(new_weapon_path))
 	new_weapon_icon.texture = load(
-		sprite_and_title[0]
+		new_weapon_info[0]
 	)
+	new_weapon_name_label.text = tr(new_weapon_info[1])
 
 
 func get_new_weapons_pathes() -> Array[String]:
@@ -60,3 +65,19 @@ func get_player_weapons() -> Array[String]:
 	for weapon in weapons:
 		result.append(weapon.resource_path)
 	return result
+
+
+func switch_weapon(weapon_index: float):
+	RunGlobal.replace_by_new_weapon(weapon_index, new_weapon_path)
+
+
+func _on_switch_left_weapon_button_pressed() -> void:
+	switch_weapon(weapon_indexes[0])
+
+
+func _on_switch_center_weapon_button_pressed() -> void:
+	switch_weapon(weapon_indexes[1])
+
+
+func _on_switch_right_weapon_button_pressed() -> void:
+	switch_weapon(weapon_indexes[2])

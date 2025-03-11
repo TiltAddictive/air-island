@@ -137,6 +137,7 @@ func switch_rotational_scale():
 
 func _on_attack_reload_timer_timeout() -> void:
 	if is_dying:
+		can_attack = false
 		return
 	can_attack = true
 

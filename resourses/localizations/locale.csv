@@ -2,4 +2,6 @@ key,ru,en
 replaceWeapon,Заменить,Replace
 boomerangTitle,Бумеранг,Boomerang
 hammerTitle,Молот,Hammer
+bubbleTitle,Пузырь,Bubble
+stickTitle,Палка,Stick
 wave_count_text,"Волна: %d/%d","Wave: %d/%d"

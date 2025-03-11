@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://byno1tsu2hfei"]
+
+[ext_resource type="PackedScene" uid="uid://bu1oollavc5jl" path="res://scenes/weapons/default_weapon.tscn" id="1_j2pbv"]
+[ext_resource type="Texture2D" uid="uid://ywm6tt6wx7lg" path="res://resourses/sprites/weapons/soap bubble.png" id="2_rrwsd"]
+[ext_resource type="Script" path="res://scripts/weapons/technical/bubble.gd" id="2_vatiu"]
+
+[sub_resource type="Animation" id="Animation_tpdw3"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ryg7e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gxlca"]
+resource_name = "pop"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_destroying"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6jnwi"]
+_data = {
+"RESET": SubResource("Animation_ryg7e"),
+"idle": SubResource("Animation_tpdw3"),
+"pop": SubResource("Animation_gxlca")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cn51g"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xbdjp"]
+radius = 20.025
+
+[node name="Bubble" instance=ExtResource("1_j2pbv")]
+collision_mask = 64
+script = ExtResource("2_vatiu")
+with_player = true
+live_time = 2.0
+number_of_clones = 3
+RELOAD_TIME = 7.0
+SPEED = 30.0
+DAMAGE = 1.0
+SPRITE_PATH = "res://resourses/sprites/weapons/soap bubble icon.png"
+TITLE_ID = "bubbleTitle"
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationalPart" index="0"]
+texture = ExtResource("2_rrwsd")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationalPart/Sprite2D" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_6jnwi")
+}
+
+[node name="DamageArea" type="Area2D" parent="RotationalPart" index="1"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationalPart/DamageArea" index="0"]
+shape = SubResource("CircleShape2D_cn51g")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_xbdjp")
+
+[node name="LiveTimer" type="Timer" parent="Timers" index="1"]
+one_shot = true
+
+[connection signal="body_entered" from="RotationalPart/DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="timeout" from="Timers/LiveTimer" to="." method="_on_live_timer_timeout"]

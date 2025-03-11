@@ -28,14 +28,13 @@ var have_to_response_on_collision: bool = false
 # Player
 var PLAYER: CharacterBody2D
 
-@export var SPRITE: Sprite2D
+@export var SPRITE_PATH: String
 @export var TITLE_ID: String = "classic"
 
 func set_weapon_behaviour_states():
 	pass
 
 func _ready():
-	RunGlobal.WEAPON_PLAYER = self
 	set_weapon_behaviour_states()
 	set_timers_times()
 	run_timers()
@@ -74,3 +73,7 @@ func enable_collision():
 
 func _on_weapon_have_to_destroy() -> void:
 	destroy()
+
+
+func _on_weapon_collided_with_wall() -> void:
+	pass

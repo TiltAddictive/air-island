@@ -65,14 +65,14 @@ _data = {
 "spin_right": SubResource("Animation_lu7qy")
 }
 
-[node name="Boomerang" type="CharacterBody2D" node_paths=PackedStringArray("SPRITE")]
+[node name="Boomerang" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_cyesg")
 MAX_DISTANCE = 100.0
 BACKWARDS_MAX_DISTANCE = 200.0
 RELOAD_TIME = 2.0
-SPRITE = NodePath("RotationalPart/Sprite2D")
+SPRITE_PATH = "res://resourses/sprites/weapons/Boomerang.png"
 TITLE_ID = "boomerangTitle"
 
 [node name="ShadowSmall" parent="." instance=ExtResource("1_aj1sp")]

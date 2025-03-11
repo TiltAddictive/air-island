@@ -20,7 +20,7 @@ var calc_input: bool = true
 
 # Timers
 @onready var invulnerability_timer: Timer = $Timers/InvulnerabilityTimer
-@export var invulnerability_time: float = 0.6
+@export var invulnerability_time: float = 0.4
 @onready var input_reload_timer: Timer = $Timers/InputReloadTimer
 @export var input_reload_time: float = 0.3
 
@@ -85,6 +85,7 @@ func launch_weapon():
 	weapon_scene.global_position = global_position
 	weapon_scene.direction = look_at_direction
 	WEAPON_NODE.add_child(weapon_scene)
+	RunGlobal.WEAPON_PLAYER = weapon_scene
 	start_evaporating()
 
 

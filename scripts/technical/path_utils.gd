@@ -31,7 +31,7 @@ static func get_weapon_scene_image_path_and_title(weapon_scene: PackedScene) -> 
 	if weapon_scene == null:
 		return ["", ""]
 	var temp_weapon = weapon_scene.instantiate()
-	var sprite = temp_weapon.SPRITE.texture.resource_path
+	var sprite = temp_weapon.SPRITE_PATH
 	var title = temp_weapon.TITLE_ID
 	temp_weapon.queue_free()
 	return [sprite, title]

@@ -107,8 +107,10 @@ shape = SubResource("CapsuleShape2D_yfv46")
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="InvulnerabilityTimer" type="Timer" parent="Timers"]
+one_shot = true
 
 [node name="InputReloadTimer" type="Timer" parent="Timers"]
+one_shot = true
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 position = Vector2(0, -15)
