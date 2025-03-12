@@ -50,7 +50,7 @@ func calc_state() -> void:
 		current_state = STATES.SATISFACTORY_DISTANCE
 
 
-func calc_move(delta: float) -> void:
+func calc_move(_delta: float) -> void:
 	if not calc_velocity:
 		return
 	if current_state == STATES.ATTACK:

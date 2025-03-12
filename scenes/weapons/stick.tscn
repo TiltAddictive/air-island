@@ -9,14 +9,15 @@ radius = 3.53553
 height = 52.3259
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ai0bw"]
-radius = 26.0192
+radius = 22.0227
 
 [node name="Stick" instance=ExtResource("1_h65xs")]
 script = ExtResource("2_kgeb8")
 ROTATION_SPEED = 900.0
 MAX_BOUNCES_AMOUNT = 10
 live_time = 4.0
-RELOAD_TIME = 10.0
+RELOAD_TIME = 20.0
+DAMAGE = 1.0
 SPRITE_PATH = "res://resourses/sprites/weapons/stick.png"
 TITLE_ID = "stickTitle"
 

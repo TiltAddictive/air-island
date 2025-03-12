@@ -1,5 +1,7 @@
 extends Control
 
+signal new_weapon_chosen
+
 @export var ENEMY_PREFIX_PATH: String = "res://scenes/weapons/"
 @export var BAN_WEAPON_PATHES: Array[String] = ["res://scenes/weapons/default_weapon.tscn"]
 
@@ -73,11 +75,14 @@ func switch_weapon(weapon_index: float):
 
 func _on_switch_left_weapon_button_pressed() -> void:
 	switch_weapon(weapon_indexes[0])
+	new_weapon_chosen.emit()
 
 
 func _on_switch_center_weapon_button_pressed() -> void:
 	switch_weapon(weapon_indexes[1])
+	new_weapon_chosen.emit()
 
 
 func _on_switch_right_weapon_button_pressed() -> void:
 	switch_weapon(weapon_indexes[2])
+	new_weapon_chosen.emit()

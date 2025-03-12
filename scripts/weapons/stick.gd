@@ -24,13 +24,16 @@ func _physics_process(delta: float) -> void:
 	if bounces_amount >= MAX_BOUNCES_AMOUNT:
 		destroy()
 	calc_animations(delta)
+	move_with_bounce(delta)
+
+
+func move_with_bounce(delta) -> void:
 	var collision: KinematicCollision2D = move_and_collide(velocity * delta)
-	if collision:
+	if collision and have_to_response_on_collision:
 		var reflect = collision.get_remainder().bounce(collision.get_normal())
 		velocity = velocity.bounce(collision.get_normal())
 		move_and_collide(reflect)
 		bounces_amount += 1
-
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if body.has_method("get_hit"):

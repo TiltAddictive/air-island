@@ -15,7 +15,7 @@ func death():
 	queue_free()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not can_attack:
 		return
 	for body in $Area2D.get_overlapping_bodies():

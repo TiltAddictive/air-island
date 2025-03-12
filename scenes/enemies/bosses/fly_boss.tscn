@@ -1,0 +1,251 @@
+[gd_scene load_steps=13 format=3 uid="uid://df37vhqdgwpct"]
+
+[ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_trs1r"]
+[ext_resource type="Script" path="res://scripts/enemies/bosses/fly_boss.gd" id="2_3kxl4"]
+[ext_resource type="Texture2D" uid="uid://cdnlqjn4ok3ed" path="res://resourses/sprites/enemies/bosses/fly/skywing.png" id="2_cycqp"]
+[ext_resource type="Texture2D" uid="uid://cy4j2qebq67k" path="res://resourses/sprites/enemies/bosses/fly/BossFly.png" id="2_um3ry"]
+[ext_resource type="PackedScene" uid="uid://dnsmnlrjt2d3e" path="res://scenes/enemies/technical/red_bullet.tscn" id="3_eg2sn"]
+
+[sub_resource type="Animation" id="Animation_n6f1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_tdjbs"]
+resource_name = "flying"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.226893, 0.0, -0.226893, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5vtny"]
+_data = {
+"RESET": SubResource("Animation_n6f1y"),
+"flying": SubResource("Animation_tdjbs")
+}
+
+[sub_resource type="Animation" id="Animation_g8sba"]
+resource_name = "wings_busting"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wings/LeftWing2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.541052, -0.872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wings/RightWing2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.60054, 4.01426]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Wings/LeftWing1:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.872665, 0.541052]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Wings/RightWing1:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.872665, -0.541052]
+}
+
+[sub_resource type="Animation" id="Animation_tw4ok"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wings/LeftWing2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.541052]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wings/RightWing2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.60054]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Wings/LeftWing1:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Wings/RightWing1:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d7rkp"]
+_data = {
+"RESET": SubResource("Animation_tw4ok"),
+"wings_busting": SubResource("Animation_g8sba")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mdrjt"]
+size = Vector2(52, 42)
+
+[node name="FlyBoss" instance=ExtResource("1_trs1r")]
+z_as_relative = false
+collision_mask = 64
+script = ExtResource("2_3kxl4")
+bullets_per_volley = 5
+shoot_reload_time = 0.3
+volley_reload_time = 3.5
+bullet_scene = ExtResource("3_eg2sn")
+SATISFACTORY_DIRECTION_DISTANCE = 700.0
+RAYCAST_ATTEMPTS = 10
+MAX_HP = 10.0
+SPEED = 200.0
+
+[node name="Wings" type="Node2D" parent="RotationalPart" index="0"]
+position = Vector2(0, 14)
+
+[node name="LeftWing2" type="Sprite2D" parent="RotationalPart/Wings" index="0"]
+modulate = Color(0.678431, 0.678431, 0.678431, 1)
+position = Vector2(-18, 0)
+rotation = 0.541052
+texture = ExtResource("2_cycqp")
+offset = Vector2(18, 0)
+
+[node name="RightWing2" type="Sprite2D" parent="RotationalPart/Wings" index="1"]
+modulate = Color(0.678944, 0.678944, 0.678944, 1)
+position = Vector2(18.0442, 0.157484)
+rotation = 2.60054
+scale = Vector2(1, -1)
+texture = ExtResource("2_cycqp")
+offset = Vector2(18.0442, -0.157484)
+
+[node name="LeftWing1" type="Sprite2D" parent="RotationalPart/Wings" index="2"]
+position = Vector2(-18, 0)
+texture = ExtResource("2_cycqp")
+offset = Vector2(18, 0)
+
+[node name="RightWing1" type="Sprite2D" parent="RotationalPart/Wings" index="3"]
+position = Vector2(18.0442, 0.157484)
+scale = Vector2(-1, 1)
+texture = ExtResource("2_cycqp")
+offset = Vector2(18.0442, -0.157484)
+
+[node name="Sprite" parent="RotationalPart" index="1"]
+position = Vector2(0, 10)
+scale = Vector2(1, 1)
+texture = ExtResource("2_um3ry")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationalPart/Sprite" index="0"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_5vtny")
+}
+autoplay = "flying"
+
+[node name="WhingsAnimationPlayer" type="AnimationPlayer" parent="RotationalPart/Sprite" index="1"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_d7rkp")
+}
+autoplay = "wings_busting"
+
+[node name="ShootPoints" type="Node2D" parent="RotationalPart" index="3"]
+position = Vector2(0, 11)
+
+[node name="ShootPointLeftTop" type="Node2D" parent="RotationalPart/ShootPoints" index="0"]
+position = Vector2(-22, -17)
+
+[node name="ShootPointRightTop" type="Node2D" parent="RotationalPart/ShootPoints" index="1"]
+position = Vector2(22, -17)
+
+[node name="ShootPointLeftBottom" type="Node2D" parent="RotationalPart/ShootPoints" index="2"]
+position = Vector2(-22, 17)
+
+[node name="ShootPointRightBottom" type="Node2D" parent="RotationalPart/ShootPoints" index="3"]
+position = Vector2(22, 17)
+
+[node name="Collision" parent="." index="4"]
+position = Vector2(0, -21)
+shape = SubResource("RectangleShape2D_mdrjt")
+
+[node name="ShootReloadTimer" type="Timer" parent="Timers" index="2"]
+one_shot = true
+
+[node name="VolleyReloadTimer" type="Timer" parent="Timers" index="3"]
+one_shot = true
+
+[node name="CollisionCheckTimer" type="Timer" parent="Timers" index="4"]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="Timers/ShootReloadTimer" to="." method="_on_shoot_reload_timer_timeout"]
+[connection signal="timeout" from="Timers/VolleyReloadTimer" to="." method="_on_volley_reload_timer_timeout"]

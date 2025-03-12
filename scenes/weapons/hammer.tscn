@@ -1,9 +1,72 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbumo37nalh4f"]
+[gd_scene load_steps=11 format=3 uid="uid://dbumo37nalh4f"]
 
 [ext_resource type="PackedScene" uid="uid://bu1oollavc5jl" path="res://scenes/weapons/default_weapon.tscn" id="1_7p0tw"]
 [ext_resource type="PackedScene" uid="uid://dcf8nguqift3x" path="res://scenes/technical/shadow_small.tscn" id="2_1tvog"]
 [ext_resource type="Script" path="res://scripts/weapons/hammer.gd" id="2_8h8bq"]
 [ext_resource type="Texture2D" uid="uid://5idun5f76yul" path="res://resourses/sprites/weapons/hammer.png" id="3_bdv4g"]
+[ext_resource type="Texture2D" uid="uid://dabkawficyxit" path="res://resourses/sprites/technical/HammerAirFlow.png" id="5_a8qw8"]
+
+[sub_resource type="Animation" id="Animation_0fc6i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AirFlowSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AirFlowSprite2D2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_ssu8r"]
+resource_name = "switch_airflow"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AirFlowSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AirFlowSprite2D2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q26fq"]
+_data = {
+"RESET": SubResource("Animation_0fc6i"),
+"switch_airflow": SubResource("Animation_ssu8r")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uilnh"]
 radius = 49.0102
@@ -13,6 +76,7 @@ radius = 2.0
 height = 18.0
 
 [node name="Hammer" instance=ExtResource("1_7p0tw")]
+collision_mask = 64
 script = ExtResource("2_8h8bq")
 ROTATION_SPEED = 300.0
 live_time = 0.75
@@ -26,6 +90,7 @@ TITLE_ID = "hammerTitle"
 
 [node name="ShadowSmall" parent="ShadowPoint" index="0" instance=ExtResource("2_1tvog")]
 position = Vector2(0, 2)
+script = null
 
 [node name="RotationalPart" parent="." index="1"]
 position = Vector2(0, -20)
@@ -33,7 +98,54 @@ position = Vector2(0, -20)
 [node name="Sprite2D" type="Sprite2D" parent="RotationalPart" index="0"]
 texture = ExtResource("3_bdv4g")
 
-[node name="DamageArea" type="Area2D" parent="RotationalPart" index="1"]
+[node name="AirFlows" type="Node2D" parent="RotationalPart" index="1"]
+modulate = Color(0.716374, 0.773268, 0.80506, 1)
+z_index = 1
+
+[node name="AirFlowSprite2D" type="Sprite2D" parent="RotationalPart/AirFlows" index="0"]
+texture = ExtResource("5_a8qw8")
+offset = Vector2(0, -21)
+hframes = 3
+frame = 1
+
+[node name="AirFlowSprite2D3" type="Sprite2D" parent="RotationalPart/AirFlows" index="1"]
+rotation = 0.35674
+texture = ExtResource("5_a8qw8")
+offset = Vector2(0, -21)
+hframes = 3
+
+[node name="AirFlowSprite2D4" type="Sprite2D" parent="RotationalPart/AirFlows" index="2"]
+rotation = 0.591885
+texture = ExtResource("5_a8qw8")
+offset = Vector2(0, -21)
+hframes = 3
+
+[node name="AirFlowSprite2D5" type="Sprite2D" parent="RotationalPart/AirFlows" index="3"]
+rotation = -2.74625
+texture = ExtResource("5_a8qw8")
+offset = Vector2(0, -21)
+hframes = 3
+
+[node name="AirFlowSprite2D6" type="Sprite2D" parent="RotationalPart/AirFlows" index="4"]
+rotation = -2.51111
+texture = ExtResource("5_a8qw8")
+offset = Vector2(0, -21)
+hframes = 3
+
+[node name="AirFlowSprite2D2" type="Sprite2D" parent="RotationalPart/AirFlows" index="5"]
+rotation = -3.14159
+texture = ExtResource("5_a8qw8")
+offset = Vector2(0, -21)
+hframes = 3
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationalPart/AirFlows" index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_q26fq")
+}
+autoplay = "switch_airflow"
+
+[node name="DamageArea" type="Area2D" parent="RotationalPart" index="2"]
 collision_layer = 2
 collision_mask = 4
 

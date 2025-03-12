@@ -33,8 +33,6 @@ var look_at_direction: Vector2 = Vector2.RIGHT
 @export var can_get_damage: bool = true
 var calc_velocity: bool = true
 
-var prev_player_position = Vector2.ZERO
-
 var prev_velocity_sign: int = 1
 @onready var rotational_part: Node2D = $RotationalPart
 

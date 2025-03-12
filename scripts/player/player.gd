@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal player_get_gamage
+signal player_removed_from_tree
 
 # Move
 var direction: Vector2 = Vector2.ZERO
@@ -10,12 +10,13 @@ var look_at_direction: Vector2 = Vector2.RIGHT
 
 # Attack
 @export var WEAPON_NODE: Node2D = null
-@export var GET_DAMAGE_IMPULSE: float = 100
+@export var GET_DAMAGE_IMPULSE: float = 200
 
 var can_attack: bool = true
 var is_evaporated: bool = false
 var can_get_damage: bool = true
 var calc_input: bool = true
+var is_dying: bool = false
 
 
 # Timers
@@ -27,9 +28,11 @@ var calc_input: bool = true
 @onready var rotational_part: Node2D = $RotationalPart
 
 @onready var animation_player: AnimationPlayer = $RotationalPart/Sprite2D/AnimationPlayer
+@onready var sprite_animation_player: AnimationPlayer = $RotationalPart/Sprite2D/SpriteAnimationPlayer
 
 func _ready() -> void:
 	RunGlobal.PLAYER = self
+	$ShadowZone/Shadow.set_shadow_size(1)
 
 
 func _process(delta: float) -> void:
@@ -41,6 +44,7 @@ func _physics_process(delta: float) -> void:
 		global_position = RunGlobal.WEAPON_PLAYER.global_position
 		return
 
+	calc_death()
 	get_input()
 	calc_attack()
 	calc_velocity()
@@ -49,16 +53,20 @@ func _physics_process(delta: float) -> void:
 
 
 func calc_velocity():
-	if not calc_input and not can_get_damage:
+	if (not calc_input and not can_get_damage) or is_dying:
 		return
 	velocity = direction * SPEED * RunGlobal.SPEED_MULTIPLIER
+
+func calc_death():
+	if RunGlobal.player_hp > 0 or is_dying:
+		return
+	start_dying()
 
 func get_input():
 	if not calc_input:
 		return
 	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
 	look_at_direction = direction if direction != Vector2.ZERO else look_at_direction
-
 
 func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO) -> void:
 	if not can_get_damage:
@@ -70,7 +78,6 @@ func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO) -> void:
 	)
 	stun(input_reload_time)
 	velocity = impulse.normalized() * GET_DAMAGE_IMPULSE
-	player_get_gamage.emit(damage, impulse)
 
 
 func calc_attack():
@@ -96,13 +103,24 @@ func start_evaporating():
 	can_get_damage = false
 	can_attack = false
 
-	set_physics_process(false)  # Отключаем физическую обработку (перемещения и коллизии)
+	set_physics_process(false)
 	visible = false
 
 
-func restore(spawn_position: Vector2, damage: float = 0):
+func freeze(stun_sec: float = -1):
+	calc_input = false
+	direction = Vector2.ZERO
+	velocity = Vector2.ZERO
+	if stun_sec < 0:
+		return
+	stun(stun_sec)
+
+
+func restore(spawn_position: Vector2, damage: float = 0, impulse_vector_direction: Vector2 = Vector2.ZERO):
 	if not is_evaporated:
 		return
+	if damage != 0:
+		RunGlobal.player_hp -= 1
 	can_get_damage = false
 	invulnerability_timer.start(
 		invulnerability_time * RunGlobal.INVULNERABILITY_TIME_MULTIPLIER
@@ -116,10 +134,14 @@ func restore(spawn_position: Vector2, damage: float = 0):
 
 
 func calc_animation():
+	if is_dying:
+		return
 	if velocity.length() != 0:
 		animation_player.play("move")
+		sprite_animation_player.play("run")
 		return
 	animation_player.stop()
+	sprite_animation_player.stop()
 
 
 func switch_rotational_scale():
@@ -128,17 +150,46 @@ func switch_rotational_scale():
 	elif sign(velocity.x) < 0:
 		rotational_part.scale.x = -1
 
+
+func start_dying():
+	z_index = 2
+	is_dying = true
+	calc_input = false
+	can_attack = false
+	can_get_damage = false
+	animation_player.stop()
+	velocity = Vector2.ZERO
+	direction = Vector2.ZERO
+
+
+func start_death_animation():
+	velocity = Vector2(-([-1, 1].pick_random()) * SPEED, 0)
+	sprite_animation_player.stop()
+	animation_player.play("death_animation")
+
+
+func free_tree():
+	player_removed_from_tree.emit()
+	queue_free()
+
+
 func stun(duration: float = -1):
 	if duration < 0:
 		duration = input_reload_time
+	sprite_animation_player.stop()
 	calc_input = false
 	can_attack = false
 	input_reload_timer.start(duration)
 
+
 func _on_invulnerability_timer_timeout() -> void:
+	if is_dying or is_evaporated:
+		return
 	can_get_damage = true
 
 
 func _on_input_reload_timer_timeout() -> void:
+	if is_dying:
+		return
 	calc_input = true
 	can_attack = true

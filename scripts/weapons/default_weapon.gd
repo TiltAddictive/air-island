@@ -57,18 +57,14 @@ func _on_collision_response_timer_timeout() -> void:
 	have_to_response_on_collision = true 
 
 
-func destroy():
-	RunGlobal.PLAYER.restore(global_position)
+func destroy(damage: float = 0, impulse_vector_direction: Vector2 = Vector2.ZERO):
+	RunGlobal.PLAYER.restore(global_position, damage, impulse_vector_direction)
 	RunGlobal.WEAPON_PLAYER = null
 	queue_free()
 
 
-func disabled_collision():
-	collision_shape_2d.disabled = true
-
-
-func enable_collision():
-	collision_shape_2d.disabled = false
+func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO) -> void:
+	destroy(damage, impulse)
 
 
 func _on_weapon_have_to_destroy() -> void:

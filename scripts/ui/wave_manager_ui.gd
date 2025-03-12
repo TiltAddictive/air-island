@@ -6,7 +6,8 @@ extends Control
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	enemies_wave_manager.connect("wave_starts", start_new_wave_animation)
+	# enemies_wave_manager.connect("wave_starts", start_new_wave_animation)
+	pass
 
 func _process(delta: float) -> void:
 	wave_counter_label.text = tr("wave_count_text") % [enemies_wave_manager.current_wave, enemies_wave_manager.waves_amount]

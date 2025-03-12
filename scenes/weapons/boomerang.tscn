@@ -67,7 +67,7 @@ _data = {
 
 [node name="Boomerang" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 16
+collision_mask = 80
 script = ExtResource("1_cyesg")
 MAX_DISTANCE = 100.0
 BACKWARDS_MAX_DISTANCE = 200.0
@@ -77,6 +77,7 @@ TITLE_ID = "boomerangTitle"
 
 [node name="ShadowSmall" parent="." instance=ExtResource("1_aj1sp")]
 position = Vector2(0, 2)
+script = null
 
 [node name="RotationalPart" type="Node2D" parent="."]
 position = Vector2(0, -14)

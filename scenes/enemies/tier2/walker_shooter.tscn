@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://rhfqiu6potvd"]
+
+[ext_resource type="PackedScene" uid="uid://c5rmck7e5wyfs" path="res://scenes/enemies/tier1/walker.tscn" id="1_q8skl"]
+[ext_resource type="Texture2D" uid="uid://cjtrcwlml2ll6" path="res://resourses/sprites/enemies/caterpillar_with_gun.png" id="2_3hkra"]
+[ext_resource type="Script" path="res://scripts/enemies/tier2/walker_shooter.gd" id="2_5x05i"]
+[ext_resource type="PackedScene" uid="uid://dnsmnlrjt2d3e" path="res://scenes/enemies/technical/red_bullet.tscn" id="2_qnjed"]
+
+[node name="WalkerShooter" instance=ExtResource("1_q8skl")]
+script = ExtResource("2_5x05i")
+bullet_scene = ExtResource("2_qnjed")
+MIN_SHOOT_RELOAD_TIME = 2.0
+MAX_SHOOT_RELOAD_TIME = 4.0
+SPEED = 50.0
+attack_reload_time = 2.0
+
+[node name="Sprite" parent="RotationalPart" index="0"]
+texture = ExtResource("2_3hkra")
+
+[node name="ShootingNode" type="Node2D" parent="RotationalPart" index="2"]
+position = Vector2(13, 13)
+
+[node name="ShootReloadTimer" type="Timer" parent="Timers" index="2"]
+
+[connection signal="timeout" from="Timers/ShootReloadTimer" to="." method="_on_shoot_reload_timer_timeout"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ciisd7blrkrdp"]
+[gd_scene load_steps=9 format=3 uid="uid://ciisd7blrkrdp"]
 
 [ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_wd7an"]
 [ext_resource type="Script" path="res://scripts/enemies/tier1/navigation_enemy.gd" id="2_ef51p"]
-[ext_resource type="PackedScene" uid="uid://bf3bdqpypeb71" path="res://scenes/technical/shadow_middle.tscn" id="3_8e666"]
 [ext_resource type="Texture2D" uid="uid://dw8gb6smmyey7" path="res://resourses/sprites/enemies/cactus_in_pot.png" id="4_tv0r8"]
 
 [sub_resource type="Animation" id="Animation_ntoua"]
@@ -94,14 +93,11 @@ _data = {
 size = Vector2(30, 17)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j0m7u"]
-radius = 4.0
+radius = 6.0
 
 [node name="NavigationEnemy" instance=ExtResource("1_wd7an")]
 script = ExtResource("2_ef51p")
 search_target_time = 0.5
-
-[node name="ShadowMiddle" parent="ShadowPoint" index="0" instance=ExtResource("3_8e666")]
-position = Vector2(0, 6)
 
 [node name="Sprite" parent="RotationalPart" index="0"]
 position = Vector2(-1, 2)
@@ -120,7 +116,7 @@ position = Vector2(0, -9.5)
 shape = SubResource("RectangleShape2D_wkyq6")
 
 [node name="Collision" parent="." index="4"]
-position = Vector2(0, -4)
+position = Vector2(0, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j0m7u")
 

@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	calc_animations(delta)
 
-func calc_speed(delta: float):
+func calc_speed(_delta: float):
 	var velocity_sign: int = 1
 	if curent_state == STATES.MOVE_BACKWARDS:
 		velocity_sign = -1

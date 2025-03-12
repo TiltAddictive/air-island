@@ -4,7 +4,7 @@
 
 [node name="DefaultWeapon" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 48
+collision_mask = 112
 script = ExtResource("1_o885s")
 
 [node name="ShadowPoint" type="Node2D" parent="."]

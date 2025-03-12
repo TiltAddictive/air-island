@@ -22,7 +22,6 @@ func update_weapon_indexes():
 	weapon_indexes = RunGlobal.get_weapon_indexes()
 
 func update_weapon_display():
-	print("update_weapon_display")
 	update_weapon_indexes()
 	update_timers_labels(weapon_indexes[0], weapon_indexes[1], weapon_indexes[2])
 	update_icons(weapon_indexes[0], weapon_indexes[1], weapon_indexes[2])

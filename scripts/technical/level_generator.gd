@@ -1,6 +1,8 @@
 extends Node2D
 
-@export var MARGIN_RADIUS: float = 75
+signal level_is_cleared
+
+@export var MIN_AVAILABLE_MARGIN_DISTANCE: float = 100
 @export var ENVIRONMENT_ITEM_NODE: Node2D
 @export var environmental_items: Array[PackedScene] = []
 @export var ZONE_SPAWNER: ZoneSpawner
@@ -21,11 +23,24 @@ func choose_item() -> PackedScene:
 
 
 func is_position_valid(candidate_position: Vector2) -> bool:
+	if not is_sufficient_distance(RunGlobal.get_closest_player(candidate_position).global_position, candidate_position, true):
+		return false
 	for child in ENVIRONMENT_ITEM_NODE.get_children():
 		if child is Node2D:
-			var dist = child.global_position.distance_to(candidate_position)
-			if dist < MARGIN_RADIUS:
+			if not is_sufficient_distance(child.global_position, candidate_position):
 				return false
+	return true
+
+func is_sufficient_distance(
+		occupied_position: Vector2,
+		candidate_position: Vector2,
+		is_occupied_by_player: bool = false
+) -> bool:
+	var min_available_margin_distance = MIN_AVAILABLE_MARGIN_DISTANCE
+	if is_occupied_by_player:
+		min_available_margin_distance /= 3
+	if occupied_position.distance_to(candidate_position) < min_available_margin_distance:
+		return false
 	return true
 
 
@@ -37,7 +52,11 @@ func spawn_item(item: PackedScene, item_position: Vector2) -> void:
 
 func clear_level():
 	for item in ENVIRONMENT_ITEM_NODE.get_children():
-		item.queue_free()
+		if item.has_method("disappear"):
+			item.disappear()
+		else:
+			item.queue_free()
+	$LevelClearanceCheckerTimer.start(1)
 
 
 func _on_spawn_gap_timer_timeout() -> void:
@@ -52,3 +71,9 @@ func _on_spawn_gap_timer_timeout() -> void:
 		return
 	spawn_item(chosen_item, item_position)
 	spawn_gap_timer.start()
+
+
+func _on_level_clearance_checker_timer_timeout() -> void:
+	if ENVIRONMENT_ITEM_NODE.get_child_count() > 0:
+		$LevelClearanceCheckerTimer.start(1)
+	level_is_cleared.emit()

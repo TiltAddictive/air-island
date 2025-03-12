@@ -7,6 +7,7 @@ var current_weapon_index: int = 1
 var PLAYER: CharacterBody2D
 var WEAPON_NODE: Node2D
 var WEAPON_PLAYER: CharacterBody2D
+var ENEMY_WAVE_MANAGER_NODE: Node2D
 
 var player_max_hp: int = 3
 var _player_hp: int
@@ -15,7 +16,7 @@ var player_hp: int:
 	get:
 		return _player_hp
 	set (value):
-		_player_hp = max(0, value)
+		_player_hp = min(max(0, value), player_max_hp)
 		if _player_hp <= 0:
 			player_run_out_of_hp.emit()
 
@@ -33,10 +34,13 @@ var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
+	new_run()
+
+
+func new_run() -> void:
 	player_hp = player_max_hp
 	rng.randomize()
 	initialize_weapon_timers()
-
 
 func initialize_run() -> void:
 	player_hp = player_max_hp

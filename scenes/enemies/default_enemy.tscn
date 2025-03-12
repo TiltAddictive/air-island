@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1f4280rnaacr"]
+[gd_scene load_steps=9 format=3 uid="uid://b1f4280rnaacr"]
 
 [ext_resource type="Script" path="res://scripts/enemies/default_enemy.gd" id="1_j4tom"]
 [ext_resource type="PackedScene" uid="uid://uc6q3n7684qm" path="res://scenes/technical/hp_bar.tscn" id="2_77071"]
 [ext_resource type="Texture2D" uid="uid://cup8kivk0njg8" path="res://icon.svg" id="2_agw0o"]
+[ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="3_wi14n"]
 
 [sub_resource type="Animation" id="Animation_k48ie"]
 length = 0.001
@@ -203,7 +204,7 @@ _data = {
 
 [node name="DefaultEnemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 48
+collision_mask = 112
 script = ExtResource("1_j4tom")
 
 [node name="HPBar" parent="." instance=ExtResource("2_77071")]
@@ -212,6 +213,8 @@ offset_top = 2.0
 offset_bottom = 2.0
 
 [node name="ShadowPoint" type="Node2D" parent="."]
+
+[node name="Shadow" parent="ShadowPoint" instance=ExtResource("3_wi14n")]
 
 [node name="RotationalPart" type="Node2D" parent="."]
 position = Vector2(0, -32)

@@ -1,13 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce1njilpfwhdq"]
+[gd_scene load_steps=5 format=3 uid="uid://ce1njilpfwhdq"]
 
+[ext_resource type="Script" path="res://scripts/technical/shadow.gd" id="1_ggxlq"]
 [ext_resource type="Texture2D" uid="uid://d2el32gkybloj" path="res://resourses/sprites/technical/white_oval.png" id="1_lig5p"]
+[ext_resource type="Texture2D" uid="uid://dwoadnkt6pouy" path="res://resourses/sprites/technical/white_oval_middle.png" id="3_h3irt"]
+[ext_resource type="Texture2D" uid="uid://dkb3sios5pwct" path="res://resourses/sprites/technical/white_oval_small.png" id="4_5oqm4"]
 
 [node name="Shadow" type="Node2D"]
 position = Vector2(0, 9)
+script = ExtResource("1_ggxlq")
 
 [node name="RotationalPart" type="Node2D" parent="."]
+modulate = Color(0.266667, 0.266667, 0.266667, 0.447059)
 position = Vector2(0, -32)
 
-[node name="Sprite2D" type="Sprite2D" parent="RotationalPart"]
-modulate = Color(0.266667, 0.266667, 0.266667, 0.447059)
+[node name="WhiteOvalBig" type="Sprite2D" parent="RotationalPart"]
+visible = false
+position = Vector2(0, -1)
 texture = ExtResource("1_lig5p")
+
+[node name="WhiteOvalMiddle" type="Sprite2D" parent="RotationalPart"]
+position = Vector2(0, -3)
+texture = ExtResource("3_h3irt")
+
+[node name="WhiteOvalSmall" type="Sprite2D" parent="RotationalPart"]
+visible = false
+position = Vector2(0, -5)
+texture = ExtResource("4_5oqm4")
