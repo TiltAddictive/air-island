@@ -34,7 +34,7 @@ var AVAILABLE_TIERES = ["tier1", "tier2"]
 var generating_opponents_delay_time: float = 2
 
 func _ready() -> void:
-	start()
+	pass
 
 
 func start() -> void:
@@ -91,7 +91,7 @@ func is_position_valid(candidate_position: Vector2) -> bool:
 func generate_waves() -> void:
 	WAVES = {}
 	current_wave = 1
-	waves_amount = randi_range(MIN_VAWES_AMOUNT, MAX_VAWES_AMOUNT)
+	waves_amount = randi_range(2,4)#randi_range(MIN_VAWES_AMOUNT, MAX_VAWES_AMOUNT)
 	for i in range(1, waves_amount + 1):
 		WAVES[i] = {
 			"tieres": get_available_tieres_in_wave(i),
@@ -112,12 +112,13 @@ func get_available_tieres_in_wave(curent_wave: int) -> Array[String]:
 
 
 func get_amount_of_enemies_in_wave(curent_wave: int) -> int:
-	return 10 + int(current_wave * 1.7)
+	return 1#10 + int(current_wave * 1.7)
 
 func _on_generating_opponents_delay_timer_timeout() -> void:
 	if ENEMY_NODE.get_child_count() > 0:
 		generating_opponents_delay_timer.start(generating_opponents_delay_time)
 		return
+	
 	wave_starts.emit(current_wave)
 	ConstantsGlobal.clear_node(ENEMY_BULLETS_NODE)
 

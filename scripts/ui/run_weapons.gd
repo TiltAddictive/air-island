@@ -34,6 +34,9 @@ func update_timers_labels(left_index: int = 0, center_index: int = 1, right_inde
 
 
 func update_timer_label(timer_label: Label, index: int):
+	if index >= RunGlobal.weapon_timers.size():
+		timer_label.text = "--"
+		return
 	var timer: Timer = RunGlobal.weapon_timers[index]
 	var result: float = timer.time_left
 	if result == 0:

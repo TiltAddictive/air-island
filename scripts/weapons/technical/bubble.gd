@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 func spawn_clones():
 	if not with_player:
 		return
-	for i in range(number_of_clones):
+	for i in range(1, number_of_clones + 1):
 		var clone = self.duplicate()
 		var angle = (TAU / number_of_clones) * i
 		var direction = Vector2(cos(angle), sin(angle)).normalized()

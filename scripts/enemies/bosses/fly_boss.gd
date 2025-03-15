@@ -38,7 +38,6 @@ func calc_animation():
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	print(animation_player.current_animation)
 	var is_collided: bool = move_and_slide()
 	if is_collided and collision_check_timer.time_left == 0:
 		direction = Vector2.ZERO

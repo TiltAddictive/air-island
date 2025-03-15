@@ -2,11 +2,9 @@ extends Control
 
 signal new_weapon_chosen
 
-@export var ENEMY_PREFIX_PATH: String = "res://scenes/weapons/"
-@export var BAN_WEAPON_PATHES: Array[String] = ["res://scenes/weapons/default_weapon.tscn"]
-
 @onready var new_weapon_icon: TextureRect = $VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponIcon
 @onready var new_weapon_name_label: Label = $VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponNameLabel
+@onready var weapon_path_util: WeaponPathUtil = WeaponPathUtil.new()
 
 var new_weapon_path: String
 var weapon_indexes
@@ -40,33 +38,12 @@ func update_current_weapons_images():
 
 
 func update_new_weapon_image():
-	new_weapon_path = get_new_weapon_path()
+	new_weapon_path = weapon_path_util.get_new_weapon_path()
 	new_weapon_info = PathUtils.get_weapon_scene_image_path_and_title(load(new_weapon_path))
 	new_weapon_icon.texture = load(
 		new_weapon_info[0]
 	)
 	new_weapon_name_label.text = tr(new_weapon_info[1])
-
-
-func get_new_weapons_pathes() -> Array[String]:
-	var all_weapons: Array[String] = PathUtils.get_scenes_from_path(ENEMY_PREFIX_PATH)
-	var current_weapons = get_player_weapons()
-	return all_weapons.filter(func(w): return not current_weapons.has(w) and not BAN_WEAPON_PATHES.has(w))
-
-
-func get_new_weapon_path() -> String:
-	var val = get_new_weapons_pathes().pick_random()
-	if val == null:
-		return ""
-	return get_new_weapons_pathes().pick_random()
-
-
-func get_player_weapons() -> Array[String]:
-	var weapons = RunGlobal.weapons
-	var result: Array[String] = []
-	for weapon in weapons:
-		result.append(weapon.resource_path)
-	return result
 
 
 func switch_weapon(weapon_index: float):

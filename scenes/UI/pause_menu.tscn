@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdj4o44dmm3t3"]
+
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_04nh5"]
+[ext_resource type="Shader" path="res://resourses/shaders/blur.gdshader" id="1_cotuh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwx8s"]
+shader = ExtResource("1_cotuh")
+shader_parameter/blur_size = 2.0
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_04nh5")
+
+[node name="BlurLayer" type="ColorRect" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_wwx8s")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.184314)
+
+[node name="CenterContainer" type="CenterContainer" parent="BlurLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BlurLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="SettingsButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="ToMainMenuButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "To Main Menu"
+
+[node name="ExitGameButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+
+[connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/ToMainMenuButton" to="." method="_on_to_main_menu_button_pressed"]
+[connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]

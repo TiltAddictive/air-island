@@ -30,20 +30,26 @@ var weapons: Array[PackedScene] = [
 ]
 var weapon_timers: Array[Timer] = []
 
+@onready var weapon_path_util: WeaponPathUtil = WeaponPathUtil.new()
+
 var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
-	new_run()
+	pass
 
 
 func new_run() -> void:
-	player_hp = player_max_hp
-	rng.randomize()
+	weapon_path_util.update_current_player_weapons()
 	initialize_weapon_timers()
+
 
 func initialize_run() -> void:
 	player_hp = player_max_hp
+
+
+func initialize_new_weapons():
+	pass
 
 
 func initialize_weapon_timers():

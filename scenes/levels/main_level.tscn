@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4ou1ewvat1uw"]
+[gd_scene load_steps=22 format=3 uid="uid://c4ou1ewvat1uw"]
 
 [ext_resource type="PackedScene" uid="uid://db0kps2wuxwwl" path="res://scenes/player/player.tscn" id="1_83f7u"]
 [ext_resource type="Script" path="res://scripts/levels/main_level.gd" id="1_snwsc"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c5dxkmwrgebu6" path="res://scenes/technical/zone_spawner.tscn" id="11_paba4"]
 [ext_resource type="PackedScene" uid="uid://b0gdisdm7gqtv" path="res://scenes/player/player_hp_bar.tscn" id="12_8ygty"]
 [ext_resource type="PackedScene" uid="uid://cvv6nh00bjkmb" path="res://scenes/UI/wave_manager_ui.tscn" id="13_gsec8"]
+[ext_resource type="PackedScene" uid="uid://bdj4o44dmm3t3" path="res://scenes/UI/pause_menu.tscn" id="17_84b38"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0y7sw"]
 texture = ExtResource("4_sdcbw")
@@ -243,3 +244,7 @@ offset_top = 450.0
 offset_bottom = 450.0
 grow_horizontal = 2
 scale = Vector2(2, 2)
+
+[node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("main_level") instance=ExtResource("17_84b38")]
+visible = false
+main_level = NodePath("../..")

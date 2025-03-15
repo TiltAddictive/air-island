@@ -4,4 +4,4 @@ boomerangTitle,Бумеранг,Boomerang
 hammerTitle,Молот,Hammer
 bubbleTitle,Пузырь,Bubble
 stickTitle,Палка,Stick
-wave_count_text,"Волна: %d/%d","Wave: %d/%d"
+wave_count_text,"Этап: %d/%d\nВолна: %d/%d","Stage: %d/%d\nWave: %d/%d"

@@ -10,7 +10,6 @@ extends Node2D
 @onready var run_progress_data: RunProgressData = RunProgressData.new()
 
 func _ready():
-	RunGlobal.new_run()
 	enemy_wave_manager.connect("wave_ends", wave_ends)
 	enemy_wave_manager.connect("wave_starts", wave_starts)
 	enemy_wave_manager.connect("stage_ends", stage_ends)
@@ -20,8 +19,12 @@ func _ready():
 	RunGlobal.ENEMY_WAVE_MANAGER_NODE = $Technical/EnemyWaveManager
 	RunGlobal.player_run_out_of_hp.connect(player_died)
 	player.connect("player_removed_from_tree", run_ends)
-	new_stage()
-	run_progress_data.save_run()
+	
+	var load_success: bool = run_progress_data.load_game()
+	RunGlobal.new_run()
+	if enemy_wave_manager.current_wave == enemy_wave_manager.waves_amount:
+		new_stage()
+	enemy_wave_manager.start()
 
 
 func new_stage(stun: bool = true):
@@ -37,6 +40,7 @@ func generate_level(amount: int = 20):
 
 func _process(delta: float) -> void:
 	calc_choose_weapon_input()
+	calc_pause()
 
 
 func calc_choose_weapon_input():
@@ -52,7 +56,18 @@ func calc_choose_weapon_input():
 	RunGlobal.swith_weapon(sign(weapon_input))
 
 
+func calc_pause():
+	if Input.is_action_just_pressed("ui_pause"):
+		toggle_pause()
+
+
+func toggle_pause():
+	get_tree().paused = !get_tree().paused
+	$CanvasLayer/PauseMenu.visible = get_tree().paused
+
+
 func player_died():
+	run_progress_data.delete_save_file()
 	get_tree().paused = true
 	camera_2d.zoom_camera_on_player()
 
@@ -60,10 +75,14 @@ func player_died():
 func run_ends():
 	enemy_wave_manager.waiting = false
 	get_tree().paused = false
+	run_progress_data.delete_save_file()
 	get_tree().reload_current_scene()
 
 
 func wave_starts(wave_num: int):
+	print("wave_num: ", wave_num)
+	if wave_num == 1:
+		run_progress_data.save_run()
 	wave_manager_ui.start_new_wave_animation()
 	
 func wave_ends(wave_ends_num: int, waves_amount: int):
@@ -85,6 +104,7 @@ func hide_switch_weapon_menu():
 
 
 func stage_ends(current_stage: int, stages_amount: int):
+	print("stage_ends(", current_stage, ", ", stages_amount, ")")
 	if current_stage == stages_amount:
 		run_ends()
 		return
