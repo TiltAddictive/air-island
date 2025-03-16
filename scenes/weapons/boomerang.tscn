@@ -8,7 +8,7 @@
 size = Vector2(16, 28)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_py0fe"]
-radius = 2.0
+radius = 4.0
 height = 16.0
 
 [sub_resource type="Animation" id="Animation_wr5qc"]
@@ -93,7 +93,7 @@ collision_mask = 20
 shape = SubResource("RectangleShape2D_qssc4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_py0fe")
 

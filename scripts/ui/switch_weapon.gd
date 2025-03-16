@@ -2,8 +2,8 @@ extends Control
 
 signal new_weapon_chosen
 
-@onready var new_weapon_icon: TextureRect = $VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponIcon
-@onready var new_weapon_name_label: Label = $VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponNameLabel
+@onready var new_weapon_icon: TextureRect = $BlurLayer/VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponIcon
+@onready var new_weapon_name_label: Label = $BlurLayer/VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponNameLabel
 @onready var weapon_path_util: WeaponPathUtil = WeaponPathUtil.new()
 
 var new_weapon_path: String
@@ -17,11 +17,12 @@ func update() -> void:
 	update_current_weapons_images()
 	update_new_weapon_image()
 	localize_text()
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/SwitchCenterWeaponButton.grab_focus()
 
 func localize_text():
-	$VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard/SwitchLeftWeaponButton.text = tr("replaceWeapon")
-	$VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/SwitchCenterWeaponButton.text = tr("replaceWeapon")
-	$VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard/SwitchRightWeaponButton.text = tr("replaceWeapon")
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard/SwitchLeftWeaponButton.text = tr("replaceWeapon")
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/SwitchCenterWeaponButton.text = tr("replaceWeapon")
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard/SwitchRightWeaponButton.text = tr("replaceWeapon")
 
 
 func update_current_weapons_images():
@@ -29,12 +30,12 @@ func update_current_weapons_images():
 	var left_weapon_info = PathUtils.get_weapon_image_path_and_title(weapon_indexes[0])
 	var center_weapon_info = PathUtils.get_weapon_image_path_and_title(weapon_indexes[1])
 	var right_weapon_info = PathUtils.get_weapon_image_path_and_title(weapon_indexes[2])
-	$VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard/LeftWeaponIcon.texture = load(left_weapon_info[0])
-	$VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard/LeftWeaponTitle.text = tr(left_weapon_info[1])
-	$VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/CenterWeaponIcon.texture = load(center_weapon_info[0])
-	$VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/CenterWeaponTitle.text = tr(center_weapon_info[1])
-	$VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard/RightWeaponIcon.texture = load(right_weapon_info[0])
-	$VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard/RightWeaponTitle.text = tr(right_weapon_info[1])
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard/LeftWeaponIcon.texture = load(left_weapon_info[0])
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard/LeftWeaponTitle.text = tr(left_weapon_info[1])
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/CenterWeaponIcon.texture = load(center_weapon_info[0])
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/CenterWeaponTitle.text = tr(center_weapon_info[1])
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard/RightWeaponIcon.texture = load(right_weapon_info[0])
+	$BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard/RightWeaponTitle.text = tr(right_weapon_info[1])
 
 
 func update_new_weapon_image():

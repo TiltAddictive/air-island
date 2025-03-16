@@ -19,7 +19,7 @@ var WAVES: Dictionary = {}
 @export var ZONE_SPAWNER: ZoneSpawner
 var waiting: bool = false
 
-@export var MIN_VAWES_AMOUNT: int = 7
+@export var MIN_VAWES_AMOUNT: int = 9
 @export var MAX_VAWES_AMOUNT: int = 12
 
 var enemy_spawned: bool = false
@@ -39,7 +39,6 @@ func _ready() -> void:
 
 func start() -> void:
 	generate_waves()
-	#wave_starts.emit(current_wave)
 	generating_opponents_delay_timer.start(generating_opponents_delay_time)
 
 
@@ -51,14 +50,15 @@ func _physics_process(delta: float) -> void:
 		return
 	if not generating_opponents_delay_timer.is_stopped():
 		return
-	wave_ends.emit(current_wave, waves_amount)
+	wave_ends.emit(current_wave, waves_amount, current_stage, stages_amount)
+	print("EnemyWaveManager: current_wave, waves_amount, current_stage, stages_amount")
+	print("EnemyWaveManager: ", current_wave, " ", waves_amount, " ", current_stage, " ", stages_amount)
 	if current_wave == waves_amount:
-		waiting = true
 		stage_ends.emit(current_stage, stages_amount)
 		current_stage += 1
 		return
 	current_wave += 1
-	if current_stage == waves_amount:
+	if current_stage == stages_amount:
 		wave_starts.emit(current_wave)
 		generating_opponents_delay_timer.start(generating_opponents_delay_time)
 		enemy_spawned = false
@@ -91,7 +91,7 @@ func is_position_valid(candidate_position: Vector2) -> bool:
 func generate_waves() -> void:
 	WAVES = {}
 	current_wave = 1
-	waves_amount = randi_range(2,4)#randi_range(MIN_VAWES_AMOUNT, MAX_VAWES_AMOUNT)
+	waves_amount = randi_range(MIN_VAWES_AMOUNT, MAX_VAWES_AMOUNT)
 	for i in range(1, waves_amount + 1):
 		WAVES[i] = {
 			"tieres": get_available_tieres_in_wave(i),
@@ -112,7 +112,7 @@ func get_available_tieres_in_wave(curent_wave: int) -> Array[String]:
 
 
 func get_amount_of_enemies_in_wave(curent_wave: int) -> int:
-	return 1#10 + int(current_wave * 1.7)
+	return 10 + int(current_wave * 1.7)
 
 func _on_generating_opponents_delay_timer_timeout() -> void:
 	if ENEMY_NODE.get_child_count() > 0:

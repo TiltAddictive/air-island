@@ -35,12 +35,10 @@ var weapon_timers: Array[Timer] = []
 var rng = RandomNumberGenerator.new()
 
 
-func _ready() -> void:
-	pass
-
-
-func new_run() -> void:
-	weapon_path_util.update_current_player_weapons()
+func new_run(set_new_weapons: bool) -> void:
+	if set_new_weapons:
+		initialize_new_weapons()
+	initialize_run()
 	initialize_weapon_timers()
 
 
@@ -49,7 +47,7 @@ func initialize_run() -> void:
 
 
 func initialize_new_weapons():
-	pass
+	weapon_path_util.update_current_player_weapons()
 
 
 func initialize_weapon_timers():

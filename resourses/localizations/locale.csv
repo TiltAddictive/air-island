@@ -5,3 +5,14 @@ hammerTitle,Молот,Hammer
 bubbleTitle,Пузырь,Bubble
 stickTitle,Палка,Stick
 wave_count_text,"Этап: %d/%d\nВолна: %d/%d","Stage: %d/%d\nWave: %d/%d"
+continue_button_text," Продолжить "," Continue "
+new_run_button_text," Новый забег "," New run "
+settings_button_text," Настройки "," Settings "
+to_main_menu_button_text," Главное меню ", " Main Menu "
+exit_game_button_text," Закрыть игру "," Quit "
+sounds_volume,"Звуки:","Sound:"
+music_volume,"Музыка:","Music:"
+language,"Язык:","Language:"
+save_and_quit," Сохранить и Выйти "," Save & Quit "
+RU,"Русский","Russian"
+EN,"Английский","English"

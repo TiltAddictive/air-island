@@ -1,0 +1,183 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbmyidm1te6o5"]
+
+[ext_resource type="Script" path="res://scripts/ui/settings_menu.gd" id="1_cn4ad"]
+[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="2_vyq25"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18qwj"]
+expand_margin_right = 10.0
+
+[sub_resource type="Theme" id="Theme_00bl7"]
+default_font = ExtResource("2_vyq25")
+default_font_size = 64
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cn4ad")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsLabel2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsLabel3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsLabel4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="Empty" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SoundLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+text = "Звуки: "
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxFlat_18qwj")
+max_value = 10.0
+
+[node name="Empty2" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Empty3" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+text = "Музыка: "
+horizontal_alignment = 1
+
+[node name="HSlider2" type="HSlider" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxFlat_18qwj")
+max_value = 10.0
+value = 10.0
+
+[node name="Empty4" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Empty5" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LanguageLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+text = "Language:"
+horizontal_alignment = 1
+
+[node name="ChangeLanguageButton" type="Button" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme = SubResource("Theme_00bl7")
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+text = "English"
+
+[node name="Empty6" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SettingsLabel5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsLabel6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsLabel7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsLabel8" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsLabel9" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveAndExit" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+text = "Save & Exit"
+
+[node name="SettingsLabel10" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vyq25")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/GridContainer/ChangeLanguageButton" to="." method="_on_change_language_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveAndExit" to="." method="_on_save_and_exit_pressed"]

@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://bs4up86nkfc4i"]
+
+[ext_resource type="Shader" path="res://resourses/shaders/blur.gdshader" id="1_be4tn"]
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_p6pf4"]
+[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="2_s50l6"]
+[ext_resource type="Texture2D" uid="uid://cvb0xnc266ija" path="res://resourses/sprites/technical/icon-blue-bg.png" id="4_d6bsd"]
+[ext_resource type="Texture2D" uid="uid://bxogq5sfipv2i" path="res://resourses/sprites/technical/icon-clouds.png" id="5_1rfj0"]
+[ext_resource type="Texture2D" uid="uid://d1fepq1k1srrm" path="res://resourses/sprites/technical/icon-island.png" id="6_0kcxq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w23o5"]
+shader = ExtResource("1_be4tn")
+shader_parameter/blur_size = 2.0
+
+[sub_resource type="Theme" id="Theme_rvdok"]
+default_font = ExtResource("2_s50l6")
+default_font_size = 64
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p6pf4")
+
+[node name="BlurLayer" type="ColorRect" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_w23o5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.184314)
+
+[node name="CenterContainer" type="CenterContainer" parent="BlurLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BlurLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="ContinueRunButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s50l6")
+theme_override_font_sizes/font_size = 63
+text = "Continue Run"
+
+[node name="NewRunButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s50l6")
+theme_override_font_sizes/font_size = 63
+text = "New Run"
+
+[node name="SettingsButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_rvdok")
+theme_override_fonts/font = ExtResource("2_s50l6")
+theme_override_font_sizes/font_size = 63
+text = "Settings"
+
+[node name="ExitGameButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s50l6")
+theme_override_font_sizes/font_size = 63
+text = "Exit Game"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_d6bsd")
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_1rfj0")
+
+[node name="TextureRect3" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0kcxq")
+
+[connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/ContinueRunButton" to="." method="_on_continue_run_button_pressed"]
+[connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/NewRunButton" to="." method="_on_new_run_button_pressed"]
+[connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]

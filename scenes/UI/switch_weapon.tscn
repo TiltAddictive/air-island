@@ -1,106 +1,125 @@
-[gd_scene load_steps=5 format=3 uid="uid://db5rvhluwl0j7"]
+[gd_scene load_steps=7 format=3 uid="uid://db5rvhluwl0j7"]
 
 [ext_resource type="Script" path="res://scripts/ui/switch_weapon.gd" id="1_h5vn3"]
 [ext_resource type="Texture2D" uid="uid://biedftd3xku6x" path="res://resourses/sprites/weapons/Boomerang.png" id="1_nkcl0"]
 [ext_resource type="Texture2D" uid="uid://5idun5f76yul" path="res://resourses/sprites/weapons/hammer.png" id="2_mvfdp"]
+[ext_resource type="Shader" path="res://resourses/shaders/blur.gdshader" id="2_y3cbq"]
 [ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_ndcbo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hc4rl"]
+shader = ExtResource("2_y3cbq")
+shader_parameter/blur_size = 2.0
 
 [node name="SwitchWeaponUI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_h5vn3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="BlurLayer" type="ColorRect" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_hc4rl")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BlurLayer"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -115.0
-offset_bottom = 115.0
+offset_top = -116.5
+offset_bottom = 116.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
 
-[node name="CurrentWeaponsHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="CurrentWeaponsHBoxContainer" type="HBoxContainer" parent="BlurLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 40
 
-[node name="LeftWeaponCard" type="VBoxContainer" parent="VBoxContainer/CurrentWeaponsHBoxContainer"]
+[node name="LeftWeaponCard" type="VBoxContainer" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer"]
 layout_mode = 2
 
-[node name="LeftWeaponIcon" type="TextureRect" parent="VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard"]
+[node name="LeftWeaponIcon" type="TextureRect" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard"]
 layout_mode = 2
 texture = ExtResource("1_nkcl0")
 stretch_mode = 3
 
-[node name="LeftWeaponTitle" type="Label" parent="VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard"]
+[node name="LeftWeaponTitle" type="Label" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ndcbo")
 text = "Оружие 1"
 horizontal_alignment = 1
 
-[node name="SwitchLeftWeaponButton" type="Button" parent="VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard"]
+[node name="SwitchLeftWeaponButton" type="Button" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ndcbo")
 text = "Заменить"
 
-[node name="CenterWeaponCard" type="VBoxContainer" parent="VBoxContainer/CurrentWeaponsHBoxContainer"]
+[node name="CenterWeaponCard" type="VBoxContainer" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer"]
 layout_mode = 2
 
-[node name="CenterWeaponIcon" type="TextureRect" parent="VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard"]
+[node name="CenterWeaponIcon" type="TextureRect" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard"]
 layout_mode = 2
 texture = ExtResource("1_nkcl0")
 stretch_mode = 3
 
-[node name="CenterWeaponTitle" type="Label" parent="VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard"]
+[node name="CenterWeaponTitle" type="Label" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ndcbo")
 text = "Оружие 2"
 horizontal_alignment = 1
 
-[node name="SwitchCenterWeaponButton" type="Button" parent="VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard"]
+[node name="SwitchCenterWeaponButton" type="Button" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ndcbo")
 text = "Заменить"
 
-[node name="RightWeaponCard" type="VBoxContainer" parent="VBoxContainer/CurrentWeaponsHBoxContainer"]
+[node name="RightWeaponCard" type="VBoxContainer" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer"]
 layout_mode = 2
 
-[node name="RightWeaponIcon" type="TextureRect" parent="VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard"]
+[node name="RightWeaponIcon" type="TextureRect" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard"]
 layout_mode = 2
 texture = ExtResource("1_nkcl0")
 stretch_mode = 3
 
-[node name="RightWeaponTitle" type="Label" parent="VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard"]
+[node name="RightWeaponTitle" type="Label" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ndcbo")
 text = "Оружие 3"
 horizontal_alignment = 1
 
-[node name="SwitchRightWeaponButton" type="Button" parent="VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard"]
+[node name="SwitchRightWeaponButton" type="Button" parent="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ndcbo")
 text = "Заменить"
 
-[node name="NewWeaponContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="NewWeaponContainer" type="CenterContainer" parent="BlurLayer/VBoxContainer"]
 layout_mode = 2
 
-[node name="NewWeaponCard" type="VBoxContainer" parent="VBoxContainer/NewWeaponContainer"]
+[node name="NewWeaponCard" type="VBoxContainer" parent="BlurLayer/VBoxContainer/NewWeaponContainer"]
 layout_mode = 2
 
-[node name="NewWeaponIcon" type="TextureRect" parent="VBoxContainer/NewWeaponContainer/NewWeaponCard"]
+[node name="NewWeaponIcon" type="TextureRect" parent="BlurLayer/VBoxContainer/NewWeaponContainer/NewWeaponCard"]
 layout_mode = 2
 texture = ExtResource("2_mvfdp")
 stretch_mode = 3
 
-[node name="NewWeaponNameLabel" type="Label" parent="VBoxContainer/NewWeaponContainer/NewWeaponCard"]
+[node name="NewWeaponNameLabel" type="Label" parent="BlurLayer/VBoxContainer/NewWeaponContainer/NewWeaponCard"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ndcbo")
 text = "Новое оружие"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard/SwitchLeftWeaponButton" to="." method="_on_switch_left_weapon_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/SwitchCenterWeaponButton" to="." method="_on_switch_center_weapon_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard/SwitchRightWeaponButton" to="." method="_on_switch_right_weapon_button_pressed"]
+[connection signal="pressed" from="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/LeftWeaponCard/SwitchLeftWeaponButton" to="." method="_on_switch_left_weapon_button_pressed"]
+[connection signal="pressed" from="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/CenterWeaponCard/SwitchCenterWeaponButton" to="." method="_on_switch_center_weapon_button_pressed"]
+[connection signal="pressed" from="BlurLayer/VBoxContainer/CurrentWeaponsHBoxContainer/RightWeaponCard/SwitchRightWeaponButton" to="." method="_on_switch_right_weapon_button_pressed"]

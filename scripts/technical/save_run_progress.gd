@@ -2,7 +2,7 @@ extends Resource
 class_name RunProgressData
 
 var save_file_path = "user://save/"
-var save_file_name = "RunProgressData.tres"
+var save_file_name = "save_progress.json"
 
 func _ready() -> void:
 	verify_save_directory(save_file_path)
@@ -31,10 +31,15 @@ func save_run():
 		print(file)
 	debug_print_save_file()
 
+func check_save_files_exists() -> bool:
+	if FileAccess.file_exists(save_file_path + save_file_name):
+		return true
+	print("No save file found!")
+	return false
+
 
 func load_game() -> bool:
-	if not FileAccess.file_exists(save_file_path + save_file_name):
-		print("No save file found!")
+	if not check_save_files_exists():
 		return false
 
 	var file = FileAccess.open(save_file_path + save_file_name, FileAccess.READ)
@@ -53,7 +58,9 @@ func load_game() -> bool:
 
 func load_from_json(save_data):
 	var loaded_weapons: Array[PackedScene] = []
+	print("loaded_weapons: ", loaded_weapons)
 	for path in save_data["weapons"]:
+		print("path: ", path)
 		var scene = load(path)
 		if scene:
 			loaded_weapons.append(scene)

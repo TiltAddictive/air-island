@@ -182,6 +182,12 @@ func stun(duration: float = -1):
 	input_reload_timer.start(duration)
 
 
+func toggle_process(is_tree_paused: bool):
+	set_process(not is_tree_paused)
+	set_physics_process(not is_tree_paused)
+	animation_player.pause()
+	sprite_animation_player.pause()
+
 func _on_invulnerability_timer_timeout() -> void:
 	if is_dying or is_evaporated:
 		return

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxvw7n8fhwed0"]
+
+[ext_resource type="Script" path="res://scripts/ui/switch_button.gd" id="1_mlxpi"]
+[ext_resource type="Texture2D" uid="uid://5snpg165vd4n" path="res://resourses/sprites/technical/ui/switch_buttons.png" id="1_p2hf8"]
+
+[node name="SwitchButton" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mlxpi")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonSprite" type="Sprite2D" parent="CenterContainer"]
+position = Vector2(20, 20)
+texture = ExtResource("1_p2hf8")
+hframes = 2
+vframes = 3

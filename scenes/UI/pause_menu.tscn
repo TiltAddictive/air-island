@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdj4o44dmm3t3"]
+[gd_scene load_steps=6 format=3 uid="uid://bdj4o44dmm3t3"]
 
 [ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_04nh5"]
 [ext_resource type="Shader" path="res://resourses/shaders/blur.gdshader" id="1_cotuh"]
+[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_lqctu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwx8s"]
 shader = ExtResource("1_cotuh")
 shader_parameter/blur_size = 2.0
+
+[sub_resource type="Theme" id="Theme_w33am"]
+default_font = ExtResource("3_lqctu")
+default_font_size = 64
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -40,18 +45,27 @@ layout_mode = 2
 
 [node name="ContinueButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lqctu")
+theme_override_font_sizes/font_size = 63
 text = "Continue"
 
 [node name="SettingsButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lqctu")
+theme_override_font_sizes/font_size = 63
 text = "Settings"
 
 [node name="ToMainMenuButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_w33am")
+theme_override_fonts/font = ExtResource("3_lqctu")
+theme_override_font_sizes/font_size = 63
 text = "To Main Menu"
 
 [node name="ExitGameButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lqctu")
+theme_override_font_sizes/font_size = 63
 text = "Exit Game"
 
 [connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
