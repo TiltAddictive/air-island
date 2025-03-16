@@ -2,6 +2,7 @@ extends Control
 
 
 @export var main_level: Node
+var should_toggle: bool = true
 
 func _ready() -> void:
 	$BlurLayer/CenterContainer/VBoxContainer/ContinueButton.text = tr("continue_button_text")
@@ -10,7 +11,7 @@ func _ready() -> void:
 	$BlurLayer/CenterContainer/VBoxContainer/ExitGameButton.text = tr("exit_game_button_text")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	calc_pause()
 
 
@@ -19,6 +20,7 @@ func _on_continue_button_pressed() -> void:
 
 
 func _on_settings_button_pressed() -> void:
+	should_toggle = false
 	SceneController.open_above_the_current_scene(ConstantsGlobal.SETTINGS_SCENE_PATH, $BlurLayer/CenterContainer, $BlurLayer, self, "_on_settings_window_closed")
 
 
@@ -32,10 +34,11 @@ func _on_exit_game_button_pressed() -> void:
 
 
 func calc_pause():
-	if Input.is_action_just_pressed("ui_pause"):
+	if Input.is_action_just_pressed("ui_pause") and should_toggle:
 		main_level.toggle_pause()
 		$BlurLayer/CenterContainer/VBoxContainer/ContinueButton.grab_focus()
 
 
 func _on_settings_window_closed():
 	$BlurLayer/CenterContainer/VBoxContainer/SettingsButton.grab_focus()
+	should_toggle = true
