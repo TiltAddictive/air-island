@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_kqh4q"]
 [ext_resource type="Script" path="res://scripts/enemies/tier2/explosive_wizard.gd" id="2_j7by5"]
-[ext_resource type="Texture2D" uid="uid://cir1vyw17qx44" path="res://resourses/sprites/enemies/red_wizard-hood.png" id="2_uysng"]
+[ext_resource type="Texture2D" uid="uid://bebmm45drw0yi" path="res://resourses/sprites/enemies/red_wizard-hood.png" id="2_uysng"]
 [ext_resource type="PackedScene" uid="uid://r8n7bxyhuna5" path="res://scenes/enemies/technical/bomb.tscn" id="3_3253c"]
-[ext_resource type="Texture2D" uid="uid://bnur0fx1tj35l" path="res://resourses/sprites/enemies/red_wizard-hat.png" id="3_vecde"]
+[ext_resource type="Texture2D" uid="uid://cnv244xu1ychk" path="res://resourses/sprites/enemies/red_wizard-hat.png" id="3_vecde"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcxh5"]
 radius = 126.194

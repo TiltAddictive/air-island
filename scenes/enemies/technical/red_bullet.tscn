@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnsmnlrjt2d3e"]
 
 [ext_resource type="Script" path="res://scripts/enemies/technical/red_bullet.gd" id="1_0t1js"]
-[ext_resource type="Texture2D" uid="uid://bbervcukpoyij" path="res://resourses/sprites/enemies/technical/red_bullet.png" id="1_k38lc"]
+[ext_resource type="Texture2D" uid="uid://col62vwitt0wa" path="res://resourses/sprites/enemies/technical/red_bullet.png" id="1_k38lc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_17gtn"]
 radius = 7.07107

@@ -5,6 +5,10 @@ extends Control
 var should_toggle: bool = true
 
 func _ready() -> void:
+	load_localization()
+
+
+func load_localization():
 	$BlurLayer/CenterContainer/VBoxContainer/ContinueButton.text = tr("continue_button_text")
 	$BlurLayer/CenterContainer/VBoxContainer/SettingsButton.text = tr("settings_button_text")
 	$BlurLayer/CenterContainer/VBoxContainer/ToMainMenuButton.text = tr("to_main_menu_button_text")
@@ -40,5 +44,6 @@ func calc_pause():
 
 
 func _on_settings_window_closed():
+	load_localization()
 	$BlurLayer/CenterContainer/VBoxContainer/SettingsButton.grab_focus()
 	should_toggle = true

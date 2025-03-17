@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://db5rvhluwl0j7"]
 
 [ext_resource type="Script" path="res://scripts/ui/switch_weapon.gd" id="1_h5vn3"]
-[ext_resource type="Texture2D" uid="uid://biedftd3xku6x" path="res://resourses/sprites/weapons/Boomerang.png" id="1_nkcl0"]
-[ext_resource type="Texture2D" uid="uid://5idun5f76yul" path="res://resourses/sprites/weapons/hammer.png" id="2_mvfdp"]
+[ext_resource type="Texture2D" uid="uid://bbb2wrr4b0p7e" path="res://resourses/sprites/weapons/Boomerang.png" id="1_nkcl0"]
+[ext_resource type="Texture2D" uid="uid://3e31exvgxwel" path="res://resourses/sprites/weapons/hammer.png" id="2_mvfdp"]
 [ext_resource type="Shader" path="res://resourses/shaders/blur.gdshader" id="2_y3cbq"]
-[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_ndcbo"]
+[ext_resource type="FontFile" uid="uid://mdcvdhukraii" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_ndcbo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hc4rl"]
 shader = ExtResource("2_y3cbq")

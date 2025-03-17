@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://r8n7bxyhuna5"]
 
-[ext_resource type="Texture2D" uid="uid://cbduxdea0yf1t" path="res://resourses/sprites/enemies/technical/Bomb.png" id="1_8b6vl"]
+[ext_resource type="Texture2D" uid="uid://h4a2cl5kyt77" path="res://resourses/sprites/enemies/technical/Bomb.png" id="1_8b6vl"]
 [ext_resource type="Script" path="res://scripts/enemies/technical/bomb.gd" id="1_ed1wg"]
 
 [sub_resource type="Animation" id="Animation_mbapd"]

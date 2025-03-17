@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bu1oollavc5jl" path="res://scenes/weapons/default_weapon.tscn" id="1_7p0tw"]
 [ext_resource type="PackedScene" uid="uid://dcf8nguqift3x" path="res://scenes/technical/shadow_small.tscn" id="2_1tvog"]
 [ext_resource type="Script" path="res://scripts/weapons/hammer.gd" id="2_8h8bq"]
-[ext_resource type="Texture2D" uid="uid://5idun5f76yul" path="res://resourses/sprites/weapons/hammer.png" id="3_bdv4g"]
-[ext_resource type="Texture2D" uid="uid://dabkawficyxit" path="res://resourses/sprites/technical/HammerAirFlow.png" id="5_a8qw8"]
+[ext_resource type="Texture2D" uid="uid://3e31exvgxwel" path="res://resourses/sprites/weapons/hammer.png" id="3_bdv4g"]
+[ext_resource type="Texture2D" uid="uid://dtuf4abhmtxg" path="res://resourses/sprites/technical/HammerAirFlow.png" id="5_a8qw8"]
 
 [sub_resource type="Animation" id="Animation_0fc6i"]
 length = 0.001

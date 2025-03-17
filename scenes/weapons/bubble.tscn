@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://byno1tsu2hfei"]
 
 [ext_resource type="PackedScene" uid="uid://bu1oollavc5jl" path="res://scenes/weapons/default_weapon.tscn" id="1_j2pbv"]
-[ext_resource type="Texture2D" uid="uid://ywm6tt6wx7lg" path="res://resourses/sprites/weapons/soap bubble.png" id="2_rrwsd"]
+[ext_resource type="Texture2D" uid="uid://crkjl6nsmkhaq" path="res://resourses/sprites/weapons/soap bubble.png" id="2_rrwsd"]
 [ext_resource type="Script" path="res://scripts/weapons/technical/bubble.gd" id="2_vatiu"]
 
 [sub_resource type="Animation" id="Animation_ryg7e"]

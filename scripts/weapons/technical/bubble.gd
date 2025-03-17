@@ -27,11 +27,17 @@ func spawn_clones():
 	for i in range(1, number_of_clones + 1):
 		var clone = self.duplicate()
 		var angle = (TAU / number_of_clones) * i
-		var direction = Vector2(cos(angle), sin(angle)).normalized()
+		var clone_direction = Vector2(cos(angle), sin(angle)).normalized()
 		clone.with_player = false
 		clone.global_position = global_position
-		clone.direction = direction
+		clone.direction = clone_direction
 		get_parent().add_child(clone)
+
+
+func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO) -> void:
+	if not with_player:
+		return
+	super.get_hit(damage, impulse)
 
 
 func start_destroying():

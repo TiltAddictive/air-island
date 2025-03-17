@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_8wr6m"]
 [ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="2_tn42s"]
-[ext_resource type="Texture2D" uid="uid://bg5ytxx4rnqdy" path="res://resourses/sprites/player/player.png" id="3_goho8"]
+[ext_resource type="Texture2D" uid="uid://bq4ptm2o86spv" path="res://resourses/sprites/player/player.png" id="3_goho8"]
 
 [sub_resource type="Animation" id="Animation_8dljw"]
 length = 0.001

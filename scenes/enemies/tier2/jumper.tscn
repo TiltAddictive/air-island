@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_syjrk"]
 [ext_resource type="Script" path="res://scripts/enemies/tier2/jumper.gd" id="2_i02yh"]
-[ext_resource type="Texture2D" uid="uid://cvsl36n4elmup" path="res://resourses/sprites/enemies/Frog-Sheet.png" id="4_koxlg"]
+[ext_resource type="Texture2D" uid="uid://bxreoxq27xbal" path="res://resourses/sprites/enemies/Frog-Sheet.png" id="4_koxlg"]
 
 [sub_resource type="Animation" id="Animation_xo3tt"]
 length = 0.001

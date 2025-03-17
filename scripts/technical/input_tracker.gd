@@ -10,6 +10,10 @@ var last_input_type: InputTypes = InputTypes.NONE
 
 signal input_type_changed(new_type: String)
 
+
+func _ready() -> void:
+	print("InputTracker")
+
 func _input(event: InputEvent) -> void:
 	var new_type: InputTypes = InputTypes.NONE
 

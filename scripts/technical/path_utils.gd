@@ -3,7 +3,9 @@ class_name PathUtils
 
 
 static func get_scenes_from_path(path: String) -> Array[String]:
+	print("get_scenes_from_path")
 	if not DirAccess.dir_exists_absolute(path):
+		print("if not DirAccess.dir_exists_absolute(path):")
 		return []
 	var dir = DirAccess.open(path)
 

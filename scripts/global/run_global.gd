@@ -35,6 +35,9 @@ var weapon_timers: Array[Timer] = []
 var rng = RandomNumberGenerator.new()
 
 
+func _ready() -> void:
+	print("RunGlobal")
+
 func new_run(set_new_weapons: bool) -> void:
 	if set_new_weapons:
 		initialize_new_weapons()

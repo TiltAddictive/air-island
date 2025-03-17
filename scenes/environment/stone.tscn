@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxmfbmd4mxehp"]
 
 [ext_resource type="PackedScene" uid="uid://cr6ppaon7nkj8" path="res://scenes/environment/tree.tscn" id="1_wejjn"]
-[ext_resource type="Texture2D" uid="uid://dnuqv8ws3rirx" path="res://resourses/sprites/environment/Stone.png" id="2_ljnt7"]
+[ext_resource type="Texture2D" uid="uid://byviq8n42cll1" path="res://resourses/sprites/environment/Stone.png" id="2_ljnt7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ilixr"]
 radius = 8.0

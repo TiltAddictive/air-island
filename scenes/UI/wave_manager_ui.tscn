@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvv6nh00bjkmb"]
 
 [ext_resource type="Script" path="res://scripts/ui/wave_manager_ui.gd" id="1_lrr6e"]
-[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="2_5cjkv"]
+[ext_resource type="FontFile" uid="uid://mdcvdhukraii" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="2_5cjkv"]
 
 [sub_resource type="Animation" id="Animation_ph76l"]
 length = 0.001

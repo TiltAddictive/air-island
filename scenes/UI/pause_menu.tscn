@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_04nh5"]
 [ext_resource type="Shader" path="res://resourses/shaders/blur.gdshader" id="1_cotuh"]
-[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_lqctu"]
+[ext_resource type="FontFile" uid="uid://mdcvdhukraii" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_lqctu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwx8s"]
 shader = ExtResource("1_cotuh")

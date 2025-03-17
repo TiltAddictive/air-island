@@ -7,6 +7,7 @@ var current_scene: Node = null
 @onready var scene_root: Node =  $"." # 👈 Сюда будем грузить сцены
 
 func _ready():
+	print("SceneController")
 	change_scene(MAIN_MENU)
 	print("MAIN_MENU is: ", MAIN_MENU)
 	print("MAIN_LEVEL is: ", MAIN_LEVEL)

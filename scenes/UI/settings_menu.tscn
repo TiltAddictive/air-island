@@ -1,10 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbmyidm1te6o5"]
+[gd_scene load_steps=6 format=3 uid="uid://dbmyidm1te6o5"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings_menu.gd" id="1_cn4ad"]
-[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="2_vyq25"]
+[ext_resource type="FontFile" uid="uid://mdcvdhukraii" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="2_vyq25"]
+[ext_resource type="StyleBox" uid="uid://b1d6b711vsae7" path="res://resourses/styles/SliderStyle.tres" id="3_jloq6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18qwj"]
-expand_margin_right = 10.0
+bg_color = Color(0.32549, 0.227451, 0.0941176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.221603, 0.150138, 0.0528222, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+expand_margin_left = 2.0
+expand_margin_top = 10.0
+expand_margin_right = 2.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="Theme" id="Theme_00bl7"]
 default_font = ExtResource("2_vyq25")
@@ -72,11 +86,13 @@ theme_override_font_sizes/font_size = 63
 text = "Звуки: "
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
+[node name="SoundHSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/slider = SubResource("StyleBoxFlat_18qwj")
+theme_override_styles/grabber_area = ExtResource("3_jloq6")
+theme_override_styles/grabber_area_highlight = ExtResource("3_jloq6")
 max_value = 10.0
 
 [node name="Empty2" type="Label" parent="VBoxContainer/GridContainer"]
@@ -94,11 +110,13 @@ theme_override_font_sizes/font_size = 63
 text = "Музыка: "
 horizontal_alignment = 1
 
-[node name="HSlider2" type="HSlider" parent="VBoxContainer/GridContainer"]
+[node name="MusicHSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/slider = SubResource("StyleBoxFlat_18qwj")
+theme_override_styles/grabber_area = ExtResource("3_jloq6")
+theme_override_styles/grabber_area_highlight = ExtResource("3_jloq6")
 max_value = 10.0
 value = 10.0
 
@@ -179,5 +197,7 @@ theme_override_font_sizes/font_size = 63
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="value_changed" from="VBoxContainer/GridContainer/SoundHSlider" to="." method="_on_sound_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/MusicHSlider" to="." method="_on_music_h_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/ChangeLanguageButton" to="." method="_on_change_language_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveAndExit" to="." method="_on_save_and_exit_pressed"]

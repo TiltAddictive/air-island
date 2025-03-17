@@ -1,7 +1,7 @@
 extends Node
 class_name WeaponPathUtil
 
-@export var WEAPON_PREFIX_PATH: String = "res://scenes/weapons/"
+const WEAPON_PREFIX_PATH: String = "res://scenes/weapons/"
 @export var BAN_WEAPON_PATHES: Array[String] = ["res://scenes/weapons/default_weapon.tscn"]
 
 func get_player_weapons() -> Array[String]:
@@ -21,6 +21,8 @@ func update_current_player_weapons() -> void:
 
 func get_new_weapons_pathes() -> Array[String]:
 	var all_weapons: Array[String] = PathUtils.get_scenes_from_path(WEAPON_PREFIX_PATH)
+	print("WEAPON_PREFIX_PATH: ", WEAPON_PREFIX_PATH)
+	print("all_weapons: ", all_weapons)
 	var current_weapons = get_player_weapons()
 	return all_weapons.filter(func(w): return not current_weapons.has(w) and not BAN_WEAPON_PATHES.has(w))
 

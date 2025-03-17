@@ -2,10 +2,10 @@
 
 [ext_resource type="Shader" path="res://resourses/shaders/blur.gdshader" id="1_be4tn"]
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_p6pf4"]
-[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="2_s50l6"]
-[ext_resource type="Texture2D" uid="uid://cvb0xnc266ija" path="res://resourses/sprites/technical/icon-blue-bg.png" id="4_d6bsd"]
-[ext_resource type="Texture2D" uid="uid://bxogq5sfipv2i" path="res://resourses/sprites/technical/icon-clouds.png" id="5_1rfj0"]
-[ext_resource type="Texture2D" uid="uid://d1fepq1k1srrm" path="res://resourses/sprites/technical/icon-island.png" id="6_0kcxq"]
+[ext_resource type="FontFile" uid="uid://mdcvdhukraii" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="2_s50l6"]
+[ext_resource type="Texture2D" uid="uid://bglhjystag2sl" path="res://resourses/sprites/technical/icon-blue-bg.png" id="4_d6bsd"]
+[ext_resource type="Texture2D" uid="uid://b1mdmpu8qcaps" path="res://resourses/sprites/technical/icon-clouds.png" id="5_1rfj0"]
+[ext_resource type="Texture2D" uid="uid://dsojjjmr8l86p" path="res://resourses/sprites/technical/icon-island.png" id="6_0kcxq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w23o5"]
 shader = ExtResource("1_be4tn")

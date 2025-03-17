@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_trs1r"]
 [ext_resource type="Script" path="res://scripts/enemies/bosses/fly_boss.gd" id="2_3kxl4"]
-[ext_resource type="Texture2D" uid="uid://cdnlqjn4ok3ed" path="res://resourses/sprites/enemies/bosses/fly/skywing.png" id="2_cycqp"]
-[ext_resource type="Texture2D" uid="uid://cy4j2qebq67k" path="res://resourses/sprites/enemies/bosses/fly/BossFly.png" id="2_um3ry"]
+[ext_resource type="Texture2D" uid="uid://ciadsurmepd7u" path="res://resourses/sprites/enemies/bosses/fly/skywing.png" id="2_cycqp"]
+[ext_resource type="Texture2D" uid="uid://dm6r1ylwie0y3" path="res://resourses/sprites/enemies/bosses/fly/BossFly.png" id="2_um3ry"]
 [ext_resource type="PackedScene" uid="uid://dnsmnlrjt2d3e" path="res://scenes/enemies/technical/red_bullet.tscn" id="3_eg2sn"]
 
 [sub_resource type="Animation" id="Animation_n6f1y"]

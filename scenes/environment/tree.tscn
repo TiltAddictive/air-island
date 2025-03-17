@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cr6ppaon7nkj8"]
 
 [ext_resource type="Script" path="res://scripts/environment/tree.gd" id="1_eah4c"]
-[ext_resource type="Texture2D" uid="uid://cmr4xvio5ah83" path="res://resourses/sprites/environment/Tree.png" id="1_uj5t0"]
+[ext_resource type="Texture2D" uid="uid://wl3rabrw6oq6" path="res://resourses/sprites/environment/Tree.png" id="1_uj5t0"]
 [ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="2_hxkp0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxhgg"]

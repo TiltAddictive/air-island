@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/default_enemy.gd" id="1_j4tom"]
 [ext_resource type="PackedScene" uid="uid://uc6q3n7684qm" path="res://scenes/technical/hp_bar.tscn" id="2_77071"]
-[ext_resource type="Texture2D" uid="uid://cup8kivk0njg8" path="res://icon.svg" id="2_agw0o"]
+[ext_resource type="Texture2D" uid="uid://cv76o36qmtqvg" path="res://icon.svg" id="2_agw0o"]
 [ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="3_wi14n"]
 
 [sub_resource type="Animation" id="Animation_k48ie"]

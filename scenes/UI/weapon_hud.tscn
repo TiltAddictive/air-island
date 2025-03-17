@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://bsjtljod0y2fk"]
 
 [ext_resource type="Script" path="res://scripts/ui/run_weapons.gd" id="1_kyxhl"]
-[ext_resource type="Texture2D" uid="uid://biedftd3xku6x" path="res://resourses/sprites/weapons/Boomerang.png" id="2_6ta04"]
+[ext_resource type="Texture2D" uid="uid://bbb2wrr4b0p7e" path="res://resourses/sprites/weapons/Boomerang.png" id="2_6ta04"]
 [ext_resource type="PackedScene" uid="uid://cxvw7n8fhwed0" path="res://scenes/UI/switch_button.tscn" id="2_jxnec"]
-[ext_resource type="Texture2D" uid="uid://c8tqacbsqws54" path="res://resourses/sprites/technical/ui/weaponHud.png" id="2_utpsg"]
-[ext_resource type="FontFile" uid="uid://q4lohvsi0yuq" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_ynbv1"]
+[ext_resource type="Texture2D" uid="uid://e3jgqhxjy383" path="res://resourses/sprites/technical/ui/weaponHud.png" id="2_utpsg"]
+[ext_resource type="FontFile" uid="uid://mdcvdhukraii" path="res://resourses/fonts/HarreeghPoppedCyrillic.ttf" id="3_ynbv1"]
 
 [node name="WeaponHUD" type="Control"]
 layout_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxvw7n8fhwed0"]
 
 [ext_resource type="Script" path="res://scripts/ui/switch_button.gd" id="1_mlxpi"]
-[ext_resource type="Texture2D" uid="uid://5snpg165vd4n" path="res://resourses/sprites/technical/ui/switch_buttons.png" id="1_p2hf8"]
+[ext_resource type="Texture2D" uid="uid://c26trgioycx8s" path="res://resourses/sprites/technical/ui/switch_buttons.png" id="1_p2hf8"]
 
 [node name="SwitchButton" type="Control"]
 layout_mode = 3
