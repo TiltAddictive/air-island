@@ -167,7 +167,7 @@ volley_reload_time = 3.5
 bullet_scene = ExtResource("3_eg2sn")
 SATISFACTORY_DIRECTION_DISTANCE = 700.0
 RAYCAST_ATTEMPTS = 10
-MAX_HP = 1.0
+MAX_HP = 13.0
 SPEED = 200.0
 
 [node name="Wings" type="Node2D" parent="RotationalPart" index="0"]

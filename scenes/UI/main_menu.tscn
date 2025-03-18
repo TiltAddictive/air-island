@@ -46,6 +46,29 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="BlurLayer/CenterContainer"]
 layout_mode = 2
 
+[node name="Label" type="Label" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_s50l6")
+theme_override_font_sizes/font_size = 63
+text = "AirIsland"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s50l6")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="BlurLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s50l6")
+theme_override_font_sizes/font_size = 63
+horizontal_alignment = 1
+
 [node name="ContinueRunButton" type="Button" parent="BlurLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_s50l6")

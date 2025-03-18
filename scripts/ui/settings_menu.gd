@@ -15,6 +15,7 @@ func _ready():
 
 
 func set_locales():
+	$VBoxContainer/SettingsLabel.text = tr("settings_button_text")
 	$VBoxContainer/GridContainer/SoundLabel.text = tr("sounds_volume")
 	$VBoxContainer/GridContainer/MusicLabel.text = tr("music_volume")
 	$VBoxContainer/GridContainer/LanguageLabel.text = tr("language")

@@ -31,7 +31,7 @@ var AVAILABLE_TIERES = ["tier1", "tier2"]
 @export var MIN_AVAILABLE_DISTANCE_TO_PLAYER: float = 60
 
 @onready var generating_opponents_delay_timer: Timer = $GeneratingOpponentsDelayTimer
-var generating_opponents_delay_time: float = 2
+var generating_opponents_delay_time: float = 4
 
 func _ready() -> void:
 	pass
