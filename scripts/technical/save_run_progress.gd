@@ -13,7 +13,6 @@ func save_run():
 	var save_data = {
 		"player_hp": RunGlobal.player_hp,
 		"player_max_hp": RunGlobal.player_max_hp,
-		"player_position": [RunGlobal.PLAYER.global_position.x, RunGlobal.PLAYER.global_position.y],
 		"weapons": get_weapon_pathes(),
 		"waves_amount": RunGlobal.ENEMY_WAVE_MANAGER_NODE.waves_amount,
 		"current_wave": RunGlobal.ENEMY_WAVE_MANAGER_NODE.current_wave,
@@ -67,7 +66,6 @@ func load_from_json(save_data):
 	RunGlobal.weapons = loaded_weapons
 	RunGlobal.player_max_hp = save_data["player_max_hp"]
 	RunGlobal.player_hp = save_data["player_hp"]
-	# RunGlobal.PLAYER.global_position = Vector2(save_data["player_position"][0], save_data["player_position"][0])
 	RunGlobal.ENEMY_WAVE_MANAGER_NODE.stages_amount = save_data["stages_amount"]
 	RunGlobal.ENEMY_WAVE_MANAGER_NODE.current_stage = save_data["current_stage"]
 
