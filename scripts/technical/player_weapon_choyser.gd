@@ -2,33 +2,26 @@ extends Node
 class_name WeaponPathUtil
 
 const WEAPON_PREFIX_PATH: String = "res://scenes/weapons/"
-@export var BAN_WEAPON_PATHES: Array[String] = ["res://scenes/weapons/default_weapon.tscn"]
-
-func get_player_weapons() -> Array[String]:
-	var weapons = RunGlobal.weapons
-	var result: Array[String] = []
-	for weapon in weapons:
-		result.append(weapon.resource_path)
-	return result
-
+var AVAILABLE_WEAPONS: Array[PackedScene] = [
+	preload("res://scenes/weapons/boomerang.tscn"),
+	preload("res://scenes/weapons/bubble.tscn"),
+	preload("res://scenes/weapons/hammer.tscn"),
+	preload("res://scenes/weapons/stick.tscn"),
+]
 
 func update_current_player_weapons() -> void:
 	var player_weapons_amount: int = RunGlobal.weapons.size()
 	RunGlobal.weapons = []
 	for i in range(player_weapons_amount):
-		RunGlobal.weapons.append(load(get_new_weapon_path()))
+		RunGlobal.weapons.append(get_new_weapon())
 
 
-func get_new_weapons_pathes() -> Array[String]:
-	var all_weapons: Array[String] = PathUtils.get_scenes_from_path(WEAPON_PREFIX_PATH)
-	print("WEAPON_PREFIX_PATH: ", WEAPON_PREFIX_PATH)
-	print("all_weapons: ", all_weapons)
-	var current_weapons = get_player_weapons()
-	return all_weapons.filter(func(w): return not current_weapons.has(w) and not BAN_WEAPON_PATHES.has(w))
+func get_new_weapons() -> Array[PackedScene]:
+	var all_weapons: Array[PackedScene] = AVAILABLE_WEAPONS.duplicate()
+	var current_weapons = RunGlobal.weapons
+	return all_weapons.filter(func(w): return not current_weapons.has(w))
 
 
-func get_new_weapon_path() -> String:
-	var val = get_new_weapons_pathes().pick_random()
-	if val == null:
-		return ""
+func get_new_weapon() -> PackedScene:
+	var val = get_new_weapons().pick_random()
 	return val

@@ -76,24 +76,19 @@ func run_ends():
 	enemy_wave_manager.waiting = false
 	run_progress_data.delete_save_file()
 	get_tree().paused = false
-	print("Preparing to change scene to MAIN_MENU...")
 	SceneController.change_scene(SceneController.MAIN_MENU)
 
 
 func wave_starts(wave_num: int):
-	print("wave_num: ", wave_num)
 	if wave_num == 1:
 		run_progress_data.save_run()
 	wave_manager_ui.start_new_wave_animation()
 	
 func wave_ends(wave_ends_num: int, waves_amount: int, current_stage: int, stages_amount: int):
-	print("wave_ends_num: int, waves_amount: int, current_stage: int, stages_amount: int")
-	print(wave_ends_num, " ", waves_amount, " ", current_stage, " ", stages_amount)
 	if current_stage == stages_amount:
 		return
 	if wave_ends_num != waves_amount:
 		return
-	print("show_switch_weapon_menu")
 	show_switch_weapon_menu()
 
 func show_switch_weapon_menu():
@@ -112,7 +107,6 @@ func hide_switch_weapon_menu():
 
 
 func stage_ends(current_stage: int, stages_amount: int):
-	print("stage_ends(", current_stage, ", ", stages_amount, ")")
 	if current_stage >= stages_amount:
 		run_ends()
 		return

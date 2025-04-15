@@ -85,6 +85,7 @@ script = ExtResource("2_vatiu")
 with_player = true
 live_time = 2.0
 number_of_clones = 3
+attack_reload_time = 0.6
 RELOAD_TIME = 7.0
 SPEED = 30.0
 DAMAGE = 1.0
@@ -113,5 +114,7 @@ shape = SubResource("CircleShape2D_xbdjp")
 [node name="LiveTimer" type="Timer" parent="Timers" index="1"]
 one_shot = true
 
-[connection signal="body_entered" from="RotationalPart/DamageArea" to="." method="_on_damage_area_body_entered"]
+[node name="AttackReloadTimer" type="Timer" parent="Timers" index="2"]
+
 [connection signal="timeout" from="Timers/LiveTimer" to="." method="_on_live_timer_timeout"]
+[connection signal="timeout" from="Timers/AttackReloadTimer" to="." method="_on_attack_reload_timer_timeout"]

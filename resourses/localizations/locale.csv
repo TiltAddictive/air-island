@@ -5,6 +5,7 @@ hammerTitle,Молот,Hammer
 bubbleTitle,Пузырь,Bubble
 stickTitle,Палка,Stick
 wave_count_text,"Этап: %d/%d\nВолна: %d/%d","Stage: %d/%d\nWave: %d/%d"
+new_wave_text,"Волна %d/%d","Wave %d/%d"
 continue_button_text," Продолжить "," Continue "
 new_run_button_text," Новый забег "," New run "
 settings_button_text," Настройки "," Settings "

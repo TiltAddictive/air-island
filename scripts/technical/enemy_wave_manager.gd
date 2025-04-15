@@ -15,7 +15,7 @@ var WAVES: Dictionary = {}
 @export var current_wave: int = 1
 @export var stages_amount: int = 2
 @export var current_stage: int = 1
-@onready var enemies_scenes_pathes: Array[String] = []
+@onready var enemies_scenes_pathes: Array[PackedScene] = []
 @export var ZONE_SPAWNER: ZoneSpawner
 var waiting: bool = false
 
@@ -25,6 +25,21 @@ var waiting: bool = false
 var enemy_spawned: bool = false
 
 var AVAILABLE_TIERES = ["tier1", "tier2"]
+@export var TIER_ENEMIES: Dictionary = {
+	"tier1": [
+		preload("res://scenes/enemies/tier1/navigation_enemy.tscn"),
+		preload("res://scenes/enemies/tier1/walker.tscn"),
+	],
+	"tier2": [
+		preload("res://scenes/enemies/tier2/explosive_wizard.tscn"),
+		preload("res://scenes/enemies/tier2/jumper.tscn"),
+		preload("res://scenes/enemies/tier2/walker_shooter.tscn"),
+	]
+}
+
+@export var BOSSES: Array[PackedScene] = [
+	preload("res://scenes/enemies/bosses/fly_boss.tscn"),
+]
 
 
 # Player
@@ -42,7 +57,7 @@ func start() -> void:
 	generating_opponents_delay_timer.start(generating_opponents_delay_time)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if waiting:
 		return
 	var enemies_amount = ENEMY_NODE.get_child_count()
@@ -51,14 +66,12 @@ func _physics_process(delta: float) -> void:
 	if not generating_opponents_delay_timer.is_stopped():
 		return
 	wave_ends.emit(current_wave, waves_amount, current_stage, stages_amount)
-	print("EnemyWaveManager: current_wave, waves_amount, current_stage, stages_amount")
-	print("EnemyWaveManager: ", current_wave, " ", waves_amount, " ", current_stage, " ", stages_amount)
 	if current_wave == waves_amount:
 		stage_ends.emit(current_stage, stages_amount)
 		current_stage += 1
 		return
 	current_wave += 1
-	if current_stage == stages_amount:
+	if current_stage == stages_amount and current_wave == 1:
 		wave_starts.emit(current_wave)
 		generating_opponents_delay_timer.start(generating_opponents_delay_time)
 		enemy_spawned = false
@@ -66,20 +79,6 @@ func _physics_process(delta: float) -> void:
 	wave_starts.emit(current_wave)
 	generating_opponents_delay_timer.start(generating_opponents_delay_time)
 	enemy_spawned = false
-
-
-func choose_random_scene_from_list(scenes: Array[String]) -> PackedScene:
-	var random_scene_path = scenes.pick_random()
-	return load(random_scene_path) as PackedScene
-
-
-func get_tier_pathes_for_wave(current_wave: int) -> Array[String]:
-	var result: Array[String] = []
-	var wave_tieres: Array = WAVES[current_wave]["tieres"]
-
-	for el in wave_tieres:
-		result.append("%s%s/" % [ENEMY_PREFIX_PATH, el])
-	return result
 
 
 func is_position_valid(candidate_position: Vector2) -> bool:
@@ -118,8 +117,6 @@ func _on_generating_opponents_delay_timer_timeout() -> void:
 	if ENEMY_NODE.get_child_count() > 0:
 		generating_opponents_delay_timer.start(generating_opponents_delay_time)
 		return
-	
-	wave_starts.emit(current_wave)
 	ConstantsGlobal.clear_node(ENEMY_BULLETS_NODE)
 
 	if current_wave != waves_amount:
@@ -127,27 +124,25 @@ func _on_generating_opponents_delay_timer_timeout() -> void:
 	else:
 		generate_boss()
 
+
 func generate_wave():
 	if current_wave not in WAVES:
 		return
-	var tier_pathes: Array[String] = get_tier_pathes_for_wave(current_wave)
 	enemies_scenes_pathes = []
-	for path in tier_pathes:
-		enemies_scenes_pathes.append_array(PathUtils.get_scenes_from_path(path))
+	for tier in WAVES[current_wave]["tieres"]:
+		enemies_scenes_pathes.append_array(TIER_ENEMIES[tier])
 	var enemies_amount: int = WAVES[current_wave]["amount"]
-	
-	for enemy in range(enemies_amount):
-		var enemy_scene: PackedScene = choose_random_scene_from_list(enemies_scenes_pathes)
+	for enemy_number in range(enemies_amount):
+		var enemy_scene: PackedScene = enemies_scenes_pathes.pick_random()
 		var enemy_node = enemy_scene.instantiate()
 		enemy_node.global_position = ZONE_SPAWNER.choose_item_position(self)
 		enemy_node.ENEMY_ATACK_NODE = ENEMY_BULLETS_NODE
 		ENEMY_NODE.add_child(enemy_node)
 	enemy_spawned = true
 
+
 func generate_boss() -> void:
-	var bosses_pathes: Array[String] = PathUtils.get_scenes_from_path(BOSSES_PREFIX_PATH)
-	var boss_scene: PackedScene = choose_random_scene_from_list(bosses_pathes)
-	var boss_node = boss_scene.instantiate()
+	var boss_node = BOSSES.pick_random().instantiate()
 	boss_node.global_position = ZONE_SPAWNER.choose_item_position(self)
 	boss_node.ENEMY_ATACK_NODE = ENEMY_BULLETS_NODE
 	ENEMY_NODE.add_child(boss_node)

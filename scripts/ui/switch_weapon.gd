@@ -6,7 +6,7 @@ signal new_weapon_chosen
 @onready var new_weapon_name_label: Label = $BlurLayer/VBoxContainer/NewWeaponContainer/NewWeaponCard/NewWeaponNameLabel
 @onready var weapon_path_util: WeaponPathUtil = WeaponPathUtil.new()
 
-var new_weapon_path: String
+var new_weapon: PackedScene
 var weapon_indexes
 var new_weapon_info
 
@@ -39,16 +39,21 @@ func update_current_weapons_images():
 
 
 func update_new_weapon_image():
-	new_weapon_path = weapon_path_util.get_new_weapon_path()
-	new_weapon_info = PathUtils.get_weapon_scene_image_path_and_title(load(new_weapon_path))
+	new_weapon = weapon_path_util.get_new_weapon()
+	new_weapon_info = PathUtils.get_weapon_scene_image_path_and_title(new_weapon)
 	new_weapon_icon.texture = load(
 		new_weapon_info[0]
 	)
 	new_weapon_name_label.text = tr(new_weapon_info[1])
 
 
-func switch_weapon(weapon_index: float):
-	RunGlobal.replace_by_new_weapon(weapon_index, new_weapon_path)
+func switch_weapon(weapon_index: int) -> void:
+	if weapon_index < 0 or weapon_index >= RunGlobal.weapons.size():
+		return
+	if new_weapon == null:
+		print("New weapon is null")
+		return
+	RunGlobal.replace_by_new_weapon(weapon_index, new_weapon)
 
 
 func _on_switch_left_weapon_button_pressed() -> void:

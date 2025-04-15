@@ -35,9 +35,6 @@ var weapon_timers: Array[Timer] = []
 var rng = RandomNumberGenerator.new()
 
 
-func _ready() -> void:
-	print("RunGlobal")
-
 func new_run(set_new_weapons: bool) -> void:
 	if set_new_weapons:
 		initialize_new_weapons()
@@ -76,8 +73,8 @@ func swith_weapon(delta_index: int) -> void:
 	weapon_switched.emit()
 
 
-func replace_by_new_weapon(weapon_index: int, new_weapon_path: String):
-	weapons[weapon_index] = load(new_weapon_path)
+func replace_by_new_weapon(weapon_index: int, new_weapon: PackedScene):
+	weapons[weapon_index] = new_weapon
 	initialize_weapon_timers()
 	swith_weapon(0)
 	weapon_switched.emit()
