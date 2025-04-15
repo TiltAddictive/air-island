@@ -5,6 +5,10 @@ extends DefaultWeapon
 @export var live_time: float = 2
 @onready var animation_player: AnimationPlayer = $RotationalPart/Sprite2D/AnimationPlayer
 @export var number_of_clones: int = 3
+@onready var damage_area: Area2D = $RotationalPart/DamageArea
+
+@onready var attack_reload_timer: Timer = $Timers/AttackReloadTimer
+@export var attack_reload_time: float = 0.6
 
 func _ready() -> void:
 	super._ready()
@@ -15,6 +19,8 @@ func _ready() -> void:
 	velocity = direction * SPEED
 	animation_player.play("idle")
 	live_timer.start(live_time)
+	attack_reload_timer.wait_time = attack_reload_time
+	attack()
 
 
 func _physics_process(delta: float) -> void:
@@ -51,6 +57,12 @@ func _on_live_timer_timeout() -> void:
 	animation_player.play("pop")
 
 
-func _on_damage_area_body_entered(body: Node2D) -> void:
-	if body.has_method("get_hit"):
-		body.get_hit(DAMAGE)
+func attack():
+	for body in damage_area.get_overlapping_bodies():
+		if body.has_method("get_hit"):
+			body.get_hit(DAMAGE)
+	attack_reload_timer.start()
+
+
+func _on_attack_reload_timer_timeout() -> void:
+	attack()

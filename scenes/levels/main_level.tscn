@@ -223,7 +223,6 @@ position = Vector2(411, 186)
 process_mode = 3
 
 [node name="RunUI" parent="CanvasLayer" instance=ExtResource("4_uyyy4")]
-visible = false
 size_flags_horizontal = 4
 
 [node name="WeaponHUD" parent="CanvasLayer" instance=ExtResource("6_7aa4v")]

@@ -16,7 +16,6 @@ var current_language_index: int = 0
 const SETTINGS_FILE: String = "user://settings.cfg"
 
 func _ready() -> void:
-	print("ConstantsGlobal")
 	languages = []
 	for key in ConstantsGlobal.AVAILABLE_LANGUAGES.keys():
 		languages.append(key)

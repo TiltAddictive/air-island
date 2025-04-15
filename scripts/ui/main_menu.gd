@@ -21,12 +21,10 @@ func load_localization():
 
 
 func _on_continue_run_button_pressed() -> void:
-	print("_on_continue_run_button_pressed")
 	SceneController.change_scene(SceneController.MAIN_LEVEL)
 
 
 func _on_new_run_button_pressed() -> void:
-	print("_on_new_run_button_pressed")
 	run_progress_data.delete_save_file()
 	SceneController.change_scene(SceneController.MAIN_LEVEL)
 

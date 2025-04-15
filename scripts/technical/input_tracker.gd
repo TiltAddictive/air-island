@@ -11,9 +11,6 @@ var last_input_type: InputTypes = InputTypes.NONE
 signal input_type_changed(new_type: String)
 
 
-func _ready() -> void:
-	print("InputTracker")
-
 func _input(event: InputEvent) -> void:
 	var new_type: InputTypes = InputTypes.NONE
 
@@ -35,5 +32,4 @@ func _input(event: InputEvent) -> void:
 	# Если тип ввода изменился, уведомляем
 	if new_type != InputTypes.NONE and new_type != last_input_type:
 		last_input_type = new_type
-		print("Переключено на: ", new_type)
 		emit_signal("input_type_changed", new_type)
