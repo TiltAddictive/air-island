@@ -1,8 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://db0kps2wuxwwl"]
+[gd_scene load_steps=20 format=3 uid="uid://db0kps2wuxwwl"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_8wr6m"]
 [ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="2_tn42s"]
 [ext_resource type="Texture2D" uid="uid://bq4ptm2o86spv" path="res://resourses/sprites/player/player.png" id="3_goho8"]
+[ext_resource type="AudioStream" uid="uid://4t2ampydsou8" path="res://resourses/sounds/sound/negative_beeps-6008.mp3" id="4_7idar"]
+[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="5_5xjkp"]
+[ext_resource type="AudioStream" uid="uid://cvpnqlah1rps2" path="res://resourses/sounds/sound/player_get_hit.mp3" id="6_pxkth"]
+[ext_resource type="AudioStream" uid="uid://b5l0lqit7jyhw" path="res://resourses/sounds/sound/footstep_left.wav" id="7_jawt7"]
+[ext_resource type="AudioStream" uid="uid://bjkct1i8ixd72" path="res://resourses/sounds/sound/footstep_right.wav" id="8_tbvej"]
+[ext_resource type="AudioStream" uid="uid://bdycayvp2nl5x" path="res://resourses/sounds/sound/byistraya-magicheskaya-ataka-audio-material-42078.wav" id="9_kolap"]
+[ext_resource type="AudioStream" uid="uid://c0p2bve8p7v4q" path="res://resourses/sounds/sound/podobnyiy-zvuk-ataki-vozdushnoy-ataki-42079.wav" id="10_1s13i"]
 
 [sub_resource type="Animation" id="Animation_8dljw"]
 length = 0.001
@@ -144,6 +151,20 @@ tracks/5/keys = {
 "method": &"free_tree"
 }]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../Sounds/DieAudioStreamPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"custom_play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_sskjo"]
 resource_name = "move"
@@ -229,6 +250,37 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("../../Sounds/FootStepLeftSoundAudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"custom_play"
+}, {
+"args": [0.0],
+"method": &"custom_play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("../../Sounds/FootStepRightSoundAudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"custom_play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6fxnl"]
 _data = {
@@ -285,6 +337,28 @@ one_shot = true
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 position = Vector2(0, -15)
 radius = 20.0
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="DieAudioStreamPlayer" parent="Sounds" instance=ExtResource("5_5xjkp")]
+stream = ExtResource("4_7idar")
+
+[node name="GetHitAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("5_5xjkp")]
+stream = ExtResource("6_pxkth")
+pitch_scale = 3.0
+
+[node name="FootStepLeftSoundAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("5_5xjkp")]
+stream = ExtResource("7_jawt7")
+sound_multiplier = 0.9
+
+[node name="FootStepRightSoundAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("5_5xjkp")]
+stream = ExtResource("8_tbvej")
+
+[node name="AttackAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("5_5xjkp")]
+stream = ExtResource("9_kolap")
+
+[node name="RestoreAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("5_5xjkp")]
+stream = ExtResource("10_1s13i")
 
 [connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
 [connection signal="timeout" from="Timers/InputReloadTimer" to="." method="_on_input_reload_timer_timeout"]

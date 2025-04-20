@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1f4280rnaacr"]
+[gd_scene load_steps=11 format=3 uid="uid://b1f4280rnaacr"]
 
 [ext_resource type="Script" path="res://scripts/enemies/default_enemy.gd" id="1_j4tom"]
 [ext_resource type="PackedScene" uid="uid://uc6q3n7684qm" path="res://scenes/technical/hp_bar.tscn" id="2_77071"]
 [ext_resource type="Texture2D" uid="uid://cv76o36qmtqvg" path="res://icon.svg" id="2_agw0o"]
 [ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="3_wi14n"]
+[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="5_8070q"]
+[ext_resource type="AudioStream" uid="uid://bv55bip8xifxq" path="res://resourses/sounds/sound/ouch-116112.mp3" id="6_ye3x3"]
 
 [sub_resource type="Animation" id="Animation_k48ie"]
 length = 0.001
@@ -193,6 +195,20 @@ tracks/7/keys = {
 "update": 0,
 "values": [0.0, -6.28319, -12.5664]
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../../Sounds/DeathAudioStreamPlayer2D")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"custom_play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pp45b"]
 _data = {
@@ -243,6 +259,13 @@ shape = SubResource("CircleShape2D_l8bx4")
 [node name="AttackReloadTimer" type="Timer" parent="Timers"]
 
 [node name="CalcVelocityTimer" type="Timer" parent="Timers"]
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="DeathAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("5_8070q")]
+stream = ExtResource("6_ye3x3")
+
+[node name="GetHitSoundAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("5_8070q")]
 
 [connection signal="timeout" from="Timers/AttackReloadTimer" to="." method="_on_attack_reload_timer_timeout"]
 [connection signal="timeout" from="Timers/CalcVelocityTimer" to="." method="_on_calc_velocity_timer_timeout"]

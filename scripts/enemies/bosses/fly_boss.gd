@@ -87,6 +87,7 @@ func choose_random_direction():
 
 func shoot():
 	for shoot_point in shoot_points:
+		$Sounds/ShootAudioStreamPlayer2D.custom_play()
 		var direction: Vector2 = (shoot_point.global_position - shoot_points_parent.global_position).normalized()
 		shoot_point_shoot(shoot_point.global_position, direction)
 		

@@ -71,6 +71,7 @@ func get_input():
 func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO) -> void:
 	if not can_get_damage:
 		return
+	$Sounds/GetHitAudioStreamPlayer2D.play()
 	RunGlobal.player_hp -= 1
 	can_get_damage = false
 	invulnerability_timer.start(
@@ -91,6 +92,7 @@ func launch_weapon():
 		return
 	weapon_scene.global_position = global_position
 	weapon_scene.direction = look_at_direction
+	$Sounds/AttackAudioStreamPlayer2D.custom_play()
 	WEAPON_NODE.add_child(weapon_scene)
 	RunGlobal.WEAPON_PLAYER = weapon_scene
 	start_evaporating()
@@ -116,7 +118,7 @@ func freeze(stun_sec: float = -1):
 	stun(stun_sec)
 
 
-func restore(spawn_position: Vector2, damage: float = 0, impulse_vector_direction: Vector2 = Vector2.ZERO):
+func restore(spawn_position: Vector2, damage: float = 0, impulse_vector_direction: Vector2 = Vector2.ZERO, weapon_broke: bool = true):
 	if not is_evaporated:
 		return
 	if damage != 0:
@@ -131,6 +133,10 @@ func restore(spawn_position: Vector2, damage: float = 0, impulse_vector_directio
 	visible = true
 	can_attack = true
 	set_physics_process(true)
+	if weapon_broke:
+		$Sounds/GetHitAudioStreamPlayer2D.custom_play()
+	else:
+		$Sounds/RestoreAudioStreamPlayer2D.custom_play()
 
 
 func calc_animation():

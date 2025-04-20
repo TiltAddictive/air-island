@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgmq3vj11b7ww"]
+
+[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="1_8un60"]
+[ext_resource type="AudioStream" uid="uid://yr8m86p4pqbh" path="res://resourses/sounds/sound/change_button_sound.wav" id="2_ydmmk"]
+[ext_resource type="AudioStream" uid="uid://x501vkv2e8nf" path="res://resourses/sounds/sound/click-sound.wav" id="3_wrkty"]
+
+[node name="MenuSoundManager" type="Node2D"]
+
+[node name="ChangeButtonAudioStreamPlayer2D" parent="." instance=ExtResource("1_8un60")]
+stream = ExtResource("2_ydmmk")
+
+[node name="ClickButtonAudioStreamPlayer2D2" parent="." instance=ExtResource("1_8un60")]
+stream = ExtResource("3_wrkty")

@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://rhfqiu6potvd"]
+[gd_scene load_steps=7 format=3 uid="uid://rhfqiu6potvd"]
 
 [ext_resource type="PackedScene" uid="uid://c5rmck7e5wyfs" path="res://scenes/enemies/tier1/walker.tscn" id="1_q8skl"]
 [ext_resource type="Texture2D" uid="uid://b6e8guhjubyat" path="res://resourses/sprites/enemies/caterpillar_with_gun.png" id="2_3hkra"]
 [ext_resource type="Script" path="res://scripts/enemies/tier2/walker_shooter.gd" id="2_5x05i"]
 [ext_resource type="PackedScene" uid="uid://dnsmnlrjt2d3e" path="res://scenes/enemies/technical/red_bullet.tscn" id="2_qnjed"]
+[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="5_ikk6o"]
+[ext_resource type="AudioStream" uid="uid://d0l70jpg47yo2" path="res://resourses/sounds/sound/laser-gun-280344.mp3" id="6_4s3aw"]
 
 [node name="WalkerShooter" instance=ExtResource("1_q8skl")]
 script = ExtResource("2_5x05i")
@@ -20,5 +22,9 @@ texture = ExtResource("2_3hkra")
 position = Vector2(13, 13)
 
 [node name="ShootReloadTimer" type="Timer" parent="Timers" index="2"]
+
+[node name="ShootAudioStreamPlayer2D" parent="Sounds" index="0" instance=ExtResource("5_ikk6o")]
+stream = ExtResource("6_4s3aw")
+sound_multiplier = 0.7
 
 [connection signal="timeout" from="Timers/ShootReloadTimer" to="." method="_on_shoot_reload_timer_timeout"]

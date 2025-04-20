@@ -36,10 +36,8 @@ func _on_save_and_exit_pressed() -> void:
 
 
 func _on_sound_h_slider_value_changed(value: float) -> void:
-	print("_on_sound_h_slider_value_changed")
 	ConstantsGlobal.SOUND_VALUE = sound_h_slider.value
 
 
 func _on_music_h_slider_value_changed(value: float) -> void:
-	print("_on_music_h_slider_value_changed")
 	ConstantsGlobal.MUSIC_VALUE = music_h_slider.value

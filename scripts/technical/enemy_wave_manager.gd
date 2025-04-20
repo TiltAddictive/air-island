@@ -23,6 +23,7 @@ var waiting: bool = false
 @export var MAX_VAWES_AMOUNT: int = 12
 
 var enemy_spawned: bool = false
+var prev_wave_was_bossfight: bool = true
 
 var AVAILABLE_TIERES = ["tier1", "tier2"]
 @export var TIER_ENEMIES: Dictionary = {
@@ -47,6 +48,10 @@ var AVAILABLE_TIERES = ["tier1", "tier2"]
 
 @onready var generating_opponents_delay_timer: Timer = $GeneratingOpponentsDelayTimer
 var generating_opponents_delay_time: float = 4
+
+@onready var average_wave_audio_stream_player_2d: CustomAudioStreamPlayer2D = $Sounds/AverageWaveAudioStreamPlayer2D
+@onready var boss_battle_audio_stream_player_2d: CustomAudioStreamPlayer2D = $Sounds/BossBattleAudioStreamPlayer2D
+
 
 func _ready() -> void:
 	pass
@@ -121,7 +126,13 @@ func _on_generating_opponents_delay_timer_timeout() -> void:
 
 	if current_wave != waves_amount:
 		generate_wave()
+		boss_battle_audio_stream_player_2d.stop()
+		if not average_wave_audio_stream_player_2d.playing:
+			average_wave_audio_stream_player_2d.custom_play()
 	else:
+		average_wave_audio_stream_player_2d.stop()
+		if not boss_battle_audio_stream_player_2d.playing:
+			boss_battle_audio_stream_player_2d.custom_play()
 		generate_boss()
 
 

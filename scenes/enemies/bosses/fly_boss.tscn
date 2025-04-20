@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://df37vhqdgwpct"]
+[gd_scene load_steps=16 format=3 uid="uid://df37vhqdgwpct"]
 
 [ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_trs1r"]
 [ext_resource type="Script" path="res://scripts/enemies/bosses/fly_boss.gd" id="2_3kxl4"]
 [ext_resource type="Texture2D" uid="uid://ciadsurmepd7u" path="res://resourses/sprites/enemies/bosses/fly/skywing.png" id="2_cycqp"]
 [ext_resource type="Texture2D" uid="uid://dm6r1ylwie0y3" path="res://resourses/sprites/enemies/bosses/fly/BossFly.png" id="2_um3ry"]
 [ext_resource type="PackedScene" uid="uid://dnsmnlrjt2d3e" path="res://scenes/enemies/technical/red_bullet.tscn" id="3_eg2sn"]
+[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="6_lbapo"]
+[ext_resource type="AudioStream" uid="uid://b1e7jy3gyehdn" path="res://resourses/sounds/sound/flapping_of_wings.wav" id="7_4wk5k"]
+[ext_resource type="AudioStream" uid="uid://d0l70jpg47yo2" path="res://resourses/sounds/sound/laser-gun-280344.mp3" id="8_sqtti"]
 
 [sub_resource type="Animation" id="Animation_n6f1y"]
 length = 0.001
@@ -246,6 +249,15 @@ one_shot = true
 [node name="CollisionCheckTimer" type="Timer" parent="Timers" index="4"]
 wait_time = 0.05
 one_shot = true
+
+[node name="WingsFlappingAudioStreamPlayer2D" parent="Sounds" index="0" instance=ExtResource("6_lbapo")]
+stream = ExtResource("7_4wk5k")
+autoplay = true
+restart_after_finished = true
+
+[node name="ShootAudioStreamPlayer2D" parent="Sounds" index="1" instance=ExtResource("6_lbapo")]
+stream = ExtResource("8_sqtti")
+sound_multiplier = 0.7
 
 [connection signal="timeout" from="Timers/ShootReloadTimer" to="." method="_on_shoot_reload_timer_timeout"]
 [connection signal="timeout" from="Timers/VolleyReloadTimer" to="." method="_on_volley_reload_timer_timeout"]

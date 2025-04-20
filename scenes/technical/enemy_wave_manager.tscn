@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://t1mo7c1n113w"]
+[gd_scene load_steps=5 format=3 uid="uid://t1mo7c1n113w"]
 
 [ext_resource type="Script" path="res://scripts/technical/enemy_wave_manager.gd" id="1_qiaqu"]
+[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="2_e54o2"]
+[ext_resource type="AudioStream" uid="uid://cla850osdrjcj" path="res://resourses/sounds/sound/colorful-potions-29571.mp3" id="3_oykis"]
+[ext_resource type="AudioStream" uid="uid://dqf4mswmot0uk" path="res://resourses/sounds/sound/boss-battle-music.wav" id="4_hvwyg"]
 
 [node name="EnemyWaveManager" type="Node2D"]
 script = ExtResource("1_qiaqu")
@@ -8,4 +11,17 @@ script = ExtResource("1_qiaqu")
 [node name="GeneratingOpponentsDelayTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="AverageWaveAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("2_e54o2")]
+stream = ExtResource("3_oykis")
+is_music = true
+restart_after_finished = true
+
+[node name="BossBattleAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("2_e54o2")]
+stream = ExtResource("4_hvwyg")
+is_music = true
+restart_after_finished = true
+
+[connection signal="wave_starts" from="." to="." method="_on_wave_starts"]
 [connection signal="timeout" from="GeneratingOpponentsDelayTimer" to="." method="_on_generating_opponents_delay_timer_timeout"]

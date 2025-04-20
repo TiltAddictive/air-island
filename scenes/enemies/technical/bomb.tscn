@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://r8n7bxyhuna5"]
+[gd_scene load_steps=12 format=3 uid="uid://r8n7bxyhuna5"]
 
 [ext_resource type="Texture2D" uid="uid://h4a2cl5kyt77" path="res://resourses/sprites/enemies/technical/Bomb.png" id="1_8b6vl"]
 [ext_resource type="Script" path="res://scripts/enemies/technical/bomb.gd" id="1_ed1wg"]
+[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="3_vun5i"]
+[ext_resource type="AudioStream" uid="uid://cbga5c6bvrdg" path="res://resourses/sounds/sound/sharp-pop-328170.mp3" id="4_n1gry"]
+[ext_resource type="AudioStream" uid="uid://cuaotxkjfp2n3" path="res://resourses/sounds/sound/pistol-gun-shot-278821.mp3" id="5_anwdd"]
 
 [sub_resource type="Animation" id="Animation_mbapd"]
 length = 0.001
@@ -149,6 +152,20 @@ tracks/3/keys = {
 "method": &"death"
 }]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sounds/ExplosionAudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"custom_play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_k5o3q"]
 resource_name = "spawn"
@@ -191,6 +208,20 @@ tracks/2/keys = {
 "method": &"play"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sounds/AppearanceAudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"custom_play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6mrix"]
 _data = {
@@ -221,3 +252,13 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_mj8ek")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="AppearanceAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("3_vun5i")]
+stream = ExtResource("4_n1gry")
+sound_multiplier = 0.8
+
+[node name="ExplosionAudioStreamPlayer2D" parent="Sounds" instance=ExtResource("3_vun5i")]
+stream = ExtResource("5_anwdd")
+attenuation = 15.455

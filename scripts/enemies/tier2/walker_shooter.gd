@@ -14,6 +14,7 @@ func shoot():
 	var bullet_node = bullet_scene.instantiate()
 	bullet_node.direction = (player_position - global_position).normalized()
 	bullet_node.global_position = $RotationalPart/ShootingNode.global_position
+	$Sounds/ShootAudioStreamPlayer2D.custom_play()
 	ENEMY_ATACK_NODE.add_child(bullet_node)
 
 func get_hit(damage: float, impulse: Vector2 = Vector2.ZERO, impulse_impact_time: float = 0) -> void:
