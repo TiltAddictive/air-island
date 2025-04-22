@@ -1,0 +1,161 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqx8wevm42epe"]
+
+[ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_63qhr"]
+[ext_resource type="Script" path="res://scripts/enemies/tier1/the_eye_of_cthulhu.gd" id="2_1pdn3"]
+[ext_resource type="Texture2D" uid="uid://cwnlgs467f2nl" path="res://resourses/sprites/enemies/the_eye_of_cthulhu.png" id="3_hj6c0"]
+
+[sub_resource type="Animation" id="Animation_s3hdc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AttackAreaNode/AttackArea2D/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -21)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 13)]
+}
+
+[sub_resource type="Animation" id="Animation_xw8tl"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 13), Vector2(0, 11), Vector2(0, 13)]
+}
+
+[sub_resource type="Animation" id="Animation_prl23"]
+resource_name = "start_impuilse"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AttackAreaNode/AttackArea2D/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -21), Vector2(0, -20)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_impulse_to_player"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1f3aa"]
+_data = {
+"RESET": SubResource("Animation_s3hdc"),
+"idle": SubResource("Animation_xw8tl"),
+"start_impuilse": SubResource("Animation_prl23")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_118l0"]
+radius = 10.0499
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_25deg"]
+radius = 4.0
+height = 20.0
+
+[node name="TheEyeOfCthulhu" instance=ExtResource("1_63qhr")]
+script = ExtResource("2_1pdn3")
+COLLISION_POWER = 0.7
+IMPULSE_WAIT_TIME_SEC = 3.0
+SPEED_FOR_IDLE_ANIMATION = 20.0
+SPEED = 250.0
+
+[node name="Sprite" parent="RotationalPart" index="0"]
+position = Vector2(0, 13)
+scale = Vector2(1, 1)
+texture = ExtResource("3_hj6c0")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationalPart/Sprite" index="0"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_1f3aa")
+}
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaNode/AttackArea2D" index="0"]
+position = Vector2(0, -21)
+shape = SubResource("CircleShape2D_118l0")
+
+[node name="Collision" parent="." index="4"]
+position = Vector2(0, -11)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_25deg")
+
+[node name="SlideWaitTimer" type="Timer" parent="Timers" index="2"]
+
+[connection signal="animation_finished" from="RotationalPart/Sprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timers/SlideWaitTimer" to="." method="_on_slide_wait_timer_timeout"]

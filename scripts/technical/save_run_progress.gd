@@ -57,9 +57,7 @@ func load_game() -> bool:
 
 func load_from_json(save_data):
 	var loaded_weapons: Array[PackedScene] = []
-	print("loaded_weapons: ", loaded_weapons)
 	for path in save_data["weapons"]:
-		print("path: ", path)
 		var scene = load(path)
 		if scene:
 			loaded_weapons.append(scene)

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://uc6q3n7684qm" path="res://scenes/technical/hp_bar.tscn" id="2_77071"]
 [ext_resource type="Texture2D" uid="uid://cv76o36qmtqvg" path="res://icon.svg" id="2_agw0o"]
 [ext_resource type="PackedScene" uid="uid://ce1njilpfwhdq" path="res://scenes/technical/shadow.tscn" id="3_wi14n"]
-[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="5_8070q"]
+[ext_resource type="PackedScene" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="5_8070q"]
 [ext_resource type="AudioStream" uid="uid://bv55bip8xifxq" path="res://resourses/sounds/sound/ouch-116112.mp3" id="6_ye3x3"]
 
 [sub_resource type="Animation" id="Animation_k48ie"]

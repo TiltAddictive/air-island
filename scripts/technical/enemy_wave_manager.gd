@@ -30,6 +30,7 @@ var AVAILABLE_TIERES = ["tier1", "tier2"]
 	"tier1": [
 		preload("res://scenes/enemies/tier1/navigation_enemy.tscn"),
 		preload("res://scenes/enemies/tier1/walker.tscn"),
+		preload("res://scenes/enemies/tier1/the_eye_of_cthulhu.tscn"),
 	],
 	"tier2": [
 		preload("res://scenes/enemies/tier2/explosive_wizard.tscn"),

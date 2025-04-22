@@ -5,7 +5,6 @@ const MAIN_LEVEL = preload("res://scenes/levels/main_level.tscn")
 
 func _ready() -> void:
 	load_localization()
-	print("Main Menu loaded!")
 	$BlurLayer/CenterContainer/VBoxContainer/ContinueRunButton.grab_focus()
 	if run_progress_data.check_save_files_exists():
 		return

@@ -40,7 +40,6 @@ func get_current_language():
 
 func switch_language():
 	current_language_index = (current_language_index + 1) % languages.size()
-	print("languages[current_language_index] ", languages[current_language_index])
 	TranslationServer.set_locale(AVAILABLE_LANGUAGES[languages[current_language_index]])
 
 

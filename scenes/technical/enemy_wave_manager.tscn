@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://t1mo7c1n113w"]
 
 [ext_resource type="Script" path="res://scripts/technical/enemy_wave_manager.gd" id="1_qiaqu"]
-[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="2_e54o2"]
+[ext_resource type="PackedScene" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="2_e54o2"]
 [ext_resource type="AudioStream" uid="uid://cla850osdrjcj" path="res://resourses/sounds/sound/colorful-potions-29571.mp3" id="3_oykis"]
 [ext_resource type="AudioStream" uid="uid://dqf4mswmot0uk" path="res://resourses/sounds/sound/boss-battle-music.wav" id="4_hvwyg"]
 

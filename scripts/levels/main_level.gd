@@ -73,7 +73,6 @@ func player_died():
 
 
 func run_ends():
-	print("RUN ENDS")
 	enemy_wave_manager.waiting = false
 	run_progress_data.delete_save_file()
 	get_tree().paused = false

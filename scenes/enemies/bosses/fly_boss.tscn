@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ciadsurmepd7u" path="res://resourses/sprites/enemies/bosses/fly/skywing.png" id="2_cycqp"]
 [ext_resource type="Texture2D" uid="uid://dm6r1ylwie0y3" path="res://resourses/sprites/enemies/bosses/fly/BossFly.png" id="2_um3ry"]
 [ext_resource type="PackedScene" uid="uid://dnsmnlrjt2d3e" path="res://scenes/enemies/technical/red_bullet.tscn" id="3_eg2sn"]
-[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="6_lbapo"]
+[ext_resource type="PackedScene" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="6_lbapo"]
 [ext_resource type="AudioStream" uid="uid://b1e7jy3gyehdn" path="res://resourses/sounds/sound/flapping_of_wings.wav" id="7_4wk5k"]
 [ext_resource type="AudioStream" uid="uid://d0l70jpg47yo2" path="res://resourses/sounds/sound/laser-gun-280344.mp3" id="8_sqtti"]
 
