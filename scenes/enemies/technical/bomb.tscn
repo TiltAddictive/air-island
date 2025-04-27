@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://h4a2cl5kyt77" path="res://resourses/sprites/enemies/technical/Bomb.png" id="1_8b6vl"]
 [ext_resource type="Script" path="res://scripts/enemies/technical/bomb.gd" id="1_ed1wg"]
-[ext_resource type="PackedScene" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="3_vun5i"]
+[ext_resource type="PackedScene" uid="uid://c4rxbrtrtj7ry" path="res://scenes/technical/abc_audio_stream_player_2d.tscn" id="3_vun5i"]
 [ext_resource type="AudioStream" uid="uid://cbga5c6bvrdg" path="res://resourses/sounds/sound/sharp-pop-328170.mp3" id="4_n1gry"]
 [ext_resource type="AudioStream" uid="uid://cuaotxkjfp2n3" path="res://resourses/sounds/sound/pistol-gun-shot-278821.mp3" id="5_anwdd"]
 
