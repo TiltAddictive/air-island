@@ -1,7 +1,8 @@
 extends Node
 
-const MAIN_MENU = "res://scenes/UI/main_menu.tscn"
-const MAIN_LEVEL = "res://scenes/levels/main_level.tscn"
+const MAIN_MENU: String = "res://scenes/UI/main_menu.tscn"
+const MAIN_LEVEL: String = "res://scenes/levels/main_level.tscn"
+const SETTINGS_SCENE_PATH: String = "res://scenes/UI/settings_menu.tscn"
 
 var current_scene: Node = null
 @onready var scene_root: Node =  $"."
@@ -11,7 +12,6 @@ func _ready():
 
 
 func change_scene(new_scene_path: String):
-
 	if current_scene:
 		current_scene.queue_free()
 	var new_scene = load(new_scene_path)
