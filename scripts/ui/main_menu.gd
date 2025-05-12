@@ -29,7 +29,7 @@ func _on_new_run_button_pressed() -> void:
 
 
 func _on_settings_button_pressed() -> void:
-	SceneController.open_above_the_current_scene(ConstantsGlobal.SETTINGS_SCENE_PATH, $BlurLayer/CenterContainer, $BlurLayer, self, "_on_settings_window_closed")
+	SceneController.open_above_the_current_scene(SceneController.SETTINGS_SCENE_PATH, $BlurLayer/CenterContainer, $BlurLayer, self, "_on_settings_window_closed")
 
 
 func _on_exit_game_button_pressed() -> void:

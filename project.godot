@@ -13,7 +13,7 @@ config_version=5
 config/name="AirIsland"
 run/main_scene="res://scenes/technical/scene_controller.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
-config/icon="res://resourses/sprites/technical/Icon.png"
+config/icon="res://icon.svg"
 
 [autoload]
 
@@ -27,6 +27,7 @@ InputTracker="*res://scripts/technical/input_tracker.gd"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+window/size/mode=3
 window/stretch/mode="viewport"
 
 [input]

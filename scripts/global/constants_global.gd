@@ -15,7 +15,6 @@ var SOUND_VALUE: int = 10:
 var MUSIC_VALUE: int = 10:
 	set = set_music_value
 
-const SETTINGS_SCENE_PATH: String = "res://scenes/UI/settings_menu.tscn"
 var languages: Array[String]
 var current_language_index: int = 0
 
