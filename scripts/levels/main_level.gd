@@ -11,6 +11,8 @@ extends Node2D
 
 @onready var run_progress_data: RunProgressData = RunProgressData.new()
 
+var player_dead: bool = false
+
 func _ready():
 	enemy_wave_manager.connect("stage_ends", stage_ends)
 	enemy_wave_manager.connect("wave_ends", wave_ends)
@@ -59,6 +61,8 @@ func calc_choose_weapon_input():
 
 
 func toggle_pause():
+	if player_dead:
+		return
 	get_tree().paused = !get_tree().paused
 	# Because $Allies/Player.process.mode == always
 	player.toggle_process(get_tree().paused)
@@ -66,6 +70,7 @@ func toggle_pause():
 
 
 func player_died():
+	player_dead = true
 	run_progress_data.delete_save_file()
 	$CanvasLayer.visible = false
 	get_tree().paused = true

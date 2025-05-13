@@ -31,6 +31,7 @@ var AVAILABLE_TIERES = ["tier1", "tier2"]
 		preload("res://scenes/enemies/tier1/navigation_enemy.tscn"),
 		preload("res://scenes/enemies/tier1/walker.tscn"),
 		preload("res://scenes/enemies/tier1/the_eye_of_cthulhu.tscn"),
+		#preload("res://scenes/enemies/tier2/lazer_wizard.tscn"),
 	],
 	"tier2": [
 		preload("res://scenes/enemies/tier2/explosive_wizard.tscn"),
@@ -40,6 +41,7 @@ var AVAILABLE_TIERES = ["tier1", "tier2"]
 }
 
 @export var BOSSES: Array[PackedScene] = [
+	preload("res://scenes/enemies/bosses/summoner.tscn"),
 	preload("res://scenes/enemies/bosses/fly_boss.tscn"),
 ]
 
@@ -145,17 +147,25 @@ func generate_wave():
 		enemies_scenes_pathes.append_array(TIER_ENEMIES[tier])
 	var enemies_amount: int = WAVES[current_wave]["amount"]
 	for enemy_number in range(enemies_amount):
+		var candidate_position: Vector2 = ZONE_SPAWNER.choose_item_position(self)
+		if candidate_position == Vector2.INF:
+			continue
 		var enemy_scene: PackedScene = enemies_scenes_pathes.pick_random()
 		var enemy_node = enemy_scene.instantiate()
-		enemy_node.global_position = ZONE_SPAWNER.choose_item_position(self)
+		enemy_node.global_position = candidate_position
 		enemy_node.ENEMY_ATACK_NODE = ENEMY_BULLETS_NODE
+		enemy_node.ZONE_SPAWNER = ZONE_SPAWNER
 		ENEMY_NODE.add_child(enemy_node)
 	enemy_spawned = true
 
 
 func generate_boss() -> void:
+	var candidate_position: Vector2 = Vector2.INF
+	while candidate_position == Vector2.INF:
+		candidate_position = ZONE_SPAWNER.choose_item_position(self)
 	var boss_node = BOSSES.pick_random().instantiate()
-	boss_node.global_position = ZONE_SPAWNER.choose_item_position(self)
+	boss_node.global_position = candidate_position
 	boss_node.ENEMY_ATACK_NODE = ENEMY_BULLETS_NODE
+	boss_node.ZONE_SPAWNER = ZONE_SPAWNER
 	ENEMY_NODE.add_child(boss_node)
 	enemy_spawned = true

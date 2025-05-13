@@ -1,4 +1,5 @@
 extends DefaultEnemy
+class_name ExploziveWizard
 
 enum STATES {TOO_CLOSE, SATISFACTORY_DISTANCE, ATTACK}
 var current_state: STATES
@@ -62,7 +63,6 @@ func calc_move(_delta: float) -> void:
 		change_random_direction_timer.start()
 		direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	velocity = direction * SPEED
-	return
 
 
 func calc_attack():

@@ -6,6 +6,7 @@ class_name CustomAudioStreamPlayer2D
 @export var restart_after_finished: bool = false
 
 func _ready() -> void:
+	volume_db = calc_volume_db()
 	ConstantsGlobal.connect("sound_value_changed", sound_value_changed)
 	ConstantsGlobal.connect("music_value_changed", music_value_changed)
 
@@ -25,7 +26,9 @@ func get_global_volume() -> float:
 
 
 func calc_volume_db() -> float:
-	return lerp(-40.0, 0.0, sound_multiplier * float(get_global_volume() / 10.0))
+	var global_volume = get_global_volume() / 10.0
+	var t = sound_multiplier * global_volume
+	return lerp(-40.0, 0.0, clamp(t,0.0,1.0))
 
 
 func sound_value_changed(value: int) -> void:

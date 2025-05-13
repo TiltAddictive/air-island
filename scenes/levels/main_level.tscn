@@ -219,13 +219,13 @@ DOWNRIGHT_ZONE_POINT = NodePath("DOWNRIGHT_ZONE_POINT")
 position = Vector2(-404, -101)
 
 [node name="TOPRIGHT_ZONE_POINT" type="Node2D" parent="Technical/ZoneSpawner"]
-position = Vector2(411, -101)
+position = Vector2(398, -100)
 
 [node name="DOWNLEFT_ZONE_POINT" type="Node2D" parent="Technical/ZoneSpawner"]
 position = Vector2(-404, 187)
 
 [node name="DOWNRIGHT_ZONE_POINT" type="Node2D" parent="Technical/ZoneSpawner"]
-position = Vector2(411, 186)
+position = Vector2(393, 179)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3

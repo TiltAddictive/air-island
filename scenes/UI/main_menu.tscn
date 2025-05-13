@@ -96,6 +96,7 @@ theme_override_font_sizes/font_size = 63
 text = "Exit Game"
 
 [node name="Control" type="Control" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

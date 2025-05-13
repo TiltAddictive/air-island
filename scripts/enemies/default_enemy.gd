@@ -19,6 +19,7 @@ var look_at_direction: Vector2 = Vector2.RIGHT
 
 # Attack
 @export var ENEMY_ATACK_NODE: Node2D = null
+@export var ZONE_SPAWNER: ZoneSpawner
 @onready var attack_area_2d: Area2D = $AttackAreaNode/AttackArea2D
 @export var DAMAGE: float = 2
 @export var REJECTION_FORCE_VALUE: float = 200

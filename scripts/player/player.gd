@@ -34,10 +34,8 @@ func _ready() -> void:
 	RunGlobal.PLAYER = self
 	$ShadowZone/Shadow.set_shadow_size(1)
 
-
 func _process(delta: float) -> void:
 	switch_rotational_scale()
-
 
 func _physics_process(delta: float) -> void:
 	if is_evaporated:

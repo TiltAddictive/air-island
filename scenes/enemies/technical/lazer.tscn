@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cachd0piu6oqf"]
+
+[ext_resource type="Script" path="res://scripts/enemies/technical/lazer.gd" id="1_q4ptk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scfft"]
+
+[node name="Lazer" type="Node2D"]
+z_index = 1
+script = ExtResource("1_q4ptk")
+
+[node name="Line2D" type="Line2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 83
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_scfft")
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="PreparationTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timers/PreparationTimer" to="." method="_on_preparation_timer_timeout"]
+[connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]

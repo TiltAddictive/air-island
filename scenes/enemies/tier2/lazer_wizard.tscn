@@ -1,0 +1,195 @@
+[gd_scene load_steps=11 format=3 uid="uid://h8bakt680kug"]
+
+[ext_resource type="PackedScene" uid="uid://b1f4280rnaacr" path="res://scenes/enemies/default_enemy.tscn" id="1_lwuis"]
+[ext_resource type="Script" path="res://scripts/enemies/tier2/lazer_wizard.gd" id="2_1dk6v"]
+[ext_resource type="PackedScene" uid="uid://cachd0piu6oqf" path="res://scenes/enemies/technical/lazer.tscn" id="3_jxnha"]
+[ext_resource type="Texture2D" uid="uid://ddi66q3fd0bns" path="res://resourses/sprites/enemies/lazer-wizard.png" id="4_yc2kr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mpl5l"]
+radius = 150.0
+
+[sub_resource type="Animation" id="Animation_yaxcc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_chd3w"]
+resource_name = "attack_initiation"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"attack_preparation", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_laser"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6lqor"]
+resource_name = "attack_preparation"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 2, 3, 2, 3, 2, 3, 2]
+}
+
+[sub_resource type="Animation" id="Animation_3d1on"]
+resource_name = "move"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -32), Vector2(0, -33), Vector2(0, -32), Vector2(0, -33), Vector2(0, -32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0698132, 0.0, -0.0698132, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_72525"]
+_data = {
+"RESET": SubResource("Animation_yaxcc"),
+"attack_initiation": SubResource("Animation_chd3w"),
+"attack_preparation": SubResource("Animation_6lqor"),
+"move": SubResource("Animation_3d1on")
+}
+
+[node name="LazerWizard" instance=ExtResource("1_lwuis")]
+script = ExtResource("2_1dk6v")
+laser_scene = ExtResource("3_jxnha")
+laser_damage = 5.0
+attack_preparation_time = 1.0
+attack_duration = 2.0
+laser_range = 3000.0
+bomb_spawn_area_range = 70.0
+panic_area_radius = 150.0
+bomb_spawn_delay = 0.1
+bombs_to_spawn = 3
+change_random_direction_time = 2.0
+bomb_scene = null
+attack_reload_time = 10.0
+
+[node name="PanicArea2D" type="Area2D" parent="." index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanicArea2D" index="0"]
+shape = SubResource("CircleShape2D_mpl5l")
+
+[node name="Sprite" parent="RotationalPart" index="0"]
+position = Vector2(0, 3)
+scale = Vector2(1, 1)
+texture = ExtResource("4_yc2kr")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationalPart/Sprite" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_72525")
+}
+
+[node name="LazerStartPoint" type="Node2D" parent="RotationalPart" index="2"]
+position = Vector2(4, 16)
+
+[node name="ChangeRandomDirectionTimer" type="Timer" parent="Timers" index="2"]
+
+[node name="BombSpawnTimer" type="Timer" parent="Timers" index="3"]
