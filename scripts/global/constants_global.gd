@@ -9,10 +9,10 @@ const AVAILABLE_LANGUAGES = {
 }
 var VELOCITY_EPS: float = 0.05
 
-var SOUND_VALUE: int = 10:
+var SOUND_VALUE: int = 5:
 	set = set_sound_value
 
-var MUSIC_VALUE: int = 10:
+var MUSIC_VALUE: int = 5:
 	set = set_music_value
 
 var languages: Array[String]
