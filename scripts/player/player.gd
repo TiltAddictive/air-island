@@ -162,6 +162,7 @@ func start_dying():
 	can_attack = false
 	can_get_damage = false
 	animation_player.stop()
+	sprite_animation_player.stop()
 	velocity = Vector2.ZERO
 	direction = Vector2.ZERO
 

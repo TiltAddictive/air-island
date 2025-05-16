@@ -43,7 +43,7 @@ func generate_level(amount: int = 20):
 	level_generator.generate_level(amount)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	calc_choose_weapon_input()
 
 

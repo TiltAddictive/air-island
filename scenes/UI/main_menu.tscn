@@ -24,6 +24,43 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p6pf4")
 
+[node name="Control" type="Control" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_d6bsd")
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_1rfj0")
+
+[node name="TextureRect3" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0kcxq")
+
 [node name="BlurLayer" type="ColorRect" parent="."]
 z_index = 2
 material = SubResource("ShaderMaterial_w23o5")
@@ -94,43 +131,6 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_s50l6")
 theme_override_font_sizes/font_size = 63
 text = "Exit Game"
-
-[node name="Control" type="Control" parent="."]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_d6bsd")
-
-[node name="TextureRect2" type="TextureRect" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_1rfj0")
-
-[node name="TextureRect3" type="TextureRect" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_0kcxq")
 
 [connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/ContinueRunButton" to="." method="_on_continue_run_button_pressed"]
 [connection signal="pressed" from="BlurLayer/CenterContainer/VBoxContainer/NewRunButton" to="." method="_on_new_run_button_pressed"]
